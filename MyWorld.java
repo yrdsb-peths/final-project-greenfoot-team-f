@@ -10,6 +10,6 @@ public class MyWorld extends World {
     private void prepare()
     {
         MainPlayer mainPlayer = new MainPlayer(); 
-        addObject(mainPlayer, 200, 200); 
+        addObject(mainPlayer, 200, 350); 
     }
 }
