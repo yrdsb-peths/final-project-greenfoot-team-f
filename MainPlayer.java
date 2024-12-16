@@ -66,7 +66,8 @@ public class MainPlayer extends Actor
         fall();
         if(Greenfoot.isKeyDown("space") && getY() > getWorld().getHeight() - 50)
         {
-            jump(); 
+            jump();
+            Greenfoot.playSound("jumpSfx.mp3");
         }
         
         move(); 
