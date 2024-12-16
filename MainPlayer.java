@@ -8,11 +8,16 @@ public class MainPlayer extends Actor
     
     private GreenfootImage[] idleFrames;
     private GreenfootImage[] runFrames;
+    private GreenfootImage[] jumpFrames;
     
     private int currentFrame;
     private int animationCounter;
     
     private boolean facingRight;
+    
+    private boolean isJumping; // Track player jump animation
+    private int jumpFrameIndex; // Track the current frame of jump
+
     
     public MainPlayer()
     {
@@ -35,6 +40,23 @@ public class MainPlayer extends Actor
             runFrames[i] = new GreenfootImage("run_" + (i + 1) + ".png");
         }
         
+        jumpFrames = new GreenfootImage[6];
+        for (int i = 0; i < jumpFrames.length; i++)
+        {
+            jumpFrames[i] = new GreenfootImage("jump_" + (i + 1) + ".png");
+        }
+        
+        // Flip jump frames if initially not facing right
+        if (!facingRight)
+        {
+            for (GreenfootImage frame : jumpFrames)
+            {
+                frame.mirrorHorizontally();
+            }
+        }
+        
+        facingRight = true; 
+        
         setImage(idleFrames[0]); 
     }
     
@@ -54,83 +76,132 @@ public class MainPlayer extends Actor
     
     private void jump()
     {
-        velocity =- 20; 
+        velocity = -18; // Apply upward velocity
+        isJumping = true; // Start jump animation
+        jumpFrameIndex = 0; // Reset jump animation frame
     }
+
+
     
-     public void move()
+    public void move()
     {
         int y = getY();
         int x = getX();
-
+    
         if (Greenfoot.isKeyDown("a")) // Move left
         {
             x -= 3;
-            if (!facingRight) // Flip image if necessary
-            {
-                flipDirection();
-            }
-        }
-
-        if (Greenfoot.isKeyDown("d")) // Move right
-        {
-            x += 3;
             if (facingRight) // Flip image if necessary
             {
                 flipDirection();
             }
         }
-
+    
+        if (Greenfoot.isKeyDown("d")) // Move right
+        {
+            x += 3;
+            if (!facingRight) // Flip image if necessary
+            {
+                flipDirection();
+            }
+        }
+    
         setLocation(x, y);
     }
+
 
     
     public void fall()
     {
+        // Update player's y position by adding the current velocity to the Y coord
         setLocation(getX(), getY() + velocity); 
+        
+        //check if player is near ground(50 px above bottom);
         if(getY() > getWorld().getHeight() - 50)
         {
             velocity = 0; 
+            //if player on ground, set velocity to 0
         }
         else
         {
             velocity += gravity;
+            //if player in the air, increase velocity by gravity. (to simulate acceleration);
         }
     }
     
     private void animate()
     {
         animationCounter++;
-
-        if (animationCounter >= 6) // Adjust this value to control animation speed
+    
+        if (isJumping) // Play jump animation
         {
-            if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("d")) // Running animation
+            if (animationCounter >= 6) // Adjust to control jump animation speed
             {
+                GreenfootImage currentJumpFrame = new GreenfootImage(jumpFrames[jumpFrameIndex]); // Get current frame
+                
+                // Flip frame dynamically if not facing right
+                if (facingRight)
+                {
+                    currentJumpFrame.mirrorHorizontally();
+                }
+    
+                setImage(currentJumpFrame); // Set the current jump frame
+                
+                jumpFrameIndex++; // Move to the next frame
+    
+                if (jumpFrameIndex >= jumpFrames.length) // End jump animation
+                {
+                    isJumping = false; // Stop the jump animation
+                    jumpFrameIndex = 0; // Reset frame index
+                }
+    
+                animationCounter = 0; // Reset animation counter
+            }
+        }
+        else if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("d")) // Running animation
+        {
+            if (animationCounter >= 6) // Control running animation speed
+            {
+                GreenfootImage currentRunFrame = new GreenfootImage(runFrames[currentFrame]); // Get current frame
+    
+                // Flip frame dynamically if not facing right
+                if (!facingRight)
+                {
+                    currentRunFrame.mirrorHorizontally();
+                }
+    
+                setImage(currentRunFrame); // Set the current run frame
+                
                 currentFrame = (currentFrame + 1) % runFrames.length; // Loop through run frames
-                setImage(runFrames[currentFrame]); // Set the current frame
+                animationCounter = 0;
             }
-            else // Idle animation
+        }
+        else // Idle animation
+        {
+            if (animationCounter >= 6) // Control idle animation speed
             {
+                GreenfootImage currentIdleFrame = new GreenfootImage(idleFrames[currentFrame]); // Get current frame
+                
+                // Flip frame dynamically if not facing right
+                if (!facingRight)
+                {
+                    currentIdleFrame.mirrorHorizontally();
+                }
+    
+                setImage(currentIdleFrame); // Set the current idle frame
+                
                 currentFrame = (currentFrame + 1) % idleFrames.length; // Loop through idle frames
-                setImage(idleFrames[currentFrame]); // Set the current frame
+                animationCounter = 0;
             }
-
-            animationCounter = 0;
         }
     }
+
     
     private void flipDirection()
     {
-        facingRight = !facingRight;
-
-        // Flip all frames (idle and run)
-        for (GreenfootImage frame : idleFrames)
-        {
-            frame.mirrorHorizontally();
-        }
-        for (GreenfootImage frame : runFrames)
-        {
-            frame.mirrorHorizontally();
-        }
+        facingRight = !facingRight; // Toggle the facing direction
     }
+
+
     
 }
