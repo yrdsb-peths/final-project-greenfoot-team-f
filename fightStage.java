@@ -1,15 +1,17 @@
 import greenfoot.*;
 import greenfoot.GreenfootSound;
 
-public class fightStage extends World {
+public class FightStage extends World {
     
     private GreenfootSound backgroundMusic;
     
-    public fightStage()
+    public FightStage()
     {
         super(600, 400, 1);
         
         backgroundMusic = new GreenfootSound("stageOneMusic.mp3"); 
+        
+        backgroundMusic.playLoop();
         
         setBackground("stage_1.png");
         prepare(); 
