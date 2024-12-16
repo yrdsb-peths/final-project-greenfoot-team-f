@@ -1,9 +1,11 @@
 import greenfoot.*;
 
-public class MyWorld extends World {
-    public MyWorld()
+public class fightStage extends World {
+    public fightStage()
     {
         super(600, 400, 1);
+        
+        setBackground("stage_1.png");
         prepare(); 
     }
     
