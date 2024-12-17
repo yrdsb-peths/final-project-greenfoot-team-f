@@ -9,12 +9,18 @@ public class MainPlayer extends Actor
     private GreenfootImage[] idleFrames;
     private GreenfootImage[] runFrames;
     private GreenfootImage[] jumpFrames;
+    private GreenfootImage[] attackFrames;
     
     private int currentFrame;
     private int animationCounter;
     
     private boolean facingRight;
     
+    //attack ani variables
+    private boolean isAttacking = false;
+    private int attackFrameIndex = 0; 
+    
+    //jump ani variables
     private boolean isJumping; // Track player jump animation
     private int jumpFrameIndex; // Track the current frame of jump
     
@@ -45,6 +51,12 @@ public class MainPlayer extends Actor
         for (int i = 0; i < jumpFrames.length; i++)
         {
             jumpFrames[i] = new GreenfootImage("jump_" + (i + 1) + ".png");
+        }
+        
+        attackFrames = new GreenfootImage[8];
+        for (int i = 0; i < attackFrames.length; i++)
+        {
+            attackFrames[i] = new GreenfootImage("attack_" + (i + 1) + ".png");
         }
         
         
@@ -138,68 +150,76 @@ public class MainPlayer extends Actor
     {
         animationCounter++;
     
-        if (isJumping) // Play jump animation
+        // Check if the player pressed "P" for attack
+        if (Greenfoot.isKeyDown("p") && !isAttacking)
         {
-            if (animationCounter >= 6) // Adjust to control jump animation speed
+            isAttacking = true; // Start attack animation
+            attackFrameIndex = 0; // Reset attack frame index
+        }
+    
+        // Play attack animation
+        if (isAttacking)
+        {
+            if (animationCounter >= 6) // Control attack animation speed
             {
-                GreenfootImage currentJumpFrame = new GreenfootImage(jumpFrames[jumpFrameIndex]); // Get current frame
+                GreenfootImage currentAttackFrame = new GreenfootImage(attackFrames[attackFrameIndex]); // Get current frame
                 
-                // Flip frame dynamically if not facing right
-                if (facingRight)
+                // Flip attack frame dynamically if not facing right
+                if (!facingRight)
                 {
-                    currentJumpFrame.mirrorHorizontally();
+                    currentAttackFrame.mirrorHorizontally();
                 }
     
-                setImage(currentJumpFrame); // Set the current jump frame
+                setImage(currentAttackFrame); // Set the current attack frame
                 
-                jumpFrameIndex++; // Move to the next frame
-    
-                if (jumpFrameIndex >= jumpFrames.length) // End jump animation
+                attackFrameIndex++; // Move to the next attack frame
+                
+                if (attackFrameIndex >= attackFrames.length) // End attack animation
                 {
-                    isJumping = false; // Stop the jump animation
-                    jumpFrameIndex = 0; // Reset frame index
+                    isAttacking = false; // Stop attack animation
+                    attackFrameIndex = 0; // Reset frame index
                 }
-    
+                
                 animationCounter = 0; // Reset animation counter
             }
         }
-        else if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("d")) // Running animation
+        // If not attacking, proceed with other animations
+        else if (isJumping)
         {
-            if (animationCounter >= 6) // Control running animation speed
+            if (animationCounter >= 6)
             {
-                GreenfootImage currentRunFrame = new GreenfootImage(runFrames[currentFrame]); // Get current frame
-    
-                // Flip frame dynamically if not facing right
-                if (!facingRight)
-                {
-                    currentRunFrame.mirrorHorizontally();
-                }
-    
-                setImage(currentRunFrame); // Set the current run frame
-                
-                currentFrame = (currentFrame + 1) % runFrames.length; // Loop through run frames
+                GreenfootImage currentJumpFrame = new GreenfootImage(jumpFrames[jumpFrameIndex]);
+                if (!facingRight) currentJumpFrame.mirrorHorizontally();
+                setImage(currentJumpFrame);
+                jumpFrameIndex++;
+                if (jumpFrameIndex >= jumpFrames.length) { isJumping = false; jumpFrameIndex = 0; }
                 animationCounter = 0;
             }
         }
-        else // Idle animation
+        else if (Greenfoot.isKeyDown("a") || Greenfoot.isKeyDown("d"))
         {
-            if (animationCounter >= 6) // Control idle animation speed
+            if (animationCounter >= 6)
             {
-                GreenfootImage currentIdleFrame = new GreenfootImage(idleFrames[currentFrame]); // Get current frame
-                
-                // Flip frame dynamically if not facing right
-                if (!facingRight)
-                {
-                    currentIdleFrame.mirrorHorizontally();
-                }
-    
-                setImage(currentIdleFrame); // Set the current idle frame
-                
-                currentFrame = (currentFrame + 1) % idleFrames.length; // Loop through idle frames
+                GreenfootImage currentRunFrame = new GreenfootImage(runFrames[currentFrame]);
+                if (!facingRight) currentRunFrame.mirrorHorizontally();
+                setImage(currentRunFrame);
+                currentFrame = (currentFrame + 1) % runFrames.length;
+                animationCounter = 0;
+            }
+        }
+        else
+        {
+            if (animationCounter >= 6)
+            {
+                GreenfootImage currentIdleFrame = new GreenfootImage(idleFrames[currentFrame]);
+                if (!facingRight) currentIdleFrame.mirrorHorizontally();
+                setImage(currentIdleFrame);
+                currentFrame = (currentFrame + 1) % idleFrames.length;
                 animationCounter = 0;
             }
         }
     }
+
 
     
     private void flipDirection()
