@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ScreenSelect extends World
 {
-
     /**
      * Constructor for objects of class ScreenSelect.
      * 
@@ -18,7 +17,7 @@ public class ScreenSelect extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         
-        //addObject(new Button(this::goInstructions, "instructions.png", "instructions.png"), 499,371);
+        addObject(new Button(this::goInstructions, "InstructionButton.png"), 499,371);
     }
     private void goInstructions()
     {
