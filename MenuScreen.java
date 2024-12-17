@@ -24,8 +24,8 @@ public class MenuScreen extends World
         backgroundMusic= new GreenfootSound("menuMusic.mp3");
         
         setBackground(new GreenfootImage("menuScreenbg.png")); // Set the background
-        pressSpaceImage = new GreenfootImage("pressSpace.png"); // Load the "Press Space" image
-        getBackground().drawImage(pressSpaceImage, 250, 331); // Draw the "Press Space" image
+        pressSpaceImage = new GreenfootImage("pressSpace2.png"); // Load the "Press Space" image
+        getBackground().drawImage(pressSpaceImage, 235, 300); // Draw the "Press Space" image
     }
     
     /**
@@ -99,8 +99,8 @@ public class MenuScreen extends World
         setBackground(new GreenfootImage("menuScreenbg.png"));
         
         // Calculate the position to center the scaled image
-        int xPos = 250 - (scaledWidth - originalWidth) / 2; 
-        int yPos = 331 - (scaledHeight - originalHeight) / 2; 
+        int xPos = 235 - (scaledWidth - originalWidth) / 2; 
+        int yPos = 300 - (scaledHeight - originalHeight) / 2; 
         getBackground().drawImage(scaledImage, xPos, yPos); // Draw the scaled image
     }
 
