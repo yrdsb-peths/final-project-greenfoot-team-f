@@ -23,16 +23,16 @@ public class MainPlayer extends Actor
     {
         velocity = 0; 
         
-        
         currentFrame = 0; 
         animationCounter = 0;
         
-        idleFrames = new GreenfootImage[4];
         
+        idleFrames = new GreenfootImage[4];
         for(int i = 0; i < idleFrames.length; i++)
         {
             idleFrames[i] = new GreenfootImage("playerIdle_" + (i + 1) + ".png");
         }
+        
         
         runFrames = new GreenfootImage[4];
         for (int i = 0; i < runFrames.length; i++)
@@ -40,11 +40,13 @@ public class MainPlayer extends Actor
             runFrames[i] = new GreenfootImage("run_" + (i + 1) + ".png");
         }
         
+        
         jumpFrames = new GreenfootImage[6];
         for (int i = 0; i < jumpFrames.length; i++)
         {
             jumpFrames[i] = new GreenfootImage("jump_" + (i + 1) + ".png");
         }
+        
         
         // Flip jump frames if initially not facing right
         if (!facingRight)
@@ -56,7 +58,9 @@ public class MainPlayer extends Actor
         }
         
         facingRight = true; 
+        //main character always starts facing right
         
+        //set idle when spawned / created
         setImage(idleFrames[0]); 
     }
     
