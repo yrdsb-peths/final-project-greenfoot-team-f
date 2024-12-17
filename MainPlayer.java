@@ -162,27 +162,31 @@ public class MainPlayer extends Actor
         {
             if (animationCounter >= 6) // Control attack animation speed
             {
-                GreenfootImage currentAttackFrame = new GreenfootImage(attackFrames[attackFrameIndex]); // Get current frame
+                GreenfootImage currentAttackFrame = new GreenfootImage(attackFrames[attackFrameIndex]);
                 
                 // Flip attack frame dynamically if not facing right
                 if (!facingRight)
                 {
                     currentAttackFrame.mirrorHorizontally();
                 }
-    
+        
                 setImage(currentAttackFrame); // Set the current attack frame
                 
-                attackFrameIndex++; // Move to the next attack frame
-                
+                attackFrameIndex++;
+        
                 if (attackFrameIndex >= attackFrames.length) // End attack animation
                 {
                     isAttacking = false; // Stop attack animation
                     attackFrameIndex = 0; // Reset frame index
+                    
+                    // Fire a projectile when attack animation finishes
+                    fireProjectile();
                 }
                 
                 animationCounter = 0; // Reset animation counter
             }
         }
+
         // If not attacking, proceed with other animations
         else if (isJumping)
         {
@@ -218,6 +222,25 @@ public class MainPlayer extends Actor
                 animationCounter = 0;
             }
         }
+    }
+
+    private void fireProjectile()
+    {
+        int x; // x position of the projectile
+        int y = getY() - 20; // Slightly higher than the player's position
+    
+        if (facingRight)
+        {
+            x = getX() + 40; // Offset to the right
+        }
+        else
+        {
+            x = getX() - 40; // Offset to the left
+        }
+    
+        // Create and add the projectile to the world
+        Projectile projectile = new Projectile(facingRight);
+        getWorld().addObject(projectile, x, y);
     }
 
 
