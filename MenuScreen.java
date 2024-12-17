@@ -164,17 +164,17 @@ public class MenuScreen extends World
         }
         else
         {
-            goInstructions(); // Transition to the next world after animation
+            goScreenSelect(); // Transition to the next world after animation
         }
     }
 
     /**
      * Switch to the FightStage world
      */
-    private void goInstructions()
+    private void goScreenSelect()
     {
         stopMus();
-        Greenfoot.setWorld(new InstructionScreen()); // Switch to the fight stage
+        Greenfoot.setWorld(new ScreenSelect()); // Switch to the fight stage
     }
     
 }
