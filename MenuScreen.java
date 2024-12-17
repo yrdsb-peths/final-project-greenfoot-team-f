@@ -6,8 +6,8 @@ public class MenuScreen extends World
     private boolean growing = true; // Toggle for breathing animation
     private boolean spacePressed = false; // Track if space has been pressed
     
-    private int originalWidth = 130; // Original width for the press space image
-    private int originalHeight = 44; // Original height for the press space image
+    private int originalWidth = 136; // Original width for the press space image
+    private int originalHeight = 30; // Original height for the press space image
     private double scaleVar = 1.0; // Scale factor for breathing animation
     
     private int animationStep = 0; // Frame count for space bar animation
