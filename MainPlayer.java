@@ -2,201 +2,150 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class MainPlayer extends Actor
 {
-  
     private final int gravity = 1;
     private int velocity;
-    
+
     private GreenfootImage[] idleFrames;
     private GreenfootImage[] runFrames;
     private GreenfootImage[] jumpFrames;
     private GreenfootImage[] attackFrames;
-    
+
     private int currentFrame;
     private int animationCounter;
-    
+
     private boolean facingRight;
-    
-    //attack ani variables
+
+    // Attack animation variables
     private boolean isAttacking = false;
-    private int attackFrameIndex = 0; 
-    
-    //jump ani variables
-    private boolean isJumping; // Track player jump animation
-    private int jumpFrameIndex; // Track the current frame of jump
-    
-    
+    private int attackFrameIndex = 0;
+
+    // Jump animation variables
+    private boolean isJumping;
+    private int jumpFrameIndex;
+
     public MainPlayer()
     {
-        velocity = 0; 
-        
-        currentFrame = 0; 
+        velocity = 0;
+        currentFrame = 0;
         animationCounter = 0;
-        
-        
-        idleFrames = new GreenfootImage[4];
-        for(int i = 0; i < idleFrames.length; i++)
-        {
-            idleFrames[i] = new GreenfootImage("playerIdle_" + (i + 1) + ".png");
-        }
-        
-        
-        runFrames = new GreenfootImage[4];
-        for (int i = 0; i < runFrames.length; i++)
-        {
-            runFrames[i] = new GreenfootImage("run_" + (i + 1) + ".png");
-        }
-        
-        
-        jumpFrames = new GreenfootImage[6];
-        for (int i = 0; i < jumpFrames.length; i++)
-        {
-            jumpFrames[i] = new GreenfootImage("jump_" + (i + 1) + ".png");
-        }
-        
-        attackFrames = new GreenfootImage[8];
-        for (int i = 0; i < attackFrames.length; i++)
-        {
-            attackFrames[i] = new GreenfootImage("attack_" + (i + 1) + ".png");
-        }
-        
-        
-        // Flip jump frames if initially not facing right
-        if (!facingRight)
-        {
-            for (GreenfootImage frame : jumpFrames)
-            {
-                frame.mirrorHorizontally();
-            }
-        }
-        
-        facingRight = true; 
-        //main character always starts facing right
-        
-        //set idle when spawned / created
-        setImage(idleFrames[0]); 
+
+        idleFrames = loadFrames("playerIdle_", 4);
+        runFrames = loadFrames("run_", 4);
+        jumpFrames = loadFrames("jump_", 6);
+        attackFrames = loadFrames("attack_", 8);
+
+        facingRight = true; // Default direction
+        setImage(idleFrames[0]);
     }
-    
-    
+
     public void act()
     {
         fall();
-        if(Greenfoot.isKeyDown("space") && getY() > getWorld().getHeight() - 50)
+        if (Greenfoot.isKeyDown("space") && getY() > getWorld().getHeight() - 50)
         {
             jump();
             Greenfoot.playSound("jumpSfx.mp3");
         }
-        
-        move(); 
-        
-        animate(); 
+
+        move();
+        animate();
     }
-    
+
+    private GreenfootImage[] loadFrames(String baseName, int count)
+    {
+        GreenfootImage[] frames = new GreenfootImage[count];
+        for (int i = 0; i < count; i++)
+        {
+            frames[i] = new GreenfootImage(baseName + (i + 1) + ".png");
+        }
+        return frames;
+    }
+
     private void jump()
     {
-        velocity = -18; // Apply upward velocity
-        isJumping = true; // Start jump animation
-        jumpFrameIndex = 0; // Reset jump animation frame
+        velocity = -18;
+        isJumping = true;
+        jumpFrameIndex = 0;
     }
 
-
-    
     public void move()
     {
         int y = getY();
         int x = getX();
-    
+
         if (Greenfoot.isKeyDown("a")) // Move left
         {
             x -= 3;
-            if (facingRight) // Flip image if necessary
+            if (facingRight)
             {
-                flipDirection();
+                facingRight = false;
             }
         }
-    
+
         if (Greenfoot.isKeyDown("d")) // Move right
         {
             x += 3;
-            if (!facingRight) // Flip image if necessary
+            if (!facingRight)
             {
-                flipDirection();
+                facingRight = true;
             }
         }
-    
+
         setLocation(x, y);
     }
 
-
-    
     public void fall()
     {
-        // Update player's y position by adding the current velocity to the Y coord
-        setLocation(getX(), getY() + velocity); 
-        
-        //check if player is near ground(50 px above bottom);
-        if(getY() > getWorld().getHeight() - 50)
+        setLocation(getX(), getY() + velocity);
+
+        if (getY() > getWorld().getHeight() - 50)
         {
-            velocity = 0; 
-            //if player on ground, set velocity to 0
+            velocity = 0;
         }
         else
         {
             velocity += gravity;
-            //if player in the air, increase velocity by gravity. (to simulate acceleration);
         }
     }
-    
+
     private void animate()
     {
         animationCounter++;
-    
-        // Check if the player pressed "P" for attack
+
         if (Greenfoot.isKeyDown("p") && !isAttacking)
         {
-            isAttacking = true; // Start attack animation
-            attackFrameIndex = 0; // Reset attack frame index
-        }
-    
-        // Play attack animation
-        if (isAttacking)
-        {
-            if (animationCounter >= 6) // Control attack animation speed
-            {
-                GreenfootImage currentAttackFrame = new GreenfootImage(attackFrames[attackFrameIndex]);
-                
-                // Flip attack frame dynamically if not facing right
-                if (!facingRight)
-                {
-                    currentAttackFrame.mirrorHorizontally();
-                }
-        
-                setImage(currentAttackFrame); // Set the current attack frame
-                
-                attackFrameIndex++;
-        
-                if (attackFrameIndex >= attackFrames.length) // End attack animation
-                {
-                    isAttacking = false; // Stop attack animation
-                    attackFrameIndex = 0; // Reset frame index
-                    
-                    // Fire a projectile when attack animation finishes
-                    fireProjectile();
-                }
-                
-                animationCounter = 0; // Reset animation counter
-            }
+            isAttacking = true;
+            attackFrameIndex = 0;
         }
 
-        // If not attacking, proceed with other animations
+        if (isAttacking)
+        {
+            if (animationCounter >= 6)
+            {
+                setImage(getFlippedFrame(attackFrames[attackFrameIndex]));
+                attackFrameIndex++;
+
+                if (attackFrameIndex >= attackFrames.length)
+                {
+                    isAttacking = false;
+                    attackFrameIndex = 0;
+                    fireProjectile();
+                }
+
+                animationCounter = 0;
+            }
+        }
         else if (isJumping)
         {
             if (animationCounter >= 6)
             {
-                GreenfootImage currentJumpFrame = new GreenfootImage(jumpFrames[jumpFrameIndex]);
-                if (!facingRight) currentJumpFrame.mirrorHorizontally();
-                setImage(currentJumpFrame);
+                setImage(getFlippedFrame(jumpFrames[jumpFrameIndex]));
                 jumpFrameIndex++;
-                if (jumpFrameIndex >= jumpFrames.length) { isJumping = false; jumpFrameIndex = 0; }
+                if (jumpFrameIndex >= jumpFrames.length)
+                {
+                    isJumping = false;
+                    jumpFrameIndex = 0;
+                }
                 animationCounter = 0;
             }
         }
@@ -204,9 +153,7 @@ public class MainPlayer extends Actor
         {
             if (animationCounter >= 6)
             {
-                GreenfootImage currentRunFrame = new GreenfootImage(runFrames[currentFrame]);
-                if (!facingRight) currentRunFrame.mirrorHorizontally();
-                setImage(currentRunFrame);
+                setImage(getFlippedFrame(runFrames[currentFrame]));
                 currentFrame = (currentFrame + 1) % runFrames.length;
                 animationCounter = 0;
             }
@@ -215,41 +162,30 @@ public class MainPlayer extends Actor
         {
             if (animationCounter >= 6)
             {
-                GreenfootImage currentIdleFrame = new GreenfootImage(idleFrames[currentFrame]);
-                if (!facingRight) currentIdleFrame.mirrorHorizontally();
-                setImage(currentIdleFrame);
+                setImage(getFlippedFrame(idleFrames[currentFrame]));
                 currentFrame = (currentFrame + 1) % idleFrames.length;
                 animationCounter = 0;
             }
         }
     }
 
+    private GreenfootImage getFlippedFrame(GreenfootImage frame)
+    {
+        GreenfootImage image = new GreenfootImage(frame);
+        if (!facingRight)
+        {
+            image.mirrorHorizontally();
+        }
+        return image;
+    }
+
     private void fireProjectile()
     {
-        int x; // x position of the projectile
-        int y = getY() - 20; // Slightly higher than the player's position
-    
-        if (facingRight)
-        {
-            x = getX() + 40; // Offset to the right
-        }
-        else
-        {
-            x = getX() - 40; // Offset to the left
-        }
-    
-        // Create and add the projectile to the world
+        int x = facingRight ? getX() + 40 : getX() - 40;
+        int y = getY() - 20;
+
+        Greenfoot.playSound("shootSfx.mp3");
         Projectile projectile = new Projectile(facingRight);
         getWorld().addObject(projectile, x, y);
     }
-
-
-    
-    private void flipDirection()
-    {
-        facingRight = !facingRight; // Toggle the facing direction
-    }
-
-
-    
 }
