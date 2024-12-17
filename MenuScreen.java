@@ -15,6 +15,9 @@ public class MenuScreen extends World
     
     private GreenfootSound backgroundMusic;
     
+    private GreenfootImage blueOverlay; // blue overlay image
+    private int fadeOpacity = 225; // Starting opacity (225 is fully opaque)
+        
     
     public MenuScreen()
     {    
@@ -25,6 +28,12 @@ public class MenuScreen extends World
         
         setBackground(new GreenfootImage("menuScreenbg.png")); // Set the background
         pressSpaceImage = new GreenfootImage("pressSpace2.png"); // Load the "Press Space" image
+        
+        // Initialize the blue overlay
+        blueOverlay = new GreenfootImage(getWidth(), getHeight());
+        blueOverlay.setColor(new Color(86, 172, 222)); // Set the overlay color to blue
+        blueOverlay.fill(); // Fill the overlay with blue color
+            
         getBackground().drawImage(pressSpaceImage, 235, 300); // Draw the "Press Space" image
     }
     
@@ -47,6 +56,13 @@ public class MenuScreen extends World
         {
             animatePressedSpace(); // Handle transition animation
         }
+        
+        // blue fade-in effect at the start
+        if (fadeOpacity > 0)
+        {
+            fadeInEffect();
+        }
+        
     }
     
     public void stopped()
@@ -65,6 +81,20 @@ public class MenuScreen extends World
         // Resume music when the world started 
         backgroundMusic.playLoop();
     }
+    
+    private void fadeInEffect()
+    {
+        blueOverlay.setTransparency(fadeOpacity); // Set current transparency
+        getBackground().drawImage(blueOverlay, 0, 0); // Draw the overlay on the background
+        
+        fadeOpacity -= 3; // Decrease opacity (controls the speed of fading)
+        
+        if (fadeOpacity < 0) // Ensure opacity doesn't go below 0
+        {
+            fadeOpacity = 0;
+        }
+    }
+
     
     
     private void animateBreathingSpace()

@@ -17,7 +17,7 @@ public class MainPlayer extends Actor
     
     private boolean isJumping; // Track player jump animation
     private int jumpFrameIndex; // Track the current frame of jump
-
+    
     
     public MainPlayer()
     {
