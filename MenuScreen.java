@@ -6,8 +6,8 @@ public class MenuScreen extends World
     private boolean growing = true; // Toggle for breathing animation
     private boolean spacePressed = false; // Track if space has been pressed
     
-    private int originalWidth = 130; // Original width for the press space image
-    private int originalHeight = 44; // Original height for the press space image
+    private int originalWidth = 136; // Original width for the press space image
+    private int originalHeight = 30; // Original height for the press space image
     private double scaleVar = 1.0; // Scale factor for breathing animation
     
     private int animationStep = 0; // Frame count for space bar animation
@@ -24,8 +24,8 @@ public class MenuScreen extends World
         backgroundMusic= new GreenfootSound("menuMusic.mp3");
         
         setBackground(new GreenfootImage("menuScreenbg.png")); // Set the background
-        pressSpaceImage = new GreenfootImage("pressSpace.png"); // Load the "Press Space" image
-        getBackground().drawImage(pressSpaceImage, 250, 331); // Draw the "Press Space" image
+        pressSpaceImage = new GreenfootImage("pressSpace2.png"); // Load the "Press Space" image
+        getBackground().drawImage(pressSpaceImage, 235, 300); // Draw the "Press Space" image
     }
     
     /**
@@ -99,8 +99,8 @@ public class MenuScreen extends World
         setBackground(new GreenfootImage("menuScreenbg.png"));
         
         // Calculate the position to center the scaled image
-        int xPos = 250 - (scaledWidth - originalWidth) / 2; 
-        int yPos = 331 - (scaledHeight - originalHeight) / 2; 
+        int xPos = 235 - (scaledWidth - originalWidth) / 2; 
+        int yPos = 300 - (scaledHeight - originalHeight) / 2; 
         getBackground().drawImage(scaledImage, xPos, yPos); // Draw the scaled image
     }
 
@@ -115,7 +115,7 @@ public class MenuScreen extends World
             double scaleVar = 1 + 0.02 * animationStep; // Scale up by 2% each frame
             int scaledWidth = (int)(originalWidth * scaleVar); 
             int scaledHeight = (int)(originalHeight * scaleVar); 
-            int opacity = Math.max(0, 225 - (int)(4.25 * animationStep)); // Reduce opacity gradually
+            int opacity = Math.max(0, 235 - (int)(4.25 * animationStep)); // Reduce opacity gradually
             
             // Create a scaled and transparent version of the image
             GreenfootImage scaledImage = new GreenfootImage(pressSpaceImage);
@@ -126,8 +126,8 @@ public class MenuScreen extends World
             setBackground(new GreenfootImage("menuScreenbg.png"));
             
             // Calculate position to center the scaled image
-            int xPos = 250 - (scaledWidth - originalWidth) / 2; 
-            int yPos = 331 - (scaledHeight - originalHeight) / 2; 
+            int xPos = 235 - (scaledWidth - originalWidth) / 2; 
+            int yPos = 300 - (scaledHeight - originalHeight) / 2; 
             getBackground().drawImage(scaledImage, xPos, yPos); // Draw the scaled image
             
             animationStep++; // Move to the next frame
