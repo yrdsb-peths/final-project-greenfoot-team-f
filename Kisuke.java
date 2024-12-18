@@ -27,12 +27,16 @@ public class Kisuke extends Actor
     
     private int walkAnimationDelay = 0; // Counter to control walking animation speed
     private final int walkAnimationSpeed = 3; // Delay for walking animation (higher = slower)
+     
+    private int idleCounter = 0;     // Counter for idle duration
+    private final int idleDuration = 120; // Idle duration in frames (2 seconds at 60 FPS)
     
     
     // Direction and state variables
     private boolean facingRight = false;  // Indicates if Kisuke is facing right
     private boolean isAttacking = false;  // Indicates if Kisuke is currently attacking
-
+    private boolean isIdle = false; // Indicates if Kisuke is idle
+    
     private MainPlayer player;  // Reference to the main player
 
     public Kisuke(MainPlayer player) 
@@ -48,17 +52,54 @@ public class Kisuke extends Actor
         setImage(idleFrames[0]);  // Set initial image to the first idle frame
     }
 
-    // Main act method called each frame
+ 
     public void act() 
     {
-        fall();            // Apply gravity and handle jumping
-        followPlayer();    // Follow the player's position
-        handleJump();      // Randomly handle jumping
-        handleAttack();    // Handle attacking behavior
-        animate();         // Animate based on current state
+        if (isIdle) 
+        {
+            handleIdle();  // Handle idle state logic
+        } 
+        else 
+        {
+            fall();            // Apply gravity and handle jumping
+            followPlayer();    // Follow the player's position
+            handleJump();      // Randomly handle jumping
+            handleAttack();    // Handle attacking behavior
+            animate();         // Animate based on current state
+    
+            // Randomly trigger idle state (5% chance every frame)
+            if (!isJumping && !isAttacking && Greenfoot.getRandomNumber(100) < 1) 
+            {
+                enterIdleState();
+            }
+        }
     }
-
-    // Utility method to load animation frames
+    
+    private void enterIdleState() 
+    {
+        isIdle = true;
+        idleCounter = idleDuration; // Set counter to idle duration
+    }
+    
+    private void handleIdle() 
+    {
+        idleCounter--;  // Decrease idle counter
+    
+        // Play idle animation during idle state
+        if (idleCounter % animationSpeed == 0) 
+        {
+            idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
+            setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
+        }
+    
+        // Exit idle state when counter reaches zero
+        if (idleCounter <= 0) 
+        {
+            isIdle = false;
+        }
+    }
+    
+    //method to load animation frames
     private GreenfootImage[] loadFrames(String baseName, int count) 
     {
         GreenfootImage[] frames = new GreenfootImage[count];
@@ -72,11 +113,11 @@ public class Kisuke extends Actor
     // Method to make Kisuke follow the player's position
     private void followPlayer() 
     {
-        if (!isAttacking && !isJumping)  // Only follow if not attacking or jumping
+        if (!isAttacking && !isJumping && !isIdle)  // Only follow if not attacking, jumping, or idle
         {
             int playerX = player.getX();  // Get player's X position
             int deltaX = playerX - getX();  // Calculate horizontal distance to player
-
+    
             if (deltaX < 0)  // If player is to the left
             {
                 facingRight = false;
@@ -90,14 +131,15 @@ public class Kisuke extends Actor
         }
     }
 
+
     // Randomly decides if Kisuke should jump
     private void handleJump() 
     {
-        if (!isJumping && jumpCooldown <= 0)  // Ready to jump
+        if (!isJumping && jumpCooldown <= 0 && !isIdle) // Jump only if not idle
         {
-            if (Greenfoot.getRandomNumber(100) < 5)  // 5% chance to jump
+            if (Greenfoot.getRandomNumber(100) < 50)  // 5% chance to jump
             {
-                jump();  // Execute jump
+                jump();
             }
         } 
         else if (jumpCooldown > 0) 
@@ -105,6 +147,7 @@ public class Kisuke extends Actor
             jumpCooldown--;  // Decrease jump cooldown
         }
     }
+
 
     
     private void jump() 
