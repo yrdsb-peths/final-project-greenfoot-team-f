@@ -9,26 +9,28 @@ public class Kisuke extends Actor
     private int jumpFrameIndex = 0;  // Tracks the current frame of jump animation
 
     // Speed and cooldown variables
-    private int speed = 2;  // Movement speed
+    private int speed = 1;  // Movement speed
     private int attackCooldown = 0;  // Cooldown for attacks
     private int jumpCooldown = 0;  // Cooldown for jumps
 
     // Animation frames and indices
-    private GreenfootImage[] idleFrames;  // Idle animation frames
-    private GreenfootImage[] walkFrames;  // Walking animation frames
-    private GreenfootImage[] attackFrames;  // Attack animation frames
-    private GreenfootImage[] jumpFrames;  // Jump animation frames
+    private GreenfootImage[] idleFrames;  
+    private GreenfootImage[] walkFrames;  
+    private GreenfootImage[] attackFrames;  
+    private GreenfootImage[] jumpFrames;  
     private int idleFrameIndex = 0;  // Tracks the current frame of idle animation
     private int walkFrameIndex = 0;  // Tracks the current frame of walking animation
     private int attackFrameIndex = 0;  // Tracks the current frame of attack animation
 
+    private int animationDelay = 0; // Counter to slow down animation
+    private final int animationSpeed = 6; //frames to wait before updating
+    
     // Direction and state variables
     private boolean facingRight = false;  // Indicates if Kisuke is facing right
     private boolean isAttacking = false;  // Indicates if Kisuke is currently attacking
 
     private MainPlayer player;  // Reference to the main player
 
-    // Constructor to initialize frames and set the initial image
     public Kisuke(MainPlayer player) 
     {
         this.player = player;
@@ -100,7 +102,7 @@ public class Kisuke extends Actor
         }
     }
 
-    // Executes the jump action
+    
     private void jump() 
     {
         velocity = -18;  // Initial upward velocity
@@ -108,7 +110,7 @@ public class Kisuke extends Actor
         jumpFrameIndex = 0;  // Reset jump animation frame
     }
 
-    // Handles gravity and snapping to the ground
+    
     private void fall() 
     {
         setLocation(getX(), getY() + velocity);  // Apply vertical velocity
@@ -126,7 +128,7 @@ public class Kisuke extends Actor
         }
     }
 
-    // Handles attacking logic
+   
     private void handleAttack() 
     {
         if (!isAttacking && attackCooldown <= 0)  // Ready to attack
@@ -163,47 +165,57 @@ public class Kisuke extends Actor
         getWorld().addObject(projectile, x, y);
     }
 
-    // Animates Kisuke based on his current state
+    
     private void animate() 
     {
-        if (isAttacking)  // Attack animation
+        animationDelay++; // Increment the animation delay counter
+    
+        // Only update the animation when delay exceeds animationSpeed
+        if (animationDelay >= animationSpeed) 
         {
-            if (attackFrameIndex < attackFrames.length) 
+            if (isAttacking) // Attack animation
             {
-                setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
-                attackFrameIndex++;
-
-                if (attackFrameIndex == 5)  // Fire projectile midway through attack animation
+                if (attackFrameIndex < attackFrames.length) 
                 {
-                    performAttack();
+                    setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
+                    attackFrameIndex++;
+    
+                    if (attackFrameIndex == 5) // Fire projectile midway through attack animation
+                    {
+                        performAttack();
+                    }
+    
+                    if (attackFrameIndex == attackFrames.length) // End attack animation
+                    {
+                        isAttacking = false;
+                        attackCooldown = 60; // Set attack cooldown
+                    }
                 }
-
-                if (attackFrameIndex == attackFrames.length)  // End attack animation
-                {
-                    isAttacking = false;
-                    attackCooldown = 60;  // Set attack cooldown
-                }
-            }
-        } 
-        else if (isJumping)  // Jump animation
-        {
-            if (jumpFrameIndex < jumpFrames.length) 
+            } 
+            else if (isJumping) // Jump animation
             {
-                setImage(flipIfNeeded(jumpFrames[jumpFrameIndex]));
-                jumpFrameIndex++;
+                if (jumpFrameIndex < jumpFrames.length) 
+                {
+                    setImage(flipIfNeeded(jumpFrames[jumpFrameIndex]));
+                    jumpFrameIndex++;
+                }
+            } 
+            else if (Math.abs(player.getX() - getX()) > 5) // Walking animation
+            {
+                walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
+                setImage(flipIfNeeded(walkFrames[walkFrameIndex]));
+            } 
+            else // Idle animation
+            {
+                idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
+                setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
             }
-        } 
-        else if (Math.abs(player.getX() - getX()) > 5)  // Walking animation
-        {
-            walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
-            setImage(flipIfNeeded(walkFrames[walkFrameIndex]));
-        } 
-        else  // Idle animation
-        {
-            idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
-            setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
+            
+            // Reset the delay counter after updating the frame
+            animationDelay = 0;
         }
     }
+
 
     // Flips a frame horizontally if Kisuke is facing left
     private GreenfootImage flipIfNeeded(GreenfootImage frame) 

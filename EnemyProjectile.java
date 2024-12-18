@@ -7,22 +7,27 @@ public class EnemyProjectile extends Actor
 
     public EnemyProjectile(String imageName, boolean movingRight) 
     {
-        setImage(imageName);
+        setImage(imageName); // Set the projectile image
         this.movingRight = movingRight;
+
+        if (!movingRight) 
+        {
+            getImage().mirrorHorizontally(); // Flip the image for the left direction
+        }
     }
 
     public void act() 
     {
         if (movingRight) 
         {
-            setLocation(getX() + speed, getY());
+            setLocation(getX() + speed, getY()); // Move to the right
         } 
         else 
         {
-            setLocation(getX() - speed, getY());
+            setLocation(getX() - speed, getY()); // Move to the left
         }
 
-        if (getX() < 0 || getX() > getWorld().getWidth()) 
+        if (isAtEdge()) // Remove projectile if it goes off-screen
         {
             getWorld().removeObject(this);
         }
