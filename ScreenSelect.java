@@ -18,12 +18,10 @@ public class ScreenSelect extends World
         super(600, 400, 1);
         
         // Instruction button
-        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
+        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png",150, 50), 499,371);
         
         //Fight/start game button
-        addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png"), 301,190);
-        fightButton.getImage().scale(200,100);
-        addObject(fightButton, 301, 190);
+        addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png",200, 50), 301,190);
     }
     private void goInstructions()
     {
