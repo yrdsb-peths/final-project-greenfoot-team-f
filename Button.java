@@ -19,6 +19,10 @@ public class Button extends Actor {
         //enlarge the image when mouse is hovered over
         hoverImage.scale((int)(hoverImage.getWidth()*6/5), (int)(hoverImage.getHeight()*6/5));
        
+        // Scaling images
+        buttonImage.scale(newWidth, newHeight);
+        
+        
         // Set combined image as the actor's image
         setImage(buttonImage);
     }
