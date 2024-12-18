@@ -44,6 +44,6 @@ public class FightStage extends World
         
         //add platform
         Platform platform = new Platform();
-        addObject(platform, 450, 250); 
+        addObject(platform, 450, 260); 
     }
 }
