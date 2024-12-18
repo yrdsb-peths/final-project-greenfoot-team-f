@@ -1,12 +1,17 @@
-import greenfoot.*;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import greenfoot.GreenfootSound;
-
-public class FightStage extends World 
+/**
+ * Write a description of class FightWorld here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class FightWorld extends World
 {
     private GreenfootSound backgroundMusic;
-
-    public FightStage()
-    {
+    
+    public FightWorld()
+    {    
         super(600, 400, 1);
 
         backgroundMusic = new GreenfootSound("stageOneMusic.mp3");
@@ -18,13 +23,14 @@ public class FightStage extends World
         setBackground("stage_1.png");
         prepare();
     }
-
+    
+    
     public void stopped()
     {
         // Pause music when the world is stopped
         backgroundMusic.pause();
     }
-
+    
     public void started()
     {
         // Resume music when the world starts
@@ -44,6 +50,7 @@ public class FightStage extends World
         
         //add platform
         Platform platform = new Platform();
-        addObject(platform, 450, 250); 
+        addObject(platform, 450, 260); 
     }
+    
 }
