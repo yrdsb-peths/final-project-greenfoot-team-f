@@ -11,7 +11,9 @@ public class FightStage extends World {
         
         backgroundMusic = new GreenfootSound("stageOneMusic.mp3"); 
         
-        backgroundMusic.playLoop();
+        //add back when not initial world
+        //backgroundMusic.playLoop();
+        backgroundMusic.setVolume(50); 
         
         setBackground("stage_1.png");
         prepare(); 
@@ -29,7 +31,7 @@ public class FightStage extends World {
         backgroundMusic.playLoop();
     }
     
-    
+   
     private void prepare()
     {
         MainPlayer mainPlayer = new MainPlayer(); 

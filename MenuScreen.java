@@ -11,7 +11,7 @@ public class MenuScreen extends World
     private double scaleVar = 1.0; // Scale factor for breathing animation
     
     private int animationStep = 0; // Frame count for space bar animation
-    private GreenfootSound selectSound = new GreenfootSound("menuSelectSound2.mp3"); // Selection sound
+    private GreenfootSound selectSound = new GreenfootSound("menuSelectSound.mp3"); // Selection sound
     
     private GreenfootSound backgroundMusic;
     
