@@ -1,217 +1,225 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class Kisuke extends Actor
+public class Kisuke extends Actor 
 {
-    private final int gravity = 1;
-    private int velocity = 0;
-    private boolean isJumping = false;
-    private boolean facingRight = true; // Default direction is right
-    private int jumpFrameIndex = 0;
-    private int attackCooldown = 0; // Counter for attack cooldown
-    private int jumpCooldown = 0;   // Counter for jump cooldown
-    private int animationCounter = 0; // Animation speed controller
+    // Constants and variables for gravity, velocity, and jumping
+    private final int gravity = 1;  // Gravity value for downward acceleration
+    private int velocity = 0;  // Current vertical velocity
+    private boolean isJumping = false;  // Indicates if Kisuke is currently jumping
+    private int jumpFrameIndex = 0;  // Tracks the current frame of jump animation
 
-    private int speed = 2; // Movement speed
+    // Speed and cooldown variables
+    private int speed = 2;  // Movement speed
+    private int attackCooldown = 0;  // Cooldown for attacks
+    private int jumpCooldown = 0;  // Cooldown for jumps
 
-    private GreenfootImage[] idleFrames;
-    private GreenfootImage[] walkFrames;
-    private GreenfootImage[] jumpFrames;
-    private GreenfootImage[] attackFrames;
+    // Animation frames and indices
+    private GreenfootImage[] idleFrames;  // Idle animation frames
+    private GreenfootImage[] walkFrames;  // Walking animation frames
+    private GreenfootImage[] attackFrames;  // Attack animation frames
+    private GreenfootImage[] jumpFrames;  // Jump animation frames
+    private int idleFrameIndex = 0;  // Tracks the current frame of idle animation
+    private int walkFrameIndex = 0;  // Tracks the current frame of walking animation
+    private int attackFrameIndex = 0;  // Tracks the current frame of attack animation
 
-    private int idleFrameIndex = 0;
-    private int walkFrameIndex = 0;
-    private int attackFrameIndex = 0;
+    // Direction and state variables
+    private boolean facingRight = false;  // Indicates if Kisuke is facing right
+    private boolean isAttacking = false;  // Indicates if Kisuke is currently attacking
 
-    private boolean isAttacking = false;
+    private MainPlayer player;  // Reference to the main player
 
-    private MainPlayer player;
-
-    public Kisuke(MainPlayer player)
+    // Constructor to initialize frames and set the initial image
+    public Kisuke(MainPlayer player) 
     {
         this.player = player;
 
         // Load all animation frames
-        idleFrames = loadFrames("kisukeIdle_", 6);     // 6 idle frames
-        walkFrames = loadFrames("kisukeWalk_", 4);     // 4 walking frames
-        jumpFrames = loadFrames("kisukeJump_", 7);     // 7 jumping frames
-        attackFrames = loadFrames("kisukeAttack_", 10); // 10 attack frames
+        idleFrames = loadFrames("kisukeIdle_", 6);
+        walkFrames = loadFrames("kisukeWalk_", 4);
+        attackFrames = loadFrames("kisukeAttack_", 10);
+        jumpFrames = loadFrames("kisukeJump_", 7);
 
-        setImage(idleFrames[0]); // Default to first idle frame
+        setImage(idleFrames[0]);  // Set initial image to the first idle frame
     }
 
-    public void act()
+    // Main act method called each frame
+    public void act() 
     {
-        fall();            // Handle gravity
-        followPlayer();    // Follow and flip towards the player
-        handleJump();      // Random jump logic
-        handleAttack();    // Random attack logic
-        animate();         // Manage animation states
+        fall();            // Apply gravity and handle jumping
+        followPlayer();    // Follow the player's position
+        handleJump();      // Randomly handle jumping
+        handleAttack();    // Handle attacking behavior
+        animate();         // Animate based on current state
     }
 
-    private GreenfootImage[] loadFrames(String baseName, int count)
+    // Utility method to load animation frames
+    private GreenfootImage[] loadFrames(String baseName, int count) 
     {
         GreenfootImage[] frames = new GreenfootImage[count];
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < count; i++) 
         {
             frames[i] = new GreenfootImage(baseName + i + ".png");
         }
         return frames;
     }
 
-    private void followPlayer()
+    // Method to make Kisuke follow the player's position
+    private void followPlayer() 
     {
-        if (!isAttacking && !isJumping) // Follow player only if not attacking or jumping
+        if (!isAttacking && !isJumping)  // Only follow if not attacking or jumping
         {
-            int playerX = player.getX();
+            int playerX = player.getX();  // Get player's X position
+            int deltaX = playerX - getX();  // Calculate horizontal distance to player
 
-            // Flip direction based on player's position
-            if (playerX < getX() && facingRight)
+            if (deltaX < 0)  // If player is to the left
             {
                 facingRight = false;
-            }
-            else if (playerX > getX() && !facingRight)
+                setLocation(getX() - speed, getY());  // Move left
+            } 
+            else if (deltaX > 0)  // If player is to the right
             {
                 facingRight = true;
+                setLocation(getX() + speed, getY());  // Move right
             }
+        }
+    }
 
-            // Move towards the player
-            int deltaX = playerX - getX();
-            if (Math.abs(deltaX) > 2)
+    // Randomly decides if Kisuke should jump
+    private void handleJump() 
+    {
+        if (!isJumping && jumpCooldown <= 0)  // Ready to jump
+        {
+            if (Greenfoot.getRandomNumber(100) < 5)  // 5% chance to jump
             {
-                setLocation(getX() + (int) Math.signum(deltaX) * speed, getY());
+                jump();  // Execute jump
             }
+        } 
+        else if (jumpCooldown > 0) 
+        {
+            jumpCooldown--;  // Decrease jump cooldown
         }
     }
 
-    private void handleJump()
+    // Executes the jump action
+    private void jump() 
     {
-        if (!isJumping && jumpCooldown <= 0) // Ready to jump
+        velocity = -18;  // Initial upward velocity
+        isJumping = true;  // Set jumping state to true
+        jumpFrameIndex = 0;  // Reset jump animation frame
+    }
+
+    // Handles gravity and snapping to the ground
+    private void fall() 
+    {
+        setLocation(getX(), getY() + velocity);  // Apply vertical velocity
+
+        if (getY() > getWorld().getHeight() - 50)  // If on the ground
         {
-            if (Greenfoot.getRandomNumber(100) < 5) // 5% chance to jump each frame
-            {
-                jump();
-            }
-        }
-        else if (jumpCooldown > 0)
+            velocity = 0;  // Stop downward motion
+            setLocation(getX(), getWorld().getHeight() - 50);  // Snap to ground level
+            isJumping = false;  // End jumping state
+            jumpCooldown = 60;  // Set jump cooldown (1 second at 60 FPS)
+        } 
+        else 
         {
-            jumpCooldown--;
+            velocity += gravity;  // Increase velocity for gravity effect
         }
     }
 
-    private void jump()
+    // Handles attacking logic
+    private void handleAttack() 
     {
-        velocity = -18; // Jump velocity
-        isJumping = true;
-        jumpFrameIndex = 0;
-    }
-
-    private void fall()
-    {
-        setLocation(getX(), getY() + velocity); // Apply gravity
-
-        if (getY() > getWorld().getHeight() - 50) // If on the ground
+        if (!isAttacking && attackCooldown <= 0)  // Ready to attack
         {
-            velocity = 0;
-            setLocation(getX(), getWorld().getHeight() - 50); // Snap to ground
-            isJumping = false;
-            jumpCooldown = 60; // Set jump cooldown
-        }
-        else
-        {
-            velocity += gravity; // Apply gravity
-        }
-    }
-
-    private void handleAttack()
-    {
-        if (!isAttacking && attackCooldown <= 0)
-        {
-            if (Greenfoot.getRandomNumber(100) < 5) // 5% chance to attack
+            if (Greenfoot.getRandomNumber(100) < 5)  // 5% chance to attack
             {
                 isAttacking = true;
-                attackFrameIndex = 0;
+                attackFrameIndex = 0;  // Reset attack animation frame
             }
-        }
-        else if (isAttacking)
+        } 
+        else if (attackCooldown > 0) 
         {
-            playAttackAnimation();
-        }
-        else
-        {
-            attackCooldown--;
+            attackCooldown--;  // Decrease attack cooldown
         }
     }
 
-    private void playAttackAnimation()
+    // Performs the projectile attack
+    private void performAttack() 
     {
-        if (attackFrameIndex < attackFrames.length)
+        int x = getX();  // Start X position of the projectile
+        int y = getY() - 20;  // Slightly higher than Kisuke's position
+
+        if (facingRight)  // Determine projectile's direction
         {
-            setImage(getFlippedFrame(attackFrames[attackFrameIndex]));
-            attackFrameIndex++;
-        }
-        else
+            x += 40;  // Offset to the right
+        } 
+        else 
         {
-            performAttack();
-            isAttacking = false;
-            attackCooldown = 60; // Cooldown for next attack
-            setImage(idleFrames[0]); // Return to idle
+            x -= 40;  // Offset to the left
         }
+
+        // Create and add the projectile to the world
+        EnemyProjectile projectile = new EnemyProjectile("kisukeProjectile.png", facingRight);
+        getWorld().addObject(projectile, x, y);
     }
 
-    private void performAttack()
+    // Animates Kisuke based on his current state
+    private void animate() 
     {
-        if (intersects(player))
+        if (isAttacking)  // Attack animation
         {
-            player.takeDamage(10); // Call player's takeDamage method
-        }
-    }
-
-    private void animate()
-    {
-        animationCounter++;
-
-        if (isAttacking)
-        {
-            // Attack animation handled in playAttackAnimation
-            return;
-        }
-
-        if (isJumping)
-        {
-            if (jumpFrameIndex < jumpFrames.length && animationCounter >= 6)
+            if (attackFrameIndex < attackFrames.length) 
             {
-                setImage(getFlippedFrame(jumpFrames[jumpFrameIndex]));
+                setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
+                attackFrameIndex++;
+
+                if (attackFrameIndex == 5)  // Fire projectile midway through attack animation
+                {
+                    performAttack();
+                }
+
+                if (attackFrameIndex == attackFrames.length)  // End attack animation
+                {
+                    isAttacking = false;
+                    attackCooldown = 60;  // Set attack cooldown
+                }
+            }
+        } 
+        else if (isJumping)  // Jump animation
+        {
+            if (jumpFrameIndex < jumpFrames.length) 
+            {
+                setImage(flipIfNeeded(jumpFrames[jumpFrameIndex]));
                 jumpFrameIndex++;
-                animationCounter = 0;
             }
-        }
-        else if (Math.abs(player.getX() - getX()) > 2) // Walking animation
+        } 
+        else if (Math.abs(player.getX() - getX()) > 5)  // Walking animation
         {
-            if (animationCounter >= 6)
-            {
-                setImage(getFlippedFrame(walkFrames[walkFrameIndex]));
-                walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
-                animationCounter = 0;
-            }
-        }
-        else // Idle animation
+            walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
+            setImage(flipIfNeeded(walkFrames[walkFrameIndex]));
+        } 
+        else  // Idle animation
         {
-            if (animationCounter >= 6)
-            {
-                setImage(getFlippedFrame(idleFrames[idleFrameIndex]));
-                idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
-                animationCounter = 0;
-            }
+            idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
+            setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
         }
     }
 
-    private GreenfootImage getFlippedFrame(GreenfootImage frame)
+    // Flips a frame horizontally if Kisuke is facing left
+    private GreenfootImage flipIfNeeded(GreenfootImage frame) 
     {
         GreenfootImage image = new GreenfootImage(frame);
-        if (!facingRight)
+        if (!facingRight) 
         {
             image.mirrorHorizontally();
         }
         return image;
+    }
+    
+    // Allows setting Kisuke's facing direction
+    public void setFacingRight(boolean facingRight)
+    {
+        this.facingRight = facingRight;
+        setImage(flipIfNeeded(getImage())); // Flip the current image if needed
     }
 }
