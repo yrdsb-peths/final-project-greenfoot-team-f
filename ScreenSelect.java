@@ -17,7 +17,7 @@ public class ScreenSelect extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         
-        addObject(new Button(this::goInstructions, "InstructionButton.png"), 499,371);
+        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
     }
     private void goInstructions()
     {

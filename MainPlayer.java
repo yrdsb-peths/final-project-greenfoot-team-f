@@ -22,7 +22,9 @@ public class MainPlayer extends Actor
     // Jump animation variables
     private boolean isJumping;
     private int jumpFrameIndex;
-
+    
+    private int health = 100; //PLAYER HEALTH *****
+    
     public MainPlayer()
     {
         velocity = 0;
@@ -181,11 +183,29 @@ public class MainPlayer extends Actor
 
     private void fireProjectile()
     {
-        int x = facingRight ? getX() + 40 : getX() - 40;
-        int y = getY() - 20;
-
+        int x;
+        int y = getY() - 20; // Slightly higher than the player's position
+        
+        if (facingRight) {
+            x = getX() + 40; // Offset to the right
+        } else {
+            x = getX() - 40; // Offset to the left
+        }
+        
         Greenfoot.playSound("shootSfx.mp3");
         Projectile projectile = new Projectile(facingRight);
         getWorld().addObject(projectile, x, y);
+
     }
+    
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            System.out.println("Player defeated!");
+            Greenfoot.stop(); // End the game
+        }
+    }
+    
 }
