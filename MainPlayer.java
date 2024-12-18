@@ -22,7 +22,9 @@ public class MainPlayer extends Actor
     // Jump animation variables
     private boolean isJumping;
     private int jumpFrameIndex;
-
+    
+    private int health = 100; //PLAYER HEALTH *****
+    
     public MainPlayer()
     {
         velocity = 0;
@@ -41,7 +43,7 @@ public class MainPlayer extends Actor
     public void act()
     {
         fall();
-        if (Greenfoot.isKeyDown("space") && getY() > getWorld().getHeight() - 50)
+        if (Greenfoot.isKeyDown("space") && isOnSolidGround())
         {
             jump();
             Greenfoot.playSound("jumpSfx.mp3");
@@ -67,7 +69,21 @@ public class MainPlayer extends Actor
         isJumping = true;
         jumpFrameIndex = 0;
     }
+    
+    public void fall()
+    {
+        setLocation(getX(), getY() + velocity);
 
+        if (isOnSolidGround())
+        {
+            velocity = 0;
+        }
+        else
+        {
+            velocity += gravity;
+        }
+    }
+    
     public void move()
     {
         int y = getY();
@@ -94,20 +110,27 @@ public class MainPlayer extends Actor
         setLocation(x, y);
     }
 
-    public void fall()
+    public boolean isOnSolidGround()
     {
-        setLocation(getX(), getY() + velocity);
-
-        if (getY() > getWorld().getHeight() - 50)
+        boolean isOnGround = false; 
+        
+        if(getY() > getWorld().getHeight() - 50)
         {
-            velocity = 0;
+            isOnGround = true;
         }
-        else
+        
+        int imageWidth = getImage().getWidth();
+        int imageHeight = getImage().getHeight(); 
+        
+        if(getOneObjectAtOffset(imageWidth / -2, imageHeight / 2, Platform.class) != null || 
+           getOneObjectAtOffset(imageWidth / 2, imageHeight / 2, Platform.class) != null)
         {
-            velocity += gravity;
+            isOnGround = true; 
         }
+        
+        return isOnGround;
     }
-
+    
     private void animate()
     {
         animationCounter++;
@@ -181,11 +204,29 @@ public class MainPlayer extends Actor
 
     private void fireProjectile()
     {
-        int x = facingRight ? getX() + 40 : getX() - 40;
-        int y = getY() - 20;
-
+        int x;
+        int y = getY() - 20; // Slightly higher than the player's position
+        
+        if (facingRight) {
+            x = getX() + 40; // Offset to the right
+        } else {
+            x = getX() - 40; // Offset to the left
+        }
+        
         Greenfoot.playSound("shootSfx.mp3");
         Projectile projectile = new Projectile(facingRight);
         getWorld().addObject(projectile, x, y);
+
     }
+    
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            System.out.println("Player defeated!");
+            Greenfoot.stop(); // End the game
+        }
+    }
+    
 }
