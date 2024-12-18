@@ -25,6 +25,10 @@ public class Kisuke extends Actor
     private int animationDelay = 0; // Counter to slow down animation
     private final int animationSpeed = 6; //frames to wait before updating
     
+    private int walkAnimationDelay = 0; // Counter to control walking animation speed
+    private final int walkAnimationSpeed = 3; // Delay for walking animation (higher = slower)
+    
+    
     // Direction and state variables
     private boolean facingRight = false;  // Indicates if Kisuke is facing right
     private boolean isAttacking = false;  // Indicates if Kisuke is currently attacking
@@ -161,7 +165,7 @@ public class Kisuke extends Actor
         }
 
         // Create and add the projectile to the world
-        EnemyProjectile projectile = new EnemyProjectile("kisukeProjectile.png", facingRight);
+        EnemyProjectile projectile = new EnemyProjectile("kisukeProjectile2.png", facingRight);
         getWorld().addObject(projectile, x, y);
     }
 
@@ -202,13 +206,24 @@ public class Kisuke extends Actor
             } 
             else if (Math.abs(player.getX() - getX()) > 5) // Walking animation
             {
-                walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
-                setImage(flipIfNeeded(walkFrames[walkFrameIndex]));
+                walkAnimationDelay++;
+                
+                if (walkAnimationDelay >= walkAnimationSpeed) // Update frame only if delay exceeds speed
+                {
+                    walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
+                    setImage(flipIfNeeded(walkFrames[walkFrameIndex]));
+                    walkAnimationDelay = 0; // Reset the walking animation delay counter
+                }
+                
             } 
             else // Idle animation
             {
-                idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
-                setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
+                if (animationDelay >= animationSpeed) 
+                {
+                    idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
+                    setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
+                    animationDelay = 0; // Reset the general animation delay counter
+                }
             }
             
             // Reset the delay counter after updating the frame
