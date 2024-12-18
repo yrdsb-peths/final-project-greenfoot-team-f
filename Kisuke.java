@@ -55,22 +55,30 @@ public class Kisuke extends Actor
  
     public void act() 
     {
-        if (isIdle) 
+        if (isJumping) 
         {
-            handleIdle();  // Handle idle state logic
+            fall(); // Handle falling and reset jumping state when on the ground
+            animate(); // Play jump animation
+        } 
+        else if (isIdle) 
+        {
+            handleIdle(); // Handle idle state logic
         } 
         else 
         {
-            fall();            // Apply gravity and handle jumping
-            followPlayer();    // Follow the player's position
-            handleJump();      // Randomly handle jumping
-            handleAttack();    // Handle attacking behavior
-            animate();         // Animate based on current state
-    
-            // Randomly trigger idle state (0.66% chance every frame)
-            if (!isJumping && !isAttacking && Greenfoot.getRandomNumber(150) < 1) 
+            handleJump(); // Handle jumping (override other actions)
+            if (!isJumping) // Only execute other actions if not jumping
             {
-                enterIdleState();
+                fall(); // Apply gravity
+                followPlayer(); // Follow the player's position
+                handleAttack(); // Handle attacking behavior
+                animate(); // Animate based on current state
+    
+                // Randomly trigger idle state (0.66% chance every frame)
+                if (!isAttacking && Greenfoot.getRandomNumber(150) < 1) 
+                {
+                    enterIdleState();
+                }
             }
         }
     }
@@ -135,19 +143,18 @@ public class Kisuke extends Actor
     // Randomly decides if Kisuke should jump
     private void handleJump() 
     {
-        if (!isJumping && jumpCooldown <= 0 && !isIdle) // Jump only if not idle
+        if (!isJumping && jumpCooldown <= 0) // Ready to jump
         {
-            if (Greenfoot.getRandomNumber(100) < 70)  // 5% chance to jump
+            if (Greenfoot.getRandomNumber(120) < 1) // 30% chance to jump (adjust for frequency)
             {
                 jump();
             }
         } 
         else if (jumpCooldown > 0) 
         {
-            jumpCooldown--;  // Decrease jump cooldown
+            jumpCooldown--; // Decrease jump cooldown every frame
         }
     }
-
 
     
     private void jump() 
@@ -161,20 +168,20 @@ public class Kisuke extends Actor
     
     private void fall() 
     {
-        setLocation(getX(), getY() + velocity);  // Apply vertical velocity
-
-        if (getY() > getWorld().getHeight() - 50)  // If on the ground
+        setLocation(getX(), getY() + velocity); // Apply vertical velocity
+    
+        if (getY() > getWorld().getHeight() - 50) // If on the ground
         {
-            velocity = 0;  // Stop downward motion
-            setLocation(getX(), getWorld().getHeight() - 50);  // Snap to ground level
-            isJumping = false;  // End jumping state
-            jumpCooldown = 30;  // Set jump cooldown
+            velocity = 0; // Stop downward motion
+            setLocation(getX(), getWorld().getHeight() - 50); // Snap to ground level
+            isJumping = false; // Reset jumping state
         } 
         else 
         {
-            velocity += gravity;  // Increase velocity for gravity effect
+            velocity += gravity; // Apply gravity
         }
     }
+
 
    
     private void handleAttack() 
