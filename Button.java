@@ -8,20 +8,16 @@ public class Button extends Actor {
     private GreenfootImage hoverImage;
     private GreenfootSound selectSound = new GreenfootSound("menuSelectSound.mp3");
     
-    public Button(Runnable action, String imageName, String hoverimgName, int newWidth, int newHeight) {
+    public Button(Runnable action, String imageName, String hoverimgName)
+    {
         this.action = action;
-
 
         //Load the button image
         buttonImage = new GreenfootImage(imageName);
         hoverImage = new GreenfootImage(hoverimgName); 
         
-        //enlarge the image when mouse is hovered over
+        //enlarge button image when hovered over
         hoverImage.scale((int)(hoverImage.getWidth()*6/5), (int)(hoverImage.getHeight()*6/5));
-       
-        // Scaling images
-        buttonImage.scale(newWidth, newHeight);
-        hoverImage.scale((int)(hoverImage.getWidth() * newWidth / buttonImage.getWidth()), (int)(hoverImage.getHeight() * newHeight / buttonImage.getHeight()));        
         
         // Set combined image as the actor's image
         setImage(buttonImage);
