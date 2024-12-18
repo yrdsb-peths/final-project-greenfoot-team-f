@@ -17,10 +17,19 @@ public class ScreenSelect extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         
-        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
+        // Instruction button
+        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png",150, 50), 499,371);
+        
+        //Fight/start game button
+        addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png",200, 50), 301,190);
     }
     private void goInstructions()
     {
         Greenfoot.setWorld(new InstructionScreen());
+    }
+    
+    private void goFightStage()
+    {
+        Greenfoot.setWorld(new FightStage()); 
     }
 }
