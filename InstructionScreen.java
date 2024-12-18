@@ -28,7 +28,7 @@ public class InstructionScreen extends World
                                 "in each stage to earn power ups and you have to conquer\n"+
                                 "the stages to proceed. Plan your moves carefully,\n" +
                                 "as every hit you take reduces your HP. If it runs out,\n" +
-                                "you’ll die and have to restart from the very beginning.\n" +
+                                "you'll die and have to restart from the very beginning.\n" +
                                 "Use your power ups wisely to overcome tougher challenges\n"+ 
                                 "as you progress through the stages!");
         
