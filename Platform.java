@@ -12,6 +12,7 @@ public class Platform extends Actor
     public Platform()
     {
        setImage("platform.png");
+       
     }
   
     
