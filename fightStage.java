@@ -41,5 +41,9 @@ public class FightStage extends World
         addObject(kisukeEnemy, 400, 350); // Position Kisuke on the stage
         
         kisukeEnemy.setFacingRight(false);
+        
+        //add platform
+        Platform platform = new Platform();
+        addObject(platform, 450, 250); 
     }
 }
