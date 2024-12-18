@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class Kisuke extends Actor 
+public class Kisuke extends Actor implements Enemy
 {
     // Constants and variables for gravity, velocity, and jumping
     private final int gravity = 1;  // Gravity value for downward acceleration
