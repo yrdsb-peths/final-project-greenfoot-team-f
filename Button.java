@@ -1,18 +1,12 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 import greenfoot.GreenfootImage;
 
-/**
- * Write a description of class Button here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Button extends Actor
-{
-    private GreenfootSound selectSound = new GreenfootSound("menuSelectSound2.mp3");
-    private Runnable action; 
+
+public class Button extends Actor {
+    private Runnable action;
     private GreenfootImage buttonImage;
     private GreenfootImage hoverImage;
+ Scarlett
     
     public Button(Runnable action, String imageName, String hoverName)
     {
@@ -22,19 +16,38 @@ public class Button extends Actor
         
         hoverImage.scale((int)(hoverImage.getWidth()*6/5), (int)(hoverImage.getHeight()*6/5));
 
+
+    private GreenfootSound selectSound = new GreenfootSound("menuSelectSound.mp3");
+    
+    public Button(Runnable action, String imageName, String hoverimgName)
+    {
+        this.action = action;
+
+        //Load the button image
+        buttonImage = new GreenfootImage(imageName);
+        hoverImage = new GreenfootImage(hoverimgName); 
+        
+        //enlarge button image when hovered over
+        hoverImage.scale((int)(hoverImage.getWidth()*6/5), (int)(hoverImage.getHeight()*6/5));
+        
+        // Set combined image as the actor's image
+ main
         setImage(buttonImage);
     }
-    public void act()
-    {
-        // Add your action code here.
-        if(Greenfoot.mouseClicked(this))
+    
+    //check if user clicked on (this) obeject. 
+    public void act() {
+        if (Greenfoot.mouseClicked(this))
         {
-            selectSound.play(); //play when clicked
-            if(action != null)
+            selectSound.play();
+            if (action != null)
             {
                 action.run();
             }
         }
+Scarlett
+        
+ main
         if (Greenfoot.mouseMoved(this))
         {
             setImage(hoverImage); // Set hover image when mouse is over the button
@@ -43,5 +56,9 @@ public class Button extends Actor
         {
             setImage(buttonImage); // Set normal image when mouse is not over the button
         }
+ Scarlett
+
+        
+ main
     }
 }
