@@ -30,6 +30,6 @@ public class ScreenSelect extends World
     
     private void goFightStage()
     {
-        Greenfoot.setWorld(new FightStage()); 
+        Greenfoot.setWorld(new FightWorld()); 
     }
 }
