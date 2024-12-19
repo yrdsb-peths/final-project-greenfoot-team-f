@@ -119,7 +119,7 @@ public class Kisuke extends Actor implements Enemy
     }
 
     // Method to make Kisuke follow the player's position
-    private void followPlayer() 
+    public void followPlayer() 
     {
         if (!isAttacking && !isJumping && !isIdle)  // Only follow if not attacking, jumping, or idle
         {
@@ -201,7 +201,7 @@ public class Kisuke extends Actor implements Enemy
     }
 
     // Performs the projectile attack
-    private void performAttack() 
+    public void performAttack() 
     {
         int x = getX();  // Start X position of the projectile
         int y = getY() - 20;  // Slightly higher than Kisuke's position
