@@ -10,7 +10,6 @@ public class InstructionScreen extends World
 {
     private GreenfootImage background;
     
-    private int scrollX;    
     /**
      * Constructor for objects of class InstructionScreen.
      * 
@@ -19,21 +18,20 @@ public class InstructionScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
-        showInstructions();
+        setBackground(new GreenfootImage("better.png")); // Set the background
+        
+        addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png"), 497,380);
+        //button that proceeds to stage
     }
     public void showInstructions()
     {
         //Text for instructions.
-        String instructions = ("In this game, you must defeat the character\n"+
-                                "in each stage to earn power ups and you have to conquer\n"+
-                                "the stages to proceed. Plan your moves carefully,\n" +
-                                "as every hit you take reduces your HP. If it runs out,\n" +
-                                "you'll die and have to restart from the very beginning.\n" +
-                                "Use your power ups wisely to overcome tougher challenges\n"+ 
-                                "as you progress through the stages!");
         
-        //Calling the instruction screen.
-        InstructionText instructionText = new InstructionText(instructions);
-        addObject(instructionText, getWidth()/2, getHeight() / 2);
+        //Calling the instruction screen.        
+    }
+    
+    public void goFightStage()
+    {
+        Greenfoot.setWorld(new FightWorld()); 
     }
 }
