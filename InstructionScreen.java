@@ -10,7 +10,6 @@ public class InstructionScreen extends World
 {
     private GreenfootImage background;
     
-    private int scrollX;    
     /**
      * Constructor for objects of class InstructionScreen.
      * 
