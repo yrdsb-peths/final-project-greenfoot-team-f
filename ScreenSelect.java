@@ -68,6 +68,7 @@ public class ScreenSelect extends World
     
     private void goFightStage()
     {
+        MusicManager.stopMenuMusic(); 
         Greenfoot.setWorld(new FightWorld()); 
     }
 }

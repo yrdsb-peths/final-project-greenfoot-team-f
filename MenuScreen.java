@@ -23,8 +23,9 @@ public class MenuScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels
         super(600, 400, 1); 
-       
-        backgroundMusic= new GreenfootSound("menuMusic.mp3");
+        
+        MusicManager.resetMusicState(); // Stop and reset any existing music
+
         
         setBackground(new GreenfootImage("menuScreenbg.png")); // Set the background
         pressSpaceImage = new GreenfootImage("pressSpace2.png"); // Load the "Press Space" image
@@ -35,6 +36,7 @@ public class MenuScreen extends World
         blueOverlay.fill(); // Fill the overlay with blue color
             
         getBackground().drawImage(pressSpaceImage, 235, 300); // Draw the "Press Space" image
+
     }
     
     /**
@@ -68,18 +70,14 @@ public class MenuScreen extends World
     public void stopped()
     {
         // pause music when the world stopped
-        backgroundMusic.pause();
+        MusicManager.pauseMenuMusic(); 
     }
     
-    public void stopMus()
-    {
-        backgroundMusic.stop(); 
-    }
     
     public void started()
     {
-        // Resume music when the world started 
-        backgroundMusic.playLoop();
+        //start music when the world started 
+        MusicManager.playMenuMusic();
     }
     
     private void fadeInEffect()
@@ -173,7 +171,6 @@ public class MenuScreen extends World
      */
     private void goScreenSelect()
     {
-        stopMus();
         Greenfoot.setWorld(new ScreenSelect()); // Switch to the fight stage
     }
     
