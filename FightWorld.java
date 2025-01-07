@@ -9,18 +9,32 @@ import greenfoot.GreenfootSound;
 public class FightWorld extends World
 {
     private GreenfootSound backgroundMusic;
-    private int countdownTimer = 180;
-    private GreenfootImage countdownImage;
+    private int countdownFrame = 0;
+    private boolean animationFinished = false;
+    
+    private GreenfootSound countdownSfx;
+    
+    private int frameDelay = 3; // Adjust to control the speed of animation
+    private int delayCounter = 0; // Counter to implement the delay 
+    
+    private boolean objectsSpawned = false;
+    
     public FightWorld()
     {    
         super(600, 400, 1);
 
         backgroundMusic = new GreenfootSound("stageOneMusic.mp3");
-
+        countdownSfx = new GreenfootSound("countdownsfx.mp3");  
+        
+        countdownSfx.setVolume(100);
+        countdownSfx.play();
+        
+        
         // Uncomment to play background music when not in the initial world
         // backgroundMusic.playLoop();
         backgroundMusic.setVolume(50);
-
+        backgroundMusic.playLoop();
+        
         setBackground("stage_1.png");
         
         prepare();
@@ -28,55 +42,62 @@ public class FightWorld extends World
     
     public void act()
     {
-        if(countdownTimer > 0)
+        if (!animationFinished) 
         {
-            countdownStart();
-        }
-        else
+            playCountdownAnimation(); // Handle the countdown animation
+        } 
+        else if (!objectsSpawned) // Ensure objects are added only once
         {
-            if(!backgroundMusic.isPlaying())
-            {
-                backgroundMusic.playLoop();
-                
-                MainPlayer mainPlayer = new MainPlayer();
-                addObject(mainPlayer, 200, 350);
-                
-                Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-                addObject(kisukeEnemy, 400, 350); // Position Kisuke on the stage
-            }
+            MainPlayer mainPlayer = new MainPlayer();
+            addObject(mainPlayer, 200, 350);
+    
+            Kisuke kisukeEnemy = new Kisuke(mainPlayer);
+            addObject(kisukeEnemy, 400, 350);
+    
+            objectsSpawned = true; // Set the flag to prevent re-spawning
         }
     }
     
-    private void countdownStart()
+    private void playCountdownAnimation()
     {
-        if(countdownTimer > 120)
+        if (delayCounter < frameDelay) 
         {
-            countdownImage = new GreenfootImage("three.png");
+            delayCounter++; // Increment the delay counter
+            return; // Wait until delay is met
         }
-        else if(countdownTimer > 60)
+    
+        delayCounter = 0; // Reset the delay counter
+    
+        if (countdownFrame <= 64) 
         {
-            countdownImage = new GreenfootImage("two.png");
-        }
-        else if(countdownTimer > 0)
+            String frameNumber = "";
+            if (countdownFrame < 10) 
+            {
+                frameNumber = "0" + countdownFrame;
+            } 
+            else 
+            {
+                frameNumber = Integer.toString(countdownFrame);
+            }
+    
+            String fileName = "countdown_" + frameNumber + ".png";
+    
+            // Combine the countdown image with the background
+            GreenfootImage background = new GreenfootImage("stage_1.png");
+            GreenfootImage countdownOverlay = new GreenfootImage(fileName);
+            background.drawImage(countdownOverlay, 
+                                 (getWidth() - countdownOverlay.getWidth()) / 2, 
+                                 (getHeight() - countdownOverlay.getHeight()) / 2);
+            setBackground(background);
+    
+            countdownFrame++;
+        } 
+        else 
         {
-            countdownImage = new GreenfootImage("one.png");
-        }
-        else
-        {
-            countdownImage = new GreenfootImage("fight.png");
-        }
-        
-        //Display the countdown image
-        getBackground().drawImage(countdownImage, getWidth() / 2 - countdownImage.getWidth() / 2, getHeight() / 2 - countdownImage.getHeight() / 2);
-        
-        //Decrease the countdown timer
-        countdownTimer--;
-        
-        if(countdownTimer == 0)
-        {
-            setBackground("stage_1.png");
+            animationFinished = true; // Mark the animation as finished
         }
     }
+
     
     public void stopped()
     {
