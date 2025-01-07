@@ -93,15 +93,16 @@ public class FightWorld extends World
     private void prepare()
     {
         MainPlayer mainPlayer = new MainPlayer();
-
-        // Add Kisuke enemy to the stage
         Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-        
         kisukeEnemy.setFacingRight(false);
-        
-        //add platform
-        Platform platform = new Platform();
-        addObject(platform, 450, 260); 
+    
+        // Add two separate platforms
+        Platform platform1 = new Platform();
+        addObject(platform1, 450, 260);
+    
+        Platform platform2 = new Platform();
+        addObject(platform2, 160, 260);
     }
+
     
 }
