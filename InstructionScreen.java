@@ -23,11 +23,10 @@ public class InstructionScreen extends World
         addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png"), 497,380);
         //button that proceeds to stage
     }
-    public void showInstructions()
+    
+    public void act()
     {
-        //Text for instructions.
         
-        //Calling the instruction screen.        
     }
     
     public void goFightStage()
