@@ -143,18 +143,19 @@ public class Kisuke extends Actor implements Enemy
     // Randomly decides if Kisuke should jump
     private void handleJump() 
     {
-        if (!isJumping && jumpCooldown <= 0) // Ready to jump
+        if (!isJumping && jumpCooldown <= 0 && isOnSolidGround()) // Only jump if on solid ground
         {
-            if (Greenfoot.getRandomNumber(120) < 1) // 30% chance to jump (adjust for frequency)
+            if (Greenfoot.getRandomNumber(120) < 1) // Adjust chance to jump
             {
                 jump();
             }
         } 
         else if (jumpCooldown > 0) 
         {
-            jumpCooldown--; // Decrease jump cooldown every frame
+            jumpCooldown--; // Decrease jump cooldown
         }
     }
+
 
     
     private void jump() 
@@ -170,10 +171,9 @@ public class Kisuke extends Actor implements Enemy
     {
         setLocation(getX(), getY() + velocity); // Apply vertical velocity
     
-        if (getY() > getWorld().getHeight() - 50) // If on the ground
+        if (isOnSolidGround()) // Check if Kisuke is on solid ground
         {
             velocity = 0; // Stop downward motion
-            setLocation(getX(), getWorld().getHeight() - 50); // Snap to ground level
             isJumping = false; // Reset jumping state
         } 
         else 
@@ -181,7 +181,6 @@ public class Kisuke extends Actor implements Enemy
             velocity += gravity; // Apply gravity
         }
     }
-
 
    
     private void handleAttack() 
@@ -300,4 +299,31 @@ public class Kisuke extends Actor implements Enemy
         this.facingRight = facingRight;
         setImage(flipIfNeeded(getImage())); // Flip the current image if needed
     }
+    
+    public boolean isOnSolidGround()
+    {
+        boolean isOnGround = false;
+    
+        if (getY() > getWorld().getHeight() - 50) // If at the bottom of the screen
+        {
+            isOnGround = true;
+        }
+    
+        int imageWidth = getImage().getWidth();
+        int imageHeight = getImage().getHeight();
+    
+        // Check if Kisuke is touching a platform
+        if (getOneObjectAtOffset(imageWidth / -2, imageHeight / 2, Platform.class) != null ||
+            getOneObjectAtOffset(imageWidth / 2, imageHeight / 2, Platform.class) != null)
+        {
+            isOnGround = true;
+        }
+    
+        return isOnGround;
+    }
+    
+    
+
+    
+    
 }
