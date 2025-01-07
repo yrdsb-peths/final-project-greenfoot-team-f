@@ -9,7 +9,7 @@ import greenfoot.GreenfootSound;
 public class FightWorld extends World
 {
     private GreenfootSound backgroundMusic;
-    private int countdownTimer = 180;
+    private int countdownTimer = 240;
     private GreenfootImage countdownImage;
     public FightWorld()
     {    
@@ -49,15 +49,15 @@ public class FightWorld extends World
     
     private void countdownStart()
     {
-        if(countdownTimer > 120)
+        if(countdownTimer > 180)
         {
             countdownImage = new GreenfootImage("three.png");
         }
-        else if(countdownTimer > 60)
+        else if(countdownTimer > 120)
         {
             countdownImage = new GreenfootImage("two.png");
         }
-        else if(countdownTimer > 0)
+        else if(countdownTimer > 60)
         {
             countdownImage = new GreenfootImage("one.png");
         }
@@ -65,6 +65,9 @@ public class FightWorld extends World
         {
             countdownImage = new GreenfootImage("fight.png");
         }
+        
+        //Make it larger
+        countdownImage.scale((int) (countdownImage.getWidth() * 1.3), (int) (countdownImage.getHeight() * 1.3));
         
         //Display the countdown image
         getBackground().drawImage(countdownImage, getWidth() / 2 - countdownImage.getWidth() / 2, getHeight() / 2 - countdownImage.getHeight() / 2);
