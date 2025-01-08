@@ -9,7 +9,8 @@ import greenfoot.GreenfootSound;
 public class FightWorld extends World
 {
     private GreenfootSound backgroundMusic;
-    
+    private int countdownTimer = 180;
+    private GreenfootImage countdownImage;
     public FightWorld()
     {    
         super(600, 400, 1);
@@ -21,9 +22,61 @@ public class FightWorld extends World
         backgroundMusic.setVolume(50);
 
         setBackground("stage_1.png");
+        
         prepare();
     }
     
+    public void act()
+    {
+        if(countdownTimer > 0)
+        {
+            countdownStart();
+        }
+        else
+        {
+            if(!backgroundMusic.isPlaying())
+            {
+                backgroundMusic.playLoop();
+                
+                MainPlayer mainPlayer = new MainPlayer();
+                addObject(mainPlayer, 200, 350);
+                
+                Kisuke kisukeEnemy = new Kisuke(mainPlayer);
+                addObject(kisukeEnemy, 400, 350); // Position Kisuke on the stage
+            }
+        }
+    }
+    
+    private void countdownStart()
+    {
+        if(countdownTimer > 120)
+        {
+            countdownImage = new GreenfootImage("three.png");
+        }
+        else if(countdownTimer > 60)
+        {
+            countdownImage = new GreenfootImage("two.png");
+        }
+        else if(countdownTimer > 0)
+        {
+            countdownImage = new GreenfootImage("one.png");
+        }
+        else
+        {
+            countdownImage = new GreenfootImage("fight.png");
+        }
+        
+        //Display the countdown image
+        getBackground().drawImage(countdownImage, getWidth() / 2 - countdownImage.getWidth() / 2, getHeight() / 2 - countdownImage.getHeight() / 2);
+        
+        //Decrease the countdown timer
+        countdownTimer--;
+        
+        if(countdownTimer == 0)
+        {
+            setBackground("stage_1.png");
+        }
+    }
     
     public void stopped()
     {
@@ -40,11 +93,9 @@ public class FightWorld extends World
     private void prepare()
     {
         MainPlayer mainPlayer = new MainPlayer();
-        addObject(mainPlayer, 200, 350);
 
         // Add Kisuke enemy to the stage
         Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-        addObject(kisukeEnemy, 400, 350); // Position Kisuke on the stage
         
         kisukeEnemy.setFacingRight(false);
         
