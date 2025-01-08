@@ -337,12 +337,7 @@ public class Kisuke extends Actor implements Enemy
         if (health <= 0)
         {
             health = 0;
-            System.out.println("Kisuke defeated!");
-            getWorld().removeObject(this); // Remove Kisuke from the world
+            Greenfoot.setWorld(new GameCompleteScreen());
         }
     }
-
-
-    
-    
 }
