@@ -14,7 +14,7 @@ public class GameOverScreen extends World
         super(600, 400, 1);
         GreenfootImage background = new GreenfootImage("stage_1alt.png");
         
-        GreenfootImage gameOverImage = new GreenfootImage("gameOver.png");
+        GreenfootImage gameOverImage = new GreenfootImage("GameOver.png");
         gameOverImage.scale(600, 150);
         
         background.drawImage(gameOverImage, (getWidth() - gameOverImage.getWidth()) / 2, (getHeight() - gameOverImage.getHeight()) / 2 - 50);
