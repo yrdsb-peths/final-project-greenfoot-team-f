@@ -9,77 +9,105 @@ import greenfoot.GreenfootSound;
 public class FightWorld extends World
 {
     private GreenfootSound backgroundMusic;
-    private int countdownTimer = 240;
-    private GreenfootImage countdownImage;
+    private int countdownFrame = 0;
+    private boolean animationFinished = false;
+    
+    private GreenfootSound countdownSfx;
+    
+    private int frameDelay = 3; // Adjust to control the speed of animation
+    private int delayCounter = 0; // Counter to implement the delay 
+    
+    private boolean objectsSpawned = false;
+    
+    private HealthBar playerHealthBar;
+    private HealthBar enemyHealthBar;
+
+    private MainPlayer mainPlayer;
+    private Kisuke kisukeEnemy;
+    
     public FightWorld()
     {    
         super(600, 400, 1);
 
         backgroundMusic = new GreenfootSound("stageOneMusic.mp3");
-
-        // Uncomment to play background music when not in the initial world
-        // backgroundMusic.playLoop();
+        countdownSfx = new GreenfootSound("countdownsfx.mp3");  
+        
+        countdownSfx.setVolume(100);
+        countdownSfx.play();
+        
+    
         backgroundMusic.setVolume(50);
-
-        setBackground("stage_1.png");
+        backgroundMusic.playLoop();
+        
+        setBackground("stage_1alt.png");
         
         prepare();
     }
     
     public void act()
     {
-        if(countdownTimer > 0)
+        if (!animationFinished) 
         {
-            countdownStart();
+            playCountdownAnimation(); // Handle the countdown animation
+        } 
+        else if (!objectsSpawned) // Ensure objects are added only once
+        {
+            spawnObjects(); 
+    
+            objectsSpawned = true; // Set the flag to prevent re-spawning
         }
-        else
+        
+        if (playerHealthBar != null && mainPlayer != null) 
         {
-            if(!backgroundMusic.isPlaying())
-            {
-                backgroundMusic.playLoop();
-                
-                MainPlayer mainPlayer = new MainPlayer();
-                addObject(mainPlayer, 200, 350);
-                
-                Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-                addObject(kisukeEnemy, 400, 350); // Position Kisuke on the stage
-            }
+            playerHealthBar.setHealth(mainPlayer.getHealth());
+        }
+    
+        if (enemyHealthBar != null && kisukeEnemy != null) 
+        {
+            enemyHealthBar.setHealth(kisukeEnemy.getHealth());
         }
     }
     
-    private void countdownStart()
+    private void playCountdownAnimation()
     {
-        if(countdownTimer > 180)
+        if (delayCounter < frameDelay) 
         {
-            countdownImage = new GreenfootImage("three.png");
+            delayCounter++; // Increment the delay counter
+            return; // Wait until delay is met
         }
-        else if(countdownTimer > 120)
+    
+        delayCounter = 0; // Reset the delay counter
+    
+        if (countdownFrame <= 64) 
         {
-            countdownImage = new GreenfootImage("two.png");
-        }
-        else if(countdownTimer > 60)
+            String frameNumber = "";
+            if (countdownFrame < 10) 
+            {
+                frameNumber = "0" + countdownFrame;
+            } 
+            else 
+            {
+                frameNumber = Integer.toString(countdownFrame);
+            }
+    
+            String fileName = "countdown_" + frameNumber + ".png";
+    
+            // Combine the countdown image with the background
+            GreenfootImage background = new GreenfootImage("stage_1alt.png");
+            GreenfootImage countdownOverlay = new GreenfootImage(fileName);
+            background.drawImage(countdownOverlay, 
+                                 (getWidth() - countdownOverlay.getWidth()) / 2, 
+                                 (getHeight() - countdownOverlay.getHeight()) / 2);
+            setBackground(background);
+    
+            countdownFrame++;
+        } 
+        else 
         {
-            countdownImage = new GreenfootImage("one.png");
-        }
-        else
-        {
-            countdownImage = new GreenfootImage("fight.png");
-        }
-        
-        //Make it larger
-        countdownImage.scale((int) (countdownImage.getWidth() * 1.3), (int) (countdownImage.getHeight() * 1.3));
-        
-        //Display the countdown image
-        getBackground().drawImage(countdownImage, getWidth() / 2 - countdownImage.getWidth() / 2, getHeight() / 2 - countdownImage.getHeight() / 2);
-        
-        //Decrease the countdown timer
-        countdownTimer--;
-        
-        if(countdownTimer == 0)
-        {
-            setBackground("stage_1.png");
+            animationFinished = true; // Mark the animation as finished
         }
     }
+
     
     public void stopped()
     {
@@ -95,16 +123,33 @@ public class FightWorld extends World
 
     private void prepare()
     {
-        MainPlayer mainPlayer = new MainPlayer();
+        // Initialize health bars
+        playerHealthBar = new HealthBar(100, 250, 30, true);
+        enemyHealthBar = new HealthBar(100, 250, 30, false);
 
-        // Add Kisuke enemy to the stage
-        Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-        
-        kisukeEnemy.setFacingRight(false);
-        
-        //add platform
-        Platform platform = new Platform();
-        addObject(platform, 450, 260); 
+        // Add health bars
+        addObject(playerHealthBar, 150, 45); // Player health bar on the left
+        addObject(enemyHealthBar, 450, 45); // Enemy health bar on the right
+
+        // Add platforms
+        Platform platform1 = new Platform();
+        addObject(platform1, 450, 260);
+
+        Platform platform2 = new Platform();
+        addObject(platform2, 160, 260);
     }
     
+    private void spawnObjects()
+    {
+        mainPlayer = new MainPlayer();
+        kisukeEnemy = new Kisuke(mainPlayer);
+
+        addObject(mainPlayer, 200, 350);
+        addObject(kisukeEnemy, 400, 350);
+
+        objectsSpawned = true; // Set the flag to prevent re-spawning
+    }
+    
+    
+
 }

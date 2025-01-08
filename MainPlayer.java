@@ -112,24 +112,28 @@ public class MainPlayer extends Actor
 
     public boolean isOnSolidGround()
     {
-        boolean isOnGround = false; 
-        
-        if(getY() > getWorld().getHeight() - 50)
-        {
-            isOnGround = true;
-        }
-        
         int imageWidth = getImage().getWidth();
-        int imageHeight = getImage().getHeight(); 
-        
-        if(getOneObjectAtOffset(imageWidth / -2, imageHeight / 2, Platform.class) != null || 
-           getOneObjectAtOffset(imageWidth / 2, imageHeight / 2, Platform.class) != null)
+        int imageHeight = getImage().getHeight();
+    
+        // Check if the player is standing on a platform
+        Actor platform = getOneObjectAtOffset(0, imageHeight / 2, Platform.class);
+        if (platform != null)
         {
-            isOnGround = true; 
+            // Snap to the top of the platform
+            setLocation(getX(), platform.getY() - platform.getImage().getHeight() / 2 - imageHeight / 2);
+            return true;
         }
-        
-        return isOnGround;
+    
+        // Check if the player is on the ground (at 370)
+        if (getY() >= 370 - imageHeight / 2)
+        {
+            setLocation(getX(), 370 - imageHeight / 2); // Snap to ground height
+            return true;
+        }
+    
+        return false;
     }
+
     
     private void animate()
     {
@@ -224,9 +228,15 @@ public class MainPlayer extends Actor
         health -= damage;
         if (health <= 0)
         {
+            health = 0;
             System.out.println("Player defeated!");
             Greenfoot.stop(); // End the game
         }
+    }
+    
+    public int getHealth()
+    {
+        return health;
     }
     
 }
