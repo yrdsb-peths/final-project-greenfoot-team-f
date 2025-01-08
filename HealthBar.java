@@ -8,13 +8,15 @@ public class HealthBar extends Actor
     private int height;
     private Color backgroundColor = Color.WHITE;
     private Color foregroundColor = Color.RED;
+    private boolean leftToRight; // Direction of the health bar
 
-    public HealthBar(int maxHealth, int width, int height)
+    public HealthBar(int maxHealth, int width, int height, boolean leftToRight)
     {
         this.maxHealth = maxHealth;
         this.currentHealth = maxHealth;
         this.width = width;
         this.height = height;
+        this.leftToRight = leftToRight; // Set the direction of the health bar
         updateImage();
     }
 
@@ -35,7 +37,15 @@ public class HealthBar extends Actor
         // Draw foreground (red bar for health)
         int healthWidth = (int) ((double) currentHealth / maxHealth * width);
         image.setColor(foregroundColor);
-        image.fillRect(0, 0, healthWidth, height);
+        if (leftToRight)
+        {
+            image.fillRect(0, 0, healthWidth, height); // Draw from left to right
+        }
+        else
+        {
+            image.fillRect(width - healthWidth, 0, healthWidth, height); // Draw from right to left
+        }
+
 
         setImage(image);
     }
