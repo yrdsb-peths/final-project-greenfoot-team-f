@@ -39,7 +39,7 @@ public class FightWorld extends World
         backgroundMusic.setVolume(50);
         backgroundMusic.playLoop();
         
-        setBackground("stage_1.png");
+        setBackground("stage_1alt.png");
         
         prepare();
     }
@@ -93,7 +93,7 @@ public class FightWorld extends World
             String fileName = "countdown_" + frameNumber + ".png";
     
             // Combine the countdown image with the background
-            GreenfootImage background = new GreenfootImage("stage_1.png");
+            GreenfootImage background = new GreenfootImage("stage_1alt.png");
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
