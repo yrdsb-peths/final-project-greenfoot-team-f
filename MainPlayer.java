@@ -224,9 +224,15 @@ public class MainPlayer extends Actor
         health -= damage;
         if (health <= 0)
         {
+            health = 0;
             System.out.println("Player defeated!");
             Greenfoot.stop(); // End the game
         }
+    }
+    
+    public int getHealth()
+    {
+        return health;
     }
     
 }

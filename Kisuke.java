@@ -38,7 +38,8 @@ public class Kisuke extends Actor implements Enemy
     private boolean isIdle = false; // Indicates if Kisuke is idle
     
     private MainPlayer player;  // Reference to the main player
-
+    private int health = 100; // enemy health
+    
     public Kisuke(MainPlayer player) 
     {
         this.player = player;
@@ -322,7 +323,23 @@ public class Kisuke extends Actor implements Enemy
         return isOnGround;
     }
     
+
+    public int getHealth()
+    {
+        return health;
+    }
     
+    public void takeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            health = 0;
+            System.out.println("Kisuke defeated!");
+            getWorld().removeObject(this); // Remove Kisuke from the world
+        }
+    }
+
 
     
     

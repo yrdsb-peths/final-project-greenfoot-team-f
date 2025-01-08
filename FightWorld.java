@@ -19,6 +19,12 @@ public class FightWorld extends World
     
     private boolean objectsSpawned = false;
     
+    private HealthBar playerHealthBar;
+    private HealthBar enemyHealthBar;
+
+    private MainPlayer mainPlayer;
+    private Kisuke kisukeEnemy;
+    
     public FightWorld()
     {    
         super(600, 400, 1);
@@ -29,9 +35,7 @@ public class FightWorld extends World
         countdownSfx.setVolume(100);
         countdownSfx.play();
         
-        
-        // Uncomment to play background music when not in the initial world
-        // backgroundMusic.playLoop();
+    
         backgroundMusic.setVolume(50);
         backgroundMusic.playLoop();
         
@@ -48,13 +52,19 @@ public class FightWorld extends World
         } 
         else if (!objectsSpawned) // Ensure objects are added only once
         {
-            MainPlayer mainPlayer = new MainPlayer();
-            addObject(mainPlayer, 200, 350);
-    
-            Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-            addObject(kisukeEnemy, 400, 350);
+            spawnObjects(); 
     
             objectsSpawned = true; // Set the flag to prevent re-spawning
+        }
+        
+        if (playerHealthBar != null && mainPlayer != null) 
+        {
+            playerHealthBar.setHealth(mainPlayer.getHealth());
+        }
+    
+        if (enemyHealthBar != null && kisukeEnemy != null) 
+        {
+            enemyHealthBar.setHealth(kisukeEnemy.getHealth());
         }
     }
     
@@ -113,17 +123,33 @@ public class FightWorld extends World
 
     private void prepare()
     {
-        MainPlayer mainPlayer = new MainPlayer();
-        Kisuke kisukeEnemy = new Kisuke(mainPlayer);
-        kisukeEnemy.setFacingRight(false);
-    
-        // Add two separate platforms
+        // Initialize health bars
+        playerHealthBar = new HealthBar(100, 250, 30);
+        enemyHealthBar = new HealthBar(100, 250, 30);
+
+        // Add health bars
+        addObject(playerHealthBar, 150, 45); // Player health bar on the left
+        addObject(enemyHealthBar, 450, 45); // Enemy health bar on the right
+
+        // Add platforms
         Platform platform1 = new Platform();
         addObject(platform1, 450, 260);
-    
+
         Platform platform2 = new Platform();
         addObject(platform2, 160, 260);
     }
-
     
+    private void spawnObjects()
+    {
+        mainPlayer = new MainPlayer();
+        kisukeEnemy = new Kisuke(mainPlayer);
+
+        addObject(mainPlayer, 200, 350);
+        addObject(kisukeEnemy, 400, 350);
+
+        objectsSpawned = true; // Set the flag to prevent re-spawning
+    }
+    
+    
+
 }

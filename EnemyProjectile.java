@@ -26,10 +26,20 @@ public class EnemyProjectile extends Actor
         {
             setLocation(getX() - speed, getY()); // Move to the left
         }
-
+    
+        // Check collision with MainPlayer
+        MainPlayer player = (MainPlayer) getOneIntersectingObject(MainPlayer.class);
+        if (player != null) 
+        {
+            player.takeDamage(10); // Deal damage
+            getWorld().removeObject(this); // Remove the projectile
+            return; // Exit to prevent further execution
+        }
+    
         if (isAtEdge()) // Remove projectile if it goes off-screen
         {
             getWorld().removeObject(this);
         }
     }
+
 }

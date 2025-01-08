@@ -94,7 +94,6 @@ public class MenuScreen extends World
     }
 
     
-    
     private void animateBreathingSpace()
     {
         // Update scale factor based on growing/shrinking state

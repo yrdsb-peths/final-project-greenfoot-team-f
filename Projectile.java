@@ -21,10 +21,20 @@ public class Projectile extends Actor
     public void act() 
     {
         setLocation(getX() + speed, getY()); // Move the projectile
-
+    
+        // Check collision with Kisuke
+        Kisuke kisuke = (Kisuke) getOneIntersectingObject(Kisuke.class);
+        if (kisuke != null) 
+        {
+            kisuke.takeDamage(10); // Deal damage
+            getWorld().removeObject(this); // Remove the projectile
+            return; // Exit to prevent further execution
+        }
+    
         if (isAtEdge()) // Remove projectile if it goes off-screen
         {
             getWorld().removeObject(this);
         }
     }
+
 }
