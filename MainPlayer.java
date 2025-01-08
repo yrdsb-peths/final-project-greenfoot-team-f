@@ -229,8 +229,6 @@ public class MainPlayer extends Actor
         if (health <= 0)
         {
             health = 0;
-            System.out.println("Player defeated!");
-            Greenfoot.stop(); // End the game
         }
     }
     
@@ -239,4 +237,11 @@ public class MainPlayer extends Actor
         return health;
     }
     
+    public void checkHealth()
+    {
+        if(getHealth() <= 0)
+        {
+            Greenfoot.setWorld(new GameOverScreen());
+        }
+    }
 }

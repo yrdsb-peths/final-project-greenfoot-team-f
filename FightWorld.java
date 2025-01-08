@@ -46,6 +46,11 @@ public class FightWorld extends World
     
     public void act()
     {
+        if(mainPlayer != null)
+        {
+            mainPlayer.checkHealth();
+        }
+        
         if (!animationFinished) 
         {
             playCountdownAnimation(); // Handle the countdown animation
@@ -149,7 +154,4 @@ public class FightWorld extends World
 
         objectsSpawned = true; // Set the flag to prevent re-spawning
     }
-    
-    
-
 }
