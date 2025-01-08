@@ -124,8 +124,8 @@ public class FightWorld extends World
     private void prepare()
     {
         // Initialize health bars
-        playerHealthBar = new HealthBar(100, 250, 30);
-        enemyHealthBar = new HealthBar(100, 250, 30);
+        playerHealthBar = new HealthBar(100, 250, 30, true);
+        enemyHealthBar = new HealthBar(100, 250, 30, false);
 
         // Add health bars
         addObject(playerHealthBar, 150, 45); // Player health bar on the left
