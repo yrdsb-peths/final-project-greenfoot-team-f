@@ -95,9 +95,10 @@ public class FightWorld extends World
             // Combine the countdown image with the background
             GreenfootImage background = new GreenfootImage("stage_1alt.png");
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
+            countdownOverlay.scale(600,400);
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
-                                 (getHeight() - countdownOverlay.getHeight()) / 2);
+                                 (getHeight() - countdownOverlay.getHeight()) / 2 + 20);
             setBackground(background);
     
             countdownFrame++;
