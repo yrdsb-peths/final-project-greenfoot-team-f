@@ -28,7 +28,7 @@ public class GameOverScreen extends World
     
     private void goScreenSelect()
     {
-        Greenfoot.setWorld(new ScreenSelect());
+        Greenfoot.setWorld(new MenuScreen());
     }
 
     private void goFightStage()
