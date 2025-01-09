@@ -15,7 +15,7 @@ public class GameCompleteScreen extends World
         
         GreenfootImage background = new GreenfootImage("stage_1alt.png");
         
-        GreenfootImage gameOverImage = new GreenfootImage("LevelComplete.png");
+        GreenfootImage gameOverImage = new GreenfootImage("levelComplete.png");
         gameOverImage.scale(600, 130);
         
         background.drawImage(gameOverImage, (getWidth() - gameOverImage.getWidth()) / 2, (getHeight() - gameOverImage.getHeight()) / 2 - 50);
