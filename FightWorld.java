@@ -29,6 +29,7 @@ public class FightWorld extends World
     {    
         super(600, 400, 1);
 
+        GreenfootImage background = new GreenfootImage("newStageOne.png");
         backgroundMusic = new GreenfootSound("stageOneMusic.mp3");
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
         
@@ -38,8 +39,8 @@ public class FightWorld extends World
     
         backgroundMusic.setVolume(50);
         backgroundMusic.playLoop();
-        
-        setBackground("newStageOne.png");
+       
+        setBackground(background);
         
         prepare();
     }
