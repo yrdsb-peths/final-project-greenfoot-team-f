@@ -35,11 +35,10 @@ public class FightWorld extends World
         
         countdownSfx.setVolume(100);
         countdownSfx.play();
-        
-    
+
         backgroundMusic.setVolume(50);
         backgroundMusic.playLoop();
-       
+        
         setBackground(background);
         
         prepare();
