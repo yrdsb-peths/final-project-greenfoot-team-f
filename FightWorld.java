@@ -21,7 +21,8 @@ public class FightWorld extends World
     
     private HealthBar playerHealthBar;
     private HealthBar enemyHealthBar;
-
+    
+    
     private MainPlayer mainPlayer;
     private Kisuke kisukeEnemy;
     
@@ -125,11 +126,11 @@ public class FightWorld extends World
     private void prepare()
     {
         // Initialize health bars
-        playerHealthBar = new HealthBar(100, 250, 30, true);
-        enemyHealthBar = new HealthBar(100, 250, 30, false);
+        playerHealthBar = new HealthBar(100, 183, 30, true);
+        enemyHealthBar = new HealthBar(100, 183, 30, false);
 
         // Add health bars
-        addObject(playerHealthBar, 150, 45); // Player health bar on the left
+        addObject(playerHealthBar, 180, 45); // Player health bar on the left
         addObject(enemyHealthBar, 450, 45); // Enemy health bar on the right
 
         // Add platforms
@@ -138,6 +139,9 @@ public class FightWorld extends World
 
         Platform platform2 = new Platform();
         addObject(platform2, 160, 240);
+        
+        BarFrame barBar = new BarFrame(); 
+        addObject(barBar,130, 48); 
     }
     
     private void spawnObjects()
@@ -147,7 +151,7 @@ public class FightWorld extends World
 
         addObject(mainPlayer, 200, 350);
         addObject(kisukeEnemy, 400, 350);
-
+    
         objectsSpawned = true; // Set the flag to prevent re-spawning
     }
 }
