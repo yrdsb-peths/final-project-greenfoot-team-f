@@ -134,10 +134,10 @@ public class FightWorld extends World
 
         // Add platforms
         Platform platform1 = new Platform();
-        addObject(platform1, 450, 260);
+        addObject(platform1, 450, 240);
 
         Platform platform2 = new Platform();
-        addObject(platform2, 160, 260);
+        addObject(platform2, 160, 240);
     }
     
     private void spawnObjects()
