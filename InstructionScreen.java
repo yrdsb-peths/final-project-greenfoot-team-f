@@ -22,16 +22,17 @@ public class InstructionScreen extends World
         
         addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png"), 497,380);
         //button that proceeds to stage
-    }
-    
-    public void act()
-    {
-        
+        addObject(new Button(this:: goScreenSelect, "backButton.png", "backButton.png"), 35,51);
     }
     
     public void goFightStage()
     {
         MusicManager.stopMenuMusic(); 
         Greenfoot.setWorld(new FightWorld()); 
+    }
+    
+    public void goScreenSelect()
+    {
+        Greenfoot.setWorld(new ScreenSelect());
     }
 }
