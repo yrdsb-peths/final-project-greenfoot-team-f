@@ -6,8 +6,8 @@ public class HealthBar extends Actor
     private int currentHealth;
     private int width;
     private int height;
-    private Color backgroundColor = Color.WHITE;
-    private Color foregroundColor = Color.RED;
+    private Color backgroundColor = Color.BLACK;
+    private Color foregroundColor = Color.GREEN;
     private boolean leftToRight; // Direction of the health bar
 
     public HealthBar(int maxHealth, int width, int height, boolean leftToRight)
