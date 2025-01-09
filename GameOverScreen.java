@@ -21,9 +21,9 @@ public class GameOverScreen extends World
 
         setBackground(background);
         
-        addObject(new Button(this::goScreenSelect, "menuButton.png", "menuButton.png"), 301,300);
+        addObject(new Button(this::goScreenSelect, "MenuButton.png", "MenuButton.png"), 301,300);
         
-        addObject(new Button(this:: goFightStage, "playAgain.png", "playAgain.png"), 301,250);
+        addObject(new Button(this:: goFightStage, "PlayAgain.png", "PlayAgain.png"), 301,250);
     }
     
     private void goScreenSelect()
