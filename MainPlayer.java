@@ -229,19 +229,12 @@ public class MainPlayer extends Actor
         if (health <= 0)
         {
             health = 0;
+            Greenfoot.setWorld(new GameOverScreen());
         }
     }
     
     public int getHealth()
     {
         return health;
-    }
-    
-    public void checkHealth()
-    {
-        if(getHealth() <= 0)
-        {
-            Greenfoot.setWorld(new GameOverScreen());
-        }
     }
 }

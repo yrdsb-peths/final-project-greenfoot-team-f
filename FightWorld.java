@@ -46,11 +46,6 @@ public class FightWorld extends World
     
     public void act()
     {
-        if(mainPlayer != null)
-        {
-            mainPlayer.checkHealth();
-        }
-        
         if (!animationFinished) 
         {
             playCountdownAnimation(); // Handle the countdown animation
