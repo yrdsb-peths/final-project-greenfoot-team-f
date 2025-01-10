@@ -337,6 +337,7 @@ public class Kisuke extends Actor implements Enemy
         if (health <= 0)
         {
             health = 0;
+            MusicManager.stopStageOneMusic();
             Greenfoot.setWorld(new GameCompleteScreen());
         }
     }

@@ -27,7 +27,7 @@ public class InstructionScreen extends World
     
     public void goFightStage()
     {
-        MusicManager.stopMenuMusic(); 
+        MusicManager.stopSelectMusic(); 
         Greenfoot.setWorld(new FightWorld()); 
     }
     

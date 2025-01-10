@@ -12,8 +12,7 @@ public class MenuScreen extends World
     
     private int animationStep = 0; // Frame count for space bar animation
     private GreenfootSound selectSound = new GreenfootSound("menuSelectSound.mp3"); // Selection sound
-    
-    private GreenfootSound backgroundMusic;
+
     
     private GreenfootImage blueOverlay; // blue overlay image
     private int fadeOpacity = 225; // Starting opacity (225 is fully opaque)
@@ -24,9 +23,7 @@ public class MenuScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels
         super(600, 400, 1); 
         
-        MusicManager.resetMusicState(); // Stop and reset any existing music
-
-        
+                
         setBackground(new GreenfootImage("menuScreenbg.png")); // Set the background
         pressSpaceImage = new GreenfootImage("pressSpace2.png"); // Load the "Press Space" image
         
@@ -161,6 +158,7 @@ public class MenuScreen extends World
         }
         else
         {
+            MusicManager.stopMenuMusic();
             goScreenSelect(); // Transition to the next world after animation
         }
     }
