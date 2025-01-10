@@ -160,7 +160,6 @@ public class MenuScreen extends World
         }
         else
         {
-            MusicManager.stopMenuMusic();
             goScreenSelect(); // Transition to the next world after animation
         }
     }
@@ -170,6 +169,7 @@ public class MenuScreen extends World
      */
     private void goScreenSelect()
     {
+        MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new ScreenSelect()); // Switch to the fight stage
     }
     
