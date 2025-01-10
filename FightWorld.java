@@ -130,7 +130,7 @@ public class FightWorld extends World
 
         // Add health bars
         addObject(playerHealthBar, 180, 45); // Player health bar on the left
-        addObject(enemyHealthBar, 450, 45); // Enemy health bar on the right
+        addObject(enemyHealthBar, 420, 45); // Enemy health bar on the right
 
         // Add platforms
         Platform platform1 = new Platform();
@@ -139,8 +139,11 @@ public class FightWorld extends World
         Platform platform2 = new Platform();
         addObject(platform2, 160, 240);
         
-        BarFrame barBar = new BarFrame(); 
+        BarFrame barBar = new BarFrame("healthFrame.png"); 
         addObject(barBar,130, 48); 
+        
+        BarFrame kisukeKisuke= new BarFrame("kisukeFrame.png");
+        addObject(kisukeKisuke, 474,48);
     }
     
     private void spawnObjects()
