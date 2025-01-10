@@ -8,10 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class BarFrame extends Actor
 {
-    public BarFrame()
+    public BarFrame(String imageName)
     {
-        GreenfootImage healthFrame = new GreenfootImage("healthFrame.png");
-        healthFrame.scale(312,80);
+        //this is an actor class that contains the differnt health bar frames of both player and enemy
+        GreenfootImage healthFrame = new GreenfootImage(imageName);
+        //healthFrame.scale(312,80);
         setImage(healthFrame); 
     }
     
