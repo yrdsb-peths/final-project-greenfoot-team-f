@@ -64,18 +64,20 @@ public class MenuScreen extends World
         
     }
     
-    public void stopped()
-    {
-        // pause music when the world stopped
-        MusicManager.pauseMenuMusic(); 
-    }
-    
     
     public void started()
     {
         //start music when the world started 
         MusicManager.playMenuMusic();
     }
+    
+    
+    public void stopped()
+    {
+        // pause music when the world stopped
+        MusicManager.pauseMenuMusic(); 
+    }
+
     
     private void fadeInEffect()
     {

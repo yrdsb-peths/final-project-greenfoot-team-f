@@ -29,12 +29,12 @@ public class GameCompleteScreen extends World
     
     private void goScreenSelect()
     {
+        MusicManager.playMenuMusic();
         Greenfoot.setWorld(new MenuScreen());
     }
 
     private void goFightStage()
-    {
-        MusicManager.stopMenuMusic(); 
+    { 
         Greenfoot.setWorld(new FightWorld()); 
     }
 }

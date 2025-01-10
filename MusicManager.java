@@ -1,34 +1,32 @@
 import greenfoot.GreenfootSound;
+import greenfoot.*;
 
 public class MusicManager
 {
-    private static GreenfootSound menuMusic = new GreenfootSound("menuMusic.mp3");
-    private static boolean isPlaying = false;
-    private static GreenfootSound selectMusic = new GreenfootSound("Home Screen.mp3"); 
-    private static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");
+    public static GreenfootSound menuMusic = new GreenfootSound("menuMusic.mp3");
+    public static GreenfootSound selectMusic = new GreenfootSound("Home Screen.mp3"); 
+    public static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");
     
     public static void playStageOneMusic()
     {
-        if (!isPlaying)
+        if (!oneMusic.isPlaying())
         {
             oneMusic.setVolume(50);
             oneMusic.playLoop();
-            isPlaying = true;
         }
     }
     
     public static void stopStageOneMusic()
     {
-        if (isPlaying)
+        if (oneMusic.isPlaying())
         {
             oneMusic.stop();
-            isPlaying = false;
         }
     }
     
     public static void pauseStageOneMusic()
     {
-        if (isPlaying)
+        if (oneMusic.isPlaying())
         {
             oneMusic.pause();
         }
@@ -37,27 +35,25 @@ public class MusicManager
     
     public static void playSelectMusic()
     {
-        if (!isPlaying)
+        if (!selectMusic.isPlaying())
         {
             selectMusic.setVolume(50);
             selectMusic.playLoop();
-            isPlaying = true;
         }
     }
-    
+    //48
     
     public static void stopSelectMusic()
     {
-        if (isPlaying)
+        if (selectMusic.isPlaying())
         {
             selectMusic.stop();
-            isPlaying = false;
         }
     }
     
     public static void pauseSelectMusic()
     {
-        if (isPlaying)
+        if (selectMusic.isPlaying())
         {
             selectMusic.pause();
         }
@@ -66,46 +62,28 @@ public class MusicManager
     
     public static void playMenuMusic()
     {
-        if (!isPlaying)
+        if (!menuMusic.isPlaying())
         {
             menuMusic.setVolume(50);
             menuMusic.playLoop();
-            isPlaying = true;
         }
     }
 
     public static void stopMenuMusic()
     {
-        if (isPlaying)
+        if (menuMusic.isPlaying())
         {
             menuMusic.stop();
-            isPlaying = false;
         }
     }
 
     public static void pauseMenuMusic()
     {
-        if (isPlaying)
+        if (menuMusic.isPlaying())
         {
             menuMusic.pause();
         }
     }
 
-    public static void resumeMenuMusic()
-    {
-        if (!isPlaying)
-        {
-            menuMusic.playLoop();
-            isPlaying = true;
-        }
-    }
 
-    public static void resetMusicState()
-    {
-        if (menuMusic != null)
-        {
-            menuMusic.stop();
-        }
-        isPlaying = false;
-    }
 }
