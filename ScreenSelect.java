@@ -29,7 +29,7 @@ public class ScreenSelect extends World
         addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
         MusicManager.playSelectMusic();
         //Fight/start game button
-        addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png"), 301,190);
+        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,190);
     }
     
     
