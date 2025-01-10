@@ -20,7 +20,7 @@ public class InstructionScreen extends World
         super(600, 400, 1); 
         setBackground(new GreenfootImage("better.png")); // Set the background
         
-        addObject(new Button(this:: goFightStage, "fightButton.png", "fightButton.png"), 497,380);
+        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 497,380);
         //button that proceeds to stage
         addObject(new Button(this:: goScreenSelect, "backButton.png", "backButton.png"), 35,51);
     }
