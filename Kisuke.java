@@ -40,6 +40,8 @@ public class Kisuke extends Actor implements Enemy
     private MainPlayer player;  // Reference to the main player
     private int health = 100; // enemy health
     
+    private GreenfootSound attackSound = new GreenfootSound("kisukeAttack2.mp3");
+    
     public Kisuke(MainPlayer player) 
     {
         this.player = player;
@@ -49,7 +51,9 @@ public class Kisuke extends Actor implements Enemy
         walkFrames = loadFrames("kisukeWalk_", 4);
         attackFrames = loadFrames("kisukeAttack_", 10);
         jumpFrames = loadFrames("kisukeJump_", 7);
-
+        
+        attackSound.setVolume(100);
+        
         setImage(idleFrames[0]);  // Set initial image to the first idle frame
     }
 
@@ -190,6 +194,7 @@ public class Kisuke extends Actor implements Enemy
         {
             if (Greenfoot.getRandomNumber(100) < 5)  // 5% chance to attack
             {
+                
                 isAttacking = true;
                 attackFrameIndex = 0;  // Reset attack animation frame
             }
@@ -217,6 +222,7 @@ public class Kisuke extends Actor implements Enemy
 
         // Create and add the projectile to the world
         EnemyProjectile projectile = new EnemyProjectile("kisukeProjectile2.png", facingRight);
+        attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
 

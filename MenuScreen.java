@@ -169,7 +169,6 @@ public class MenuScreen extends World
      */
     private void goScreenSelect()
     {
-        MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new ScreenSelect()); // Switch to the fight stage
     }
     

@@ -27,7 +27,7 @@ public class ScreenSelect extends World
         counter = 0;
         // Instruction button
         addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
-        MusicManager.playSelectMusic();
+
         //Fight/start game button
         addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,190);
     }
@@ -36,15 +36,9 @@ public class ScreenSelect extends World
     public void stopped()
     {
         // pause music when the world stopped
-        MusicManager.pauseSelectMusic(); 
+        MusicManager.pauseMenuMusic(); 
     }
     
-    
-    public void started()
-    {
-        //start music when the world started 
-        MusicManager.playSelectMusic();
-    }
     
     public void act()
     {
@@ -82,7 +76,7 @@ public class ScreenSelect extends World
     
     private void goFightStage()
     {
-        MusicManager.stopSelectMusic();
+        MusicManager.stopMenuMusic(); 
         Greenfoot.setWorld(new FightWorld()); 
     }
 }
