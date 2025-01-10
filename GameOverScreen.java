@@ -8,8 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameOverScreen extends World
 {
+    private static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");
+    
     public GameOverScreen()
     {    
+    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         GreenfootImage background = new GreenfootImage("stage_1alt.png");
@@ -24,16 +27,31 @@ public class GameOverScreen extends World
         addObject(new Button(this::goScreenSelect, "MenuButton.png", "MenuButton.png"), 301,300);
         
         addObject(new Button(this:: goFightStage, "PlayAgain.png", "PlayAgain.png"), 301,250);
+        
+        MusicManager.stopStageOneMusic();
+        loseMusic.playLoop(); 
     }
     
     private void goScreenSelect()
     {
+        loseMusic.stop(); 
         Greenfoot.setWorld(new MenuScreen());
     }
 
     private void goFightStage()
     {
-        MusicManager.stopMenuMusic(); 
+        loseMusic.stop(); 
         Greenfoot.setWorld(new FightWorld()); 
     }
+    
+    public void stopped()
+    {
+        loseMusic.pause(); 
+    }
+    
+    public void started()
+    {
+        loseMusic.play(); 
+    }
+    
 }

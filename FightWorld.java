@@ -31,16 +31,15 @@ public class FightWorld extends World
         super(600, 400, 1);
 
         GreenfootImage background = new GreenfootImage("newStageOne.png");
-        backgroundMusic = new GreenfootSound("stageOneMusic.mp3");
+        
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
         
         countdownSfx.setVolume(100);
         countdownSfx.play();
 
-        backgroundMusic.setVolume(50);
-        backgroundMusic.playLoop();
-        
         setBackground(background);
+        
+        MusicManager.playStageOneMusic();
         
         prepare();
     }
@@ -114,13 +113,13 @@ public class FightWorld extends World
     public void stopped()
     {
         // Pause music when the world is stopped
-        backgroundMusic.pause();
+        MusicManager.pauseStageOneMusic();
     }
     
     public void started()
     {
         // Resume music when the world starts
-        backgroundMusic.playLoop();
+        MusicManager.playStageOneMusic();
     }
 
     private void prepare()
