@@ -109,18 +109,7 @@ public class FightWorld extends World
         }
     }
 
-    
-    public void stopped()
-    {
-        // Pause music when the world is stopped
-        MusicManager.pauseStageOneMusic();
-    }
-    
-    public void started()
-    {
-        // Resume music when the world starts
-        MusicManager.playStageOneMusic();
-    }
+
 
     private void prepare()
     {
