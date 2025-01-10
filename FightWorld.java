@@ -139,7 +139,7 @@ public class FightWorld extends World
         Platform platform2 = new Platform();
         addObject(platform2, 160, 240);
         
-        BarFrame barBar = new BarFrame(); 
+        BarFrame barBar = new BarFrame("healthFrame.png"); 
         addObject(barBar,130, 48); 
     }
     
