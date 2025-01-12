@@ -52,7 +52,7 @@ public class Kisuke extends Actor implements Enemy
         attackFrames = loadFrames("kisukeAttack_", 10);
         jumpFrames = loadFrames("kisukeJump_", 7);
         
-        attackSound.setVolume(100);
+        attackSound.setVolume(50);
         
         setImage(idleFrames[0]);  // Set initial image to the first idle frame
     }
