@@ -21,7 +21,11 @@ public class Projectile extends Actor
     public void act() 
     {
         setLocation(getX() + speed, getY()); // Move the projectile
-    
+        
+        if (getWorld() == null) {
+            return; // Skip further actions if the projectile is no longer in the world
+        }
+        
         // Check collision with Kisuke
         Kisuke kisuke = (Kisuke) getOneIntersectingObject(Kisuke.class);
         if (kisuke != null) 
@@ -44,6 +48,8 @@ public class Projectile extends Actor
         {
             getWorld().removeObject(this);
         }
+        
+        
         
     }
 

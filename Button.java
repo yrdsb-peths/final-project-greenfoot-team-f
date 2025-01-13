@@ -1,13 +1,13 @@
 import greenfoot.*;
 import greenfoot.GreenfootImage;
 
-
 public class Button extends Actor {
     private Runnable action;
     private GreenfootImage buttonImage;
     private GreenfootImage hoverImage;
     private GreenfootSound selectSound = new GreenfootSound("menuSelectSound.mp3");
     private GreenfootSound hoveringSound = new GreenfootSound("hoveringSound.mp3"); 
+    
     public Button(Runnable action, String imageName, String hoverimgName)
     {
         this.action = action;

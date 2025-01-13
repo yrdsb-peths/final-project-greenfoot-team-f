@@ -42,6 +42,8 @@ public class Kisuke extends Actor implements Enemy
     
     private GreenfootSound attackSound = new GreenfootSound("kisukeAttack2.mp3");
     
+    private boolean isFading = false;
+    
     public Kisuke(MainPlayer player) 
     {
         this.player = player;
@@ -60,6 +62,8 @@ public class Kisuke extends Actor implements Enemy
  
     public void act() 
     {
+
+        
         if (isJumping) 
         {
             fall(); // Handle falling and reset jumping state when on the ground
@@ -340,11 +344,21 @@ public class Kisuke extends Actor implements Enemy
     public void takeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !isFading)
         {
             health = 0;
             MusicManager.stopStageOneMusic();
-            Greenfoot.setWorld(new FightWorldTwo());
+    
+            if (getWorld() instanceof FightWorld)
+            {
+                ((FightWorld) getWorld()).startFadeOut();
+            }
+    
+            getWorld().removeObject(this);
         }
     }
+
+
+
+
 }
