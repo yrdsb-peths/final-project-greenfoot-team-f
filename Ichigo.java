@@ -116,10 +116,13 @@ public class Ichigo extends Actor implements Enemy
         GreenfootImage[] frames = new GreenfootImage[count];
         for (int i = 0; i < count; i++) 
         {
-            frames[i] = new GreenfootImage(baseName + i + ".png");
+            // Format the index with leading zeroes (e.g., "00", "01", etc.)
+            String formattedIndex = String.format("%02d", i);
+            frames[i] = new GreenfootImage(baseName + formattedIndex + ".png");
         }
         return frames;
     }
+
 
     // Method to make Ichigo follow the player's position
     public void followPlayer() 

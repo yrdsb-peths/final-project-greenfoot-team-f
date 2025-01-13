@@ -35,6 +35,14 @@ public class Projectile extends Actor
         {
             getWorld().removeObject(this);
         }
+        
+        Ichigo ichigo = (Ichigo) getOneIntersectingObject(Ichigo.class); 
+        if(ichigo != null)
+        {
+            ichigo.takeDamage(10);
+            getWorld().removeObject(this);
+            return;
+        }
     }
 
 }
