@@ -112,7 +112,7 @@ public class FightWorldTwo extends World
         enemyHealthBar = new HealthBar(100, 183, 40, false);
 
         // Add health bars
-        addObject(playerHealthBar, 180, 45); // Player health bar on the left
+        addObject(playerHealthBar, 181, 45); // Player health bar on the left
         addObject(enemyHealthBar, 420, 45); // Enemy health bar on the right
 
         // Add platforms
