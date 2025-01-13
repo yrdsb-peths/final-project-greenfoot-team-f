@@ -20,7 +20,7 @@ public class MusicManager
     {
         if (oneMusic.isPlaying())
         {
-            oneMusic.stop();
+            oneMusic.pause();
         }
     }
     
@@ -47,7 +47,7 @@ public class MusicManager
     {
         if (selectMusic.isPlaying())
         {
-            selectMusic.stop();
+            selectMusic.pause();
         }
     }
     
@@ -73,7 +73,7 @@ public class MusicManager
     {
         if (menuMusic.isPlaying())
         {
-            menuMusic.stop();
+            menuMusic.pause();
         }
     }
 
