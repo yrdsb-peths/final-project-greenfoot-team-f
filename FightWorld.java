@@ -26,6 +26,9 @@ public class FightWorld extends World
     private MainPlayer mainPlayer;
     private Kisuke kisukeEnemy;
     
+    private FadeOverlay fadeOverlay;
+    private boolean isFading = false;
+    
     public FightWorld()
     {    
         super(600, 400, 1);
@@ -41,11 +44,23 @@ public class FightWorld extends World
         
         MusicManager.playStageOneMusic();
         
+        fadeOverlay = new FadeOverlay();
+        addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
+    
         prepare();
+        
+        setPaintOrder(FadeOverlay.class, BarFrame.class, HealthBar.class);
     }
     
     public void act()
     {
+        if (isFading)
+        {
+            // Skip other logic during fading
+            return;
+        }
+        
+        
         if (!animationFinished) 
         {
             playCountdownAnimation(); // Handle the countdown animation
@@ -145,4 +160,12 @@ public class FightWorld extends World
     
         objectsSpawned = true; // Set the flag to prevent re-spawning
     }
+    
+    
+    public void startFadeOut()
+    {
+        isFading = true;
+        fadeOverlay.startFadeOut(); // Start the fade-out effect
+    }
+    
 }
