@@ -39,7 +39,7 @@ public class Ichigo extends Actor implements Enemy
     private MainPlayer player;  // Reference to the main player
     private int health = 100; // enemy health
     
-    private GreenfootSound attackSound = new GreenfootSound("kisukeAttack.mp3");  // Change sound if necessary
+    private GreenfootSound attackSound = new GreenfootSound("ichigoSfx.mp3");  // Change sound if necessary
     
     public Ichigo(MainPlayer player) 
     {
@@ -51,7 +51,7 @@ public class Ichigo extends Actor implements Enemy
         attackFrames = loadFrames("ichigoAttack_", 5);
         jumpFrames = loadFrames("ichigoJump_", 6);
         
-        attackSound.setVolume(50);
+        attackSound.setVolume(80);
         
         setImage(idleFrames[0]);  // Set initial image to the first idle frame
     }
