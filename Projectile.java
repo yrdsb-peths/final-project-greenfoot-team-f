@@ -30,11 +30,6 @@ public class Projectile extends Actor
             getWorld().removeObject(this); // Remove the projectile
             return; // Exit to prevent further execution
         }
-    
-        if (isAtEdge()) // Remove projectile if it goes off-screen
-        {
-            getWorld().removeObject(this);
-        }
         
         Ichigo ichigo = (Ichigo) getOneIntersectingObject(Ichigo.class); 
         if(ichigo != null)
@@ -43,6 +38,13 @@ public class Projectile extends Actor
             getWorld().removeObject(this);
             return;
         }
+        
+        
+        if (isAtEdge()) // Remove projectile if it goes off-screen
+        {
+            getWorld().removeObject(this);
+        }
+        
     }
 
 }
