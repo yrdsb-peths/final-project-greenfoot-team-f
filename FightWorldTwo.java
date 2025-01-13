@@ -108,8 +108,8 @@ public class FightWorldTwo extends World
     private void prepare()
     {
         // Initialize health bars
-        playerHealthBar = new HealthBar(100, 183, 30, true);
-        enemyHealthBar = new HealthBar(100, 183, 30, false);
+        playerHealthBar = new HealthBar(100, 183, 40, true);
+        enemyHealthBar = new HealthBar(100, 183, 40, false);
 
         // Add health bars
         addObject(playerHealthBar, 180, 45); // Player health bar on the left
