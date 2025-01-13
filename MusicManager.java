@@ -6,6 +6,24 @@ public class MusicManager
     public static GreenfootSound menuMusic = new GreenfootSound("menuMusic.mp3");
     public static GreenfootSound selectMusic = new GreenfootSound("Home Screen.mp3"); 
     public static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");
+    public static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");
+    
+    public static void playLoseMusic()
+    {
+        if(!loseMusic.isPlaying())
+        {
+            loseMusic.setVolume(60);
+            loseMusic.playLoop();
+        }
+    }
+    
+    public static void stopLoseMusic()
+    {
+        if(loseMusic.isPlaying())
+        {
+            loseMusic.pause(); 
+        }
+    }
     
     public static void playStageOneMusic()
     {

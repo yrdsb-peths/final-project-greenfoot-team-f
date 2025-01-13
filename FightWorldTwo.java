@@ -24,7 +24,7 @@ public class FightWorldTwo extends World
     {    
         super(600, 400, 1);
 
-        GreenfootImage background = new GreenfootImage("newStageOne.png"); // Update to stage two background if needed
+        GreenfootImage background = new GreenfootImage("stage_2new.png"); // Update to stage two background if needed
         
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
         
@@ -87,7 +87,7 @@ public class FightWorldTwo extends World
             String fileName = "countdown_" + frameNumber + ".png";
     
             // Combine the countdown image with the background
-            GreenfootImage background = new GreenfootImage("newStageOne.png"); // Updated stage two background
+            GreenfootImage background = new GreenfootImage("stage_2new.png"); // Updated stage two background
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600, 400);
             background.drawImage(countdownOverlay, 
