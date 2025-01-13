@@ -221,7 +221,7 @@ public class Kisuke extends Actor implements Enemy
         }
 
         // Create and add the projectile to the world
-        EnemyProjectile projectile = new EnemyProjectile("kisukeProjectile2.png", facingRight);
+        EnemyProjectile projectile = new EnemyProjectile("kisukeProjectile2.png", facingRight, 10);
         attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
@@ -344,7 +344,7 @@ public class Kisuke extends Actor implements Enemy
         {
             health = 0;
             MusicManager.stopStageOneMusic();
-            Greenfoot.setWorld(new GameCompleteScreen());
+            Greenfoot.setWorld(new FightWorldTwo());
         }
     }
 }

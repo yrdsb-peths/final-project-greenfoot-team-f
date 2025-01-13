@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GameOverScreen extends World
 {
-    private static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");
     
     public GameOverScreen()
     {    
@@ -29,29 +28,32 @@ public class GameOverScreen extends World
         addObject(new Button(this:: goFightStage, "PlayAgain.png", "PlayAgain.png"), 301,250);
         
         MusicManager.stopStageOneMusic();
+        MusicManager.playLoseMusic(); 
 
     }
     
     private void goScreenSelect()
     {
-        loseMusic.stop();
+        MusicManager.stopLoseMusic(); 
+        MusicManager.playMenuMusic(); 
         Greenfoot.setWorld(new MenuScreen());
     }
 
     private void goFightStage()
     {
-        loseMusic.stop();
+        MusicManager.stopLoseMusic();
+        
         Greenfoot.setWorld(new FightWorld()); 
     }
     
     public void stopped()
     {
-        loseMusic.pause(); 
+         MusicManager.stopLoseMusic(); 
     }
     
     public void started()
     {
-        loseMusic.play(); 
+         MusicManager.playLoseMusic();  
     }
     
 }

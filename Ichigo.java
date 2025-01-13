@@ -215,7 +215,7 @@ public class Ichigo extends Actor implements Enemy
         }
 
         // Create and add the projectile to the world
-        EnemyProjectile projectile = new EnemyProjectile("ichigoProjectile.png", facingRight);
+        EnemyProjectile projectile = new EnemyProjectile("ichigoProjectile.png", facingRight, 15);
         attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
