@@ -39,7 +39,7 @@ public class Ichigo extends Actor implements Enemy
     private MainPlayer player;  // Reference to the main player
     private int health = 100; // enemy health
     
-    private GreenfootSound attackSound = new GreenfootSound("ichigoSfx.mp3");  // Change sound if necessary
+    private GreenfootSound attackSound = new GreenfootSound("ichigoSfx.mp3"); 
     
     public Ichigo(MainPlayer player) 
     {
@@ -215,7 +215,7 @@ public class Ichigo extends Actor implements Enemy
         }
 
         // Create and add the projectile to the world
-        EnemyProjectile projectile = new EnemyProjectile("ichigoProjectile.png", facingRight, 15);
+        EnemyProjectile projectile = new EnemyProjectile("ichigoProjectile2.png", facingRight, 15);
         attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
@@ -325,8 +325,16 @@ public class Ichigo extends Actor implements Enemy
         health -= damage;
         if (health <= 0)
         {
-            health = 0;
+            health = 0; // Ensure health doesn't go below zero
+          
+    
+            // Stop the current stage music
+            MusicManager.stopStageOneMusic();
+    
+            
             getWorld().removeObject(this);
         }
     }
+
+
 }

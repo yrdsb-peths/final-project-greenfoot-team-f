@@ -7,6 +7,25 @@ public class MusicManager
     public static GreenfootSound selectMusic = new GreenfootSound("Home Screen.mp3"); 
     public static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");
     public static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");
+    public static GreenfootSound twoMusic  = new GreenfootSound("stage2music.mp3");
+    
+    public static void playTwoMusic()
+    {
+        if(!twoMusic.isPlaying())
+        {
+            twoMusic.setVolume(60);
+            twoMusic.playLoop(); 
+        }
+    }
+    
+    public static void stopTwoMusic()
+    {
+        if(twoMusic.isPlaying())
+        {
+            twoMusic.pause();
+      
+        }
+    }
     
     public static void playLoseMusic()
     {
@@ -22,6 +41,7 @@ public class MusicManager
         if(loseMusic.isPlaying())
         {
             loseMusic.pause(); 
+       
         }
     }
     
@@ -39,6 +59,7 @@ public class MusicManager
         if (oneMusic.isPlaying())
         {
             oneMusic.pause();
+           
         }
     }
     

@@ -28,6 +28,7 @@ public class GameOverScreen extends World
         addObject(new Button(this:: goFightStage, "PlayAgain.png", "PlayAgain.png"), 301,250);
         
         MusicManager.stopStageOneMusic();
+        MusicManager.stopTwoMusic();
         MusicManager.playLoseMusic(); 
 
     }
@@ -42,7 +43,6 @@ public class GameOverScreen extends World
     private void goFightStage()
     {
         MusicManager.stopLoseMusic();
-        
         Greenfoot.setWorld(new FightWorld()); 
     }
     

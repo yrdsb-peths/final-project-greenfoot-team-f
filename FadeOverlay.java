@@ -3,13 +3,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class FadeOverlay extends Actor
 {
     private int opacity = 0;
-    private boolean fadingIn = false;
     private boolean fadingOut = false;
+    private World targetWorld;
     private int fadeSpeed = 2;
 
     public FadeOverlay()
     {
-        // Create a fully black image to cover the entire screen
         GreenfootImage fadeImage = new GreenfootImage(600, 400);
         fadeImage.setColor(Color.BLACK);
         fadeImage.fill();
@@ -19,58 +18,32 @@ public class FadeOverlay extends Actor
 
     public void act()
     {
-        if (fadingIn)
-        {
-            handleFadeIn();
-        }
-        else if (fadingOut)
+        if (fadingOut)
         {
             handleFadeOut();
         }
     }
 
-    public void startFadeIn()
-    {
-        fadingIn = true;
-        fadingOut = false;
-        opacity = 255; // Start fully opaque
-        getImage().setTransparency(opacity);
-    }
-
-    public void startFadeOut()
+    public void startFadeOut(World nextWorld)
     {
         fadingOut = true;
-        fadingIn = false;
         opacity = 0; // Start fully transparent
+        targetWorld = nextWorld; // Set the target world for the transition
         getImage().setTransparency(opacity);
-    }
-
-    private void handleFadeIn()
-    {
-        if (opacity > 0)
-        {
-            opacity -= fadeSpeed;
-            getImage().setTransparency(opacity);
-        }
-        else
-        {
-            fadingIn = false;
-        }
     }
 
     private void handleFadeOut()
     {
         if (opacity < 255)
         {
-            opacity = Math.min(255, opacity + fadeSpeed); // Ensure it doesn't exceed 255
+            opacity = Math.min(255, opacity + fadeSpeed); // Increase opacity
             getImage().setTransparency(opacity);
         }
         else
         {
             fadingOut = false;
-            Greenfoot.setWorld(new FightWorldTwo()); // Switch worlds after fade completes
+            Greenfoot.setWorld(targetWorld); // Switch to the target world
         }
     }
-
-
 }
+

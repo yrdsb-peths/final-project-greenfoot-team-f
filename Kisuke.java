@@ -43,6 +43,9 @@ public class Kisuke extends Actor implements Enemy
     private GreenfootSound attackSound = new GreenfootSound("kisukeAttack2.mp3");
     
     private boolean isFading = false;
+    private int fadeOpacity = 0;
+    private GreenfootImage fadeImage = new GreenfootImage(600, 400);
+
     
     public Kisuke(MainPlayer player) 
     {
@@ -62,6 +65,11 @@ public class Kisuke extends Actor implements Enemy
  
     public void act() 
     {
+        if (isFading) 
+        {
+            handleFadeOut();
+            return; // Skip other actions during fade-out
+        }
 
         
         if (isJumping) 
@@ -346,19 +354,47 @@ public class Kisuke extends Actor implements Enemy
         health -= damage;
         if (health <= 0 && !isFading)
         {
-            health = 0;
+            health = 0; // Ensure health doesn't go below zero
+            isFading = true;
+    
+            // Stop the current stage music
             MusicManager.stopStageOneMusic();
     
+            // Trigger the fade-out transition if the world supports it
             if (getWorld() instanceof FightWorld)
             {
-                ((FightWorld) getWorld()).startFadeOut();
+                // Pass the next world (e.g., FightWorldTwo) to startFadeOut
+                ((FightWorld) getWorld()).startFadeOut(new FightWorldTwo());
             }
-    
+            
+            // Remove Kisuke from the world
             getWorld().removeObject(this);
         }
     }
 
 
+    
+    private void startFadeOut()
+    {
+        isFading = true;
+        fadeOpacity = 0; // Reset fade opacity to 0
+        fadeImage.setColor(Color.BLACK);
+        fadeImage.fill(); // Pre-fill the fade image with black
+    }
 
+
+    private void handleFadeOut()
+    {
+        if (fadeOpacity <= 255)
+        {
+            fadeImage.setTransparency(fadeOpacity); // Gradually increase transparency
+            getWorld().getBackground().drawImage(fadeImage, 0, 0); // Draw the fade image over the world
+            fadeOpacity += 2; // Adjust this value for slower or faster fade
+        }
+        else
+        {
+            Greenfoot.setWorld(new FightWorldTwo()); // Switch to FightWorldTwo after fade is complete
+        }
+    }
 
 }

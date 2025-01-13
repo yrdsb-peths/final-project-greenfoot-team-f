@@ -124,8 +124,6 @@ public class FightWorld extends World
         }
     }
 
-
-
     private void prepare()
     {
         // Initialize health bars
@@ -162,10 +160,22 @@ public class FightWorld extends World
     }
     
     
-    public void startFadeOut()
+    public void startFadeOut(World nextWorld)
     {
-        isFading = true;
-        fadeOverlay.startFadeOut(); // Start the fade-out effect
+        if (!isFading)
+        {
+            isFading = true;
+    
+            // Add the fade overlay to the current world
+            fadeOverlay = new FadeOverlay();
+            addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
+    
+            // Start the fade-out animation and transition to the specified world
+            fadeOverlay.startFadeOut(nextWorld);
+        }
     }
+
+
+
     
 }
