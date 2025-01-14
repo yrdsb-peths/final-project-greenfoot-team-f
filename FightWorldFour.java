@@ -17,5 +17,8 @@ public class FightWorldFour extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        GreenfootImage background = new GreenfootImage("stage_4.png"); // Background for stage 3
+        setBackground(background);
     }
 }
