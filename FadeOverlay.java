@@ -1,13 +1,13 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class FadeOverlay extends Actor
+public class FadeOverlay extends Actor 
 {
     private int opacity = 0;
     private boolean fadingOut = false;
-    private World targetWorld;
     private int fadeSpeed = 2;
+    private boolean fadeComplete = false;
 
-    public FadeOverlay()
+    public FadeOverlay() 
     {
         GreenfootImage fadeImage = new GreenfootImage(600, 400);
         fadeImage.setColor(Color.BLACK);
@@ -16,34 +16,38 @@ public class FadeOverlay extends Actor
         setImage(fadeImage);
     }
 
-    public void act()
+    public void act() 
     {
-        if (fadingOut)
+        if (fadingOut) 
         {
             handleFadeOut();
         }
     }
 
-    public void startFadeOut(World nextWorld)
+    public void startFadeOut() 
     {
         fadingOut = true;
         opacity = 0; // Start fully transparent
-        targetWorld = nextWorld; // Set the target world for the transition
+        fadeComplete = false;
         getImage().setTransparency(opacity);
     }
 
-    private void handleFadeOut()
+    private void handleFadeOut() 
     {
-        if (opacity < 255)
+        if (opacity < 255) 
         {
-            opacity = Math.min(255, opacity + fadeSpeed); // Increase opacity
+            opacity = Math.min(255, opacity + fadeSpeed); // Gradually increase opacity
             getImage().setTransparency(opacity);
-        }
-        else
+        } 
+        else 
         {
             fadingOut = false;
-            Greenfoot.setWorld(targetWorld); // Switch to the target world
+            fadeComplete = true; // Mark the fade as complete
         }
     }
-}
 
+    public boolean isFadeComplete() 
+    {
+        return fadeComplete;
+    }
+}

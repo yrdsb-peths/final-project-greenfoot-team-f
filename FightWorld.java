@@ -54,10 +54,9 @@ public class FightWorld extends World
     
     public void act()
     {
-        if (isFading)
+        if (isFading && fadeOverlay != null && fadeOverlay.isFadeComplete()) 
         {
-            // Skip other logic during fading
-            return;
+            Greenfoot.setWorld(new FightWorldTwo()); // Transition to the next world
         }
         
         
@@ -160,20 +159,17 @@ public class FightWorld extends World
     }
     
     
-    public void startFadeOut(World nextWorld)
+    public void startFadeOut() 
     {
-        if (!isFading)
+        if (!isFading) 
         {
             isFading = true;
-    
-            // Add the fade overlay to the current world
             fadeOverlay = new FadeOverlay();
             addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
-    
-            // Start the fade-out animation and transition to the specified world
-            fadeOverlay.startFadeOut(nextWorld);
+            fadeOverlay.startFadeOut();
         }
     }
+
 
 
 
