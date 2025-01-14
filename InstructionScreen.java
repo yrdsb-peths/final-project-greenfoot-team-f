@@ -9,7 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class InstructionScreen extends World
 {
     private GreenfootImage background;
-    
     /**
      * Constructor for objects of class InstructionScreen.
      * 
@@ -18,9 +17,18 @@ public class InstructionScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
-        setBackground(new GreenfootImage("better.png")); // Set the background
+        GreenfootImage background = new GreenfootImage("better.png");
         
-        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 497,380);
+        GreenfootImage uryuImage = new GreenfootImage("uryuImage.png");
+        uryuImage.scale(780, 400);
+        background.drawImage(uryuImage, (getWidth() - uryuImage.getWidth()) / 2 + 170, (getHeight() - uryuImage.getHeight()) / 2 + 20);
+        
+        GreenfootImage instructionText1 = new GreenfootImage("instructionText1.png");
+        instructionText1.scale(300, 300);
+        instructionText1.setTransparency(230);
+        background.drawImage(instructionText1, (getWidth() - instructionText1.getWidth()) / 2 - 120, (getHeight() - instructionText1.getHeight()) / 2);
+        
+        setBackground(background);
         //button that proceeds to stage
         addObject(new Button(this:: goScreenSelect, "backButton.png", "backButton.png"), 35,51);
     }
