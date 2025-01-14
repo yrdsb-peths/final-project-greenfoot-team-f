@@ -9,14 +9,12 @@ import java.util.Stack;
 public class InstructionScreen extends World
 {
     private GreenfootImage background;
-Scarlett
     private int index;
     private Stack<World> screenHistory; //Stack to keep track of screen history
     /**
      * Constructor for objects of class InstructionScreen.
      * 
      */
-main
     public InstructionScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
