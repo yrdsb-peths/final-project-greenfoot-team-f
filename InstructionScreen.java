@@ -38,7 +38,7 @@ public class InstructionScreen extends World
     
     public void buttons()
     {
-        Button nextButton = new Button(this::nextInstruction, "backButton.png", "backButton.png");
+        Button nextButton = new Button(this::nextInstruction, "nextButton.png", "nextButton.png");
         addObject(nextButton, 550, 360);
         
         Button prevButton = new Button(this::prevInstruction, "backButton.png", "backButton.png");
