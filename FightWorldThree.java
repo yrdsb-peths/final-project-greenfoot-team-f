@@ -17,7 +17,7 @@ public class FightWorldThree extends World
     {    
         super(600, 400, 1); 
         GreenfootImage background = new GreenfootImage("stage3.png");
-        
+        setBackground(background); 
     }
     
     
