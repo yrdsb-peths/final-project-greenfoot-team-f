@@ -9,7 +9,7 @@ public class Ichigo extends Actor implements Enemy
     private int jumpFrameIndex = 0;  // Tracks the current frame of jump animation
 
     // Speed and cooldown variables
-    private int speed = 1;  // Movement speed
+    private int speed = 2;  // Movement speed
     private int attackCooldown = 0;  // Cooldown for attacks
     private int jumpCooldown = 0;  // Cooldown for jumps
 

@@ -213,7 +213,7 @@ public class Kenny extends Actor implements Enemy
         }
 
         // Create and add the projectile to the world
-        EnemyProjectile projectile = new EnemyProjectile("kennyProjectile_01.png", facingRight, 20);
+        EnemyProjectile projectile = new EnemyProjectile("kennyProjectile_01.png", facingRight, 25);
         attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
