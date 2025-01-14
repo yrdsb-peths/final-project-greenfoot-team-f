@@ -29,6 +29,7 @@ public class GameOverScreen extends World
         
         MusicManager.stopStageOneMusic();
         MusicManager.stopTwoMusic();
+        MusicManager.stopThreeMusic(); 
         MusicManager.playLoseMusic(); 
 
     }

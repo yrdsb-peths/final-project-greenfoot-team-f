@@ -39,7 +39,7 @@ public class Kenny extends Actor implements Enemy
     private MainPlayer player;  // Reference to the main player
     private int health = 100; // enemy health
     
-    private GreenfootSound attackSound = new GreenfootSound("kennySfx.mp3");  // Change sound if necessary
+    private GreenfootSound attackSound = new GreenfootSound("kennyAttack.mp3");  // Change sound if necessary
     
     public Kenny(MainPlayer player) 
     {
@@ -229,17 +229,20 @@ public class Kenny extends Actor implements Enemy
                 if (attackFrameIndex < attackFrames.length) 
                 {
                     setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
-                    attackFrameIndex++;
-
-                    if (attackFrameIndex == 2) 
+                    
+                    // Trigger the projectile attack after the 5th frame
+                    if (attackFrameIndex == 5) 
                     {
-                        performAttack();
+                        performAttack(); // Fire the projectile
                     }
-
+    
+                    attackFrameIndex++;
+    
+                    // Reset attack state after completing the animation
                     if (attackFrameIndex == attackFrames.length) 
                     {
                         isAttacking = false;
-                        attackCooldown = 60;
+                        attackCooldown = 60; // Reset the attack cooldown
                     }
                 }
             } 
@@ -254,7 +257,6 @@ public class Kenny extends Actor implements Enemy
             else if (Math.abs(player.getX() - getX()) > 5) 
             {
                 walkAnimationDelay++;
-                
                 if (walkAnimationDelay >= walkAnimationSpeed) 
                 {
                     walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
@@ -264,17 +266,15 @@ public class Kenny extends Actor implements Enemy
             } 
             else 
             {
-                if (animationDelay >= animationSpeed) 
-                {
-                    idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
-                    setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
-                    animationDelay = 0;
-                }
+                idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
+                setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
             }
-            
-            animationDelay = 0;
+    
+            animationDelay = 0; // Reset the animation delay counter
         }
     }
+
+
 
     private GreenfootImage flipIfNeeded(GreenfootImage frame) 
     {
@@ -324,6 +324,7 @@ public class Kenny extends Actor implements Enemy
         if (health <= 0)
         {
             health = 0;
+            MusicManager.stopThreeMusic();
             getWorld().removeObject(this);
         }
     }

@@ -8,6 +8,24 @@ public class MusicManager
     public static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");
     public static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");
     public static GreenfootSound twoMusic  = new GreenfootSound("stage2music.mp3");
+    public static GreenfootSound threeMusic = new GreenfootSound("stage3MusicNew.mp3");
+    
+    public static void playThreeMusic()
+    {
+        if(!threeMusic.isPlaying())
+        {
+            threeMusic.setVolume(70);
+            threeMusic.playLoop();
+        }
+    }
+    
+    public static void stopThreeMusic()
+    {
+        if(threeMusic.isPlaying())
+        {
+            threeMusic.pause();
+        }
+    }
     
     public static void playTwoMusic()
     {

@@ -350,10 +350,10 @@ public class Kisuke extends Actor implements Enemy
     }
     
     
-    public void takeDamage(int damage) 
+    public void takeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0 && !isFading) 
+        if (health <= 0 && !isFading)
         {
             health = 0; // Ensure health doesn't go below zero
             isFading = true;
@@ -361,17 +361,18 @@ public class Kisuke extends Actor implements Enemy
             // Stop the current stage music
             MusicManager.stopStageOneMusic();
     
-            // Trigger the fade-out transition
-            if (getWorld() instanceof FightWorld) 
+            // Trigger the fade-out transition via the world
+            if (getWorld() instanceof FightWorld)
             {
                 FightWorld currentWorld = (FightWorld) getWorld();
-                currentWorld.startFadeOut(); // Start the fade-out animation
+                currentWorld.startFadeOut(); // Use FightWorld's fade logic
             }
     
             // Remove Kisuke from the world
             getWorld().removeObject(this);
         }
     }
+
 
 
     

@@ -20,7 +20,9 @@ public class FightWorldTwo extends World
     private MainPlayer mainPlayer;
     private Ichigo ichigoEnemy;
     
-    
+    private FadeOverlay fadeOverlay;
+    private boolean isFading = false;
+        
     public FightWorldTwo()
     {    
         super(600, 400, 1);
@@ -43,6 +45,12 @@ public class FightWorldTwo extends World
     
     public void act()
     {
+        if (isFading && fadeOverlay != null && fadeOverlay.isFadeComplete()) 
+        {
+            Greenfoot.setWorld(new FightWorldThree()); // Transition to FightWorldThree
+        }
+        
+        
         if (!animationFinished) 
         {
             playCountdownAnimation(); // Handle the countdown animation
@@ -140,6 +148,18 @@ public class FightWorldTwo extends World
         addObject(ichigoEnemy, 400, 350);
     
         objectsSpawned = true; // Set the flag to prevent re-spawning
+    }
+    
+    
+    public void startFadeOut() 
+    {
+        if (!isFading) 
+        {
+            isFading = true;
+            fadeOverlay = new FadeOverlay();
+            addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
+            fadeOverlay.startFadeOut();
+        }
     }
     
 }

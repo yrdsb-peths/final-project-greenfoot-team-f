@@ -41,6 +41,7 @@ public class Ichigo extends Actor implements Enemy
     
     private GreenfootSound attackSound = new GreenfootSound("ichigoSfx.mp3"); 
     
+    private boolean isFading = false;
     public Ichigo(MainPlayer player) 
     {
         this.player = player;
@@ -323,18 +324,26 @@ public class Ichigo extends Actor implements Enemy
     public void takeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !isFading)
         {
             health = 0; // Ensure health doesn't go below zero
-          
+            isFading = true;
     
             // Stop the current stage music
-            MusicManager.stopStageOneMusic();
+            MusicManager.stopTwoMusic(); // Replace with the correct method for stage two
     
-            
+            // Trigger the fade-out transition via the world
+            if (getWorld() instanceof FightWorldTwo)
+            {
+                FightWorldTwo currentWorld = (FightWorldTwo) getWorld();
+                currentWorld.startFadeOut(); // Use FightWorldTwo's fade logic
+            }
+    
+            // Remove Ichigo from the world
             getWorld().removeObject(this);
         }
     }
+
 
 
 }

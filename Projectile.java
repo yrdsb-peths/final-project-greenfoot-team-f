@@ -3,7 +3,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Projectile extends Actor 
 {
     private int speed;
-
+    
+    private static GreenfootSound kennyHurt = new GreenfootSound("kennyHurt.mp3");
+    
     public Projectile(boolean facingRight) 
     {
         setImage("blueArrow.png"); // Set the projectile image
@@ -43,6 +45,15 @@ public class Projectile extends Actor
             return;
         }
         
+        Kenny kenny = (Kenny) getOneIntersectingObject(Kenny.class);
+        if(kenny != null)
+        {
+            kenny.takeDamage(10);
+            kennyHurt.play(); 
+            getWorld().removeObject(this);
+            return;
+            
+        }
         
         if (isAtEdge()) // Remove projectile if it goes off-screen
         {
