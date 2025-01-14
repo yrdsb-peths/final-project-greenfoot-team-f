@@ -20,6 +20,7 @@ public class FightWorldTwo extends World
     private MainPlayer mainPlayer;
     private Ichigo ichigoEnemy;
     
+    
     public FightWorldTwo()
     {    
         super(600, 400, 1);
@@ -33,9 +34,11 @@ public class FightWorldTwo extends World
 
         setBackground(background);
         
-        MusicManager.playStageOneMusic(); // Assume there is a stage two music manager method
+        MusicManager.playTwoMusic(); // Assume there is a stage two music manager method
         
         prepare();
+        
+        setPaintOrder(FadeOverlay.class, BarFrame.class, HealthBar.class);
     }
     
     public void act()
@@ -104,12 +107,11 @@ public class FightWorldTwo extends World
     }
 
 
-
     private void prepare()
     {
         // Initialize health bars
         playerHealthBar = new HealthBar(100, 183, 40, true);
-        enemyHealthBar = new HealthBar(100, 183, 40, false);
+        enemyHealthBar = new HealthBar(100, 184, 40, false);
 
         // Add health bars
         addObject(playerHealthBar, 181, 45); // Player health bar on the left
@@ -139,4 +141,5 @@ public class FightWorldTwo extends World
     
         objectsSpawned = true; // Set the flag to prevent re-spawning
     }
+    
 }

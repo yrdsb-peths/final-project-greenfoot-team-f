@@ -54,10 +54,9 @@ public class FightWorld extends World
     
     public void act()
     {
-        if (isFading)
+        if (isFading && fadeOverlay != null && fadeOverlay.isFadeComplete()) 
         {
-            // Skip other logic during fading
-            return;
+            Greenfoot.setWorld(new FightWorldTwo()); // Transition to the next world
         }
         
         
@@ -124,8 +123,6 @@ public class FightWorld extends World
         }
     }
 
-
-
     private void prepare()
     {
         // Initialize health bars
@@ -162,10 +159,19 @@ public class FightWorld extends World
     }
     
     
-    public void startFadeOut()
+    public void startFadeOut() 
     {
-        isFading = true;
-        fadeOverlay.startFadeOut(); // Start the fade-out effect
+        if (!isFading) 
+        {
+            isFading = true;
+            fadeOverlay = new FadeOverlay();
+            addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
+            fadeOverlay.startFadeOut();
+        }
     }
+
+
+
+
     
 }

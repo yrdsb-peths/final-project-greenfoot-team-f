@@ -1,15 +1,14 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class FadeOverlay extends Actor
+public class FadeOverlay extends Actor 
 {
     private int opacity = 0;
-    private boolean fadingIn = false;
     private boolean fadingOut = false;
     private int fadeSpeed = 2;
+    private boolean fadeComplete = false;
 
-    public FadeOverlay()
+    public FadeOverlay() 
     {
-        // Create a fully black image to cover the entire screen
         GreenfootImage fadeImage = new GreenfootImage(600, 400);
         fadeImage.setColor(Color.BLACK);
         fadeImage.fill();
@@ -17,60 +16,38 @@ public class FadeOverlay extends Actor
         setImage(fadeImage);
     }
 
-    public void act()
+    public void act() 
     {
-        if (fadingIn)
-        {
-            handleFadeIn();
-        }
-        else if (fadingOut)
+        if (fadingOut) 
         {
             handleFadeOut();
         }
     }
 
-    public void startFadeIn()
-    {
-        fadingIn = true;
-        fadingOut = false;
-        opacity = 255; // Start fully opaque
-        getImage().setTransparency(opacity);
-    }
-
-    public void startFadeOut()
+    public void startFadeOut() 
     {
         fadingOut = true;
-        fadingIn = false;
         opacity = 0; // Start fully transparent
+        fadeComplete = false;
         getImage().setTransparency(opacity);
     }
 
-    private void handleFadeIn()
+    private void handleFadeOut() 
     {
-        if (opacity > 0)
+        if (opacity < 255) 
         {
-            opacity -= fadeSpeed;
+            opacity = Math.min(255, opacity + fadeSpeed); // Gradually increase opacity
             getImage().setTransparency(opacity);
-        }
-        else
-        {
-            fadingIn = false;
-        }
-    }
-
-    private void handleFadeOut()
-    {
-        if (opacity < 255)
-        {
-            opacity = Math.min(255, opacity + fadeSpeed); // Ensure it doesn't exceed 255
-            getImage().setTransparency(opacity);
-        }
-        else
+        } 
+        else 
         {
             fadingOut = false;
-            Greenfoot.setWorld(new FightWorldTwo()); // Switch worlds after fade completes
+            fadeComplete = true; // Mark the fade as complete
         }
     }
 
-
+    public boolean isFadeComplete() 
+    {
+        return fadeComplete;
+    }
 }
