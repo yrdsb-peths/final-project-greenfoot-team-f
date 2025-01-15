@@ -9,7 +9,6 @@ import java.util.Stack;
 public class InstructionScreen extends World
 {
     private GreenfootImage background;
-    private int index;
     private Stack<World> screenHistory; //Stack to keep track of screen history
     /**
      * Constructor for objects of class InstructionScreen.

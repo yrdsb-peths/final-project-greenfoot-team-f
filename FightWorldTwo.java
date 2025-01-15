@@ -73,11 +73,13 @@ public class FightWorldTwo extends World
             
             if (ichigoEnemy.getHealth() <= 0) 
             {
-                if (!LevelClearManager.isLevelClear(2)) {
-                    LevelClearManager.setLevelClear(2, true); // Set the level as cleared
-                    clearLevel(2); // Mark the level as cleared in game
+                if (!LevelClearManager.isLevelCleared(2)) // Fix method name
+                {
+                    LevelClearManager.clearLevel(2); // Correct method to set level as cleared
+                    clearLevel(2); // Mark the level as cleared in-game
                 }
             }
+
         }
         
     }
