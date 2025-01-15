@@ -29,6 +29,9 @@ public class FightWorldThree extends World
 
         GreenfootImage background = new GreenfootImage("stage3.png"); // Background for stage 3
         
+        GreenfootImage levelNum = new GreenfootImage("levelThree.png");
+        background.drawImage(levelNum, (getWidth() - levelNum.getWidth()) / 2, (getHeight() - levelNum.getHeight()) / 2 - 149);
+        
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
         countdownSfx.setVolume(100);
         countdownSfx.play();
@@ -99,6 +102,10 @@ public class FightWorldThree extends World
             GreenfootImage background = new GreenfootImage("stage3.png"); // Stage 3 background
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600, 400);
+            
+            LevelNum levelNum = new LevelNum("levelThree.png");
+            addObject(levelNum, 300, 53);
+            
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
                                  (getHeight() - countdownOverlay.getHeight()) / 2 + 20);
@@ -119,8 +126,8 @@ public class FightWorldThree extends World
         enemyHealthBar = new HealthBar(100, 184, 40, false);
 
         // Add health bars
-        addObject(playerHealthBar, 181, 45); // Player health bar on the left
-        addObject(enemyHealthBar, 420, 45); // Enemy health bar on the right
+        addObject(playerHealthBar, 170, 45); // Player health bar on the left
+        addObject(enemyHealthBar, 431, 45); // Enemy health bar on the right
 
         // Add platforms
         Platform platform1 = new Platform();

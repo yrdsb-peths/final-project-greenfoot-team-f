@@ -99,6 +99,10 @@ public class FightWorldFour extends World
             GreenfootImage background = new GreenfootImage("stage_4.png"); // Stage 4 background
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600, 400);
+            
+            LevelNum levelNum = new LevelNum("levelFour.png");
+            addObject(levelNum, 300, 53);
+            
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
                                  (getHeight() - countdownOverlay.getHeight()) / 2 + 20);
@@ -119,8 +123,8 @@ public class FightWorldFour extends World
         enemyHealthBar = new HealthBar(100, 184, 40, false);
 
         // Add health bars
-        addObject(playerHealthBar, 181, 45); // Player health bar on the left
-        addObject(enemyHealthBar, 420, 45); // Enemy health bar on the right
+        addObject(playerHealthBar, 170, 45); // Player health bar on the left
+        addObject(enemyHealthBar, 432, 45); // Enemy health bar on the right
 
         // Add platforms
         Platform platform1 = new Platform();

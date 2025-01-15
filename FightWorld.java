@@ -35,6 +35,8 @@ public class FightWorld extends World
 
         GreenfootImage background = new GreenfootImage("newStageOne.png");
         
+        setBackground(background);
+        
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
         
         countdownSfx.setVolume(100);
@@ -110,6 +112,10 @@ public class FightWorld extends World
             GreenfootImage background = new GreenfootImage("newStageOne.png");
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600,400);
+            
+            LevelNum levelNum = new LevelNum("levelOne.png");
+            addObject(levelNum, 300, 53);
+            
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
                                  (getHeight() - countdownOverlay.getHeight()) / 2 + 20);
@@ -130,8 +136,8 @@ public class FightWorld extends World
         enemyHealthBar = new HealthBar(100, 183, 40, false);
 
         // Add health bars
-        addObject(playerHealthBar, 181, 45); // Player health bar on the left
-        addObject(enemyHealthBar, 420, 45); // Enemy health bar on the right
+        addObject(playerHealthBar, 170, 45); // Player health bar on the left
+        addObject(enemyHealthBar, 431, 45); // Enemy health bar on the right
 
         // Add platforms
         Platform platform1 = new Platform();

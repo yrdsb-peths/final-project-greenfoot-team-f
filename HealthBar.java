@@ -28,13 +28,13 @@ public class HealthBar extends Actor
 
     private void updateImage()
     {
-        GreenfootImage image = new GreenfootImage(width, height);
+        GreenfootImage image = new GreenfootImage(width - 30, height - 10);
 
         // Draw background (black bar)
         image.setColor(backgroundColor);
         image.fillRect(0, 0, width, height);
 
-        // Draw foreground (red bar for health)
+        // Draw foreground (green bar for health)
         int healthWidth = (int) ((double) currentHealth / maxHealth * width);
         image.setColor(foregroundColor);
         if (leftToRight)
