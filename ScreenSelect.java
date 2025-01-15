@@ -23,21 +23,19 @@ public class ScreenSelect extends World
         
         background = new GreenfootImage("instructionScreenBgBleach.png");
         
-        GreenfootImage lvlOne = new GreenfootImage("lock.png");
-        lvlOne.scale(50,50);
-        background.drawImage(lvlOne, (getWidth() - lvlOne.getWidth()) / 2 - 150, (getHeight() - lvlOne.getHeight()) / 2 + 65);
+        addObject(new LevelNum("lvlOne.png"), 150,265);
+       
+        addObject(new LevelNum("lock.png") {{
+            getImage().scale(50, 50); // Scale the image in one line
+        }}, 250, 265);
+    
+        addObject(new LevelNum("lock.png") {{
+            getImage().scale(50, 50); // Scale the image in one line
+        }}, 350, 265);
         
-        GreenfootImage lvlTwo = new GreenfootImage("lock.png");
-        lvlTwo.scale(50,50);
-        background.drawImage(lvlTwo, (getWidth() - lvlTwo.getWidth()) / 2 - 50, (getHeight() - lvlTwo.getHeight()) / 2 + 65);
-        
-        GreenfootImage lvlThree = new GreenfootImage("lock.png");
-        lvlThree.scale(50,50);
-        background.drawImage(lvlThree, (getWidth() - lvlThree.getWidth()) / 2 + 50, (getHeight() - lvlThree.getHeight()) / 2 + 65);
-        
-        GreenfootImage lvlFour = new GreenfootImage("lock.png");
-        lvlFour.scale(50,50);
-        background.drawImage(lvlFour, (getWidth() - lvlFour.getWidth()) / 2 + 150, (getHeight() - lvlFour.getHeight()) / 2 + 65);
+        addObject(new LevelNum("lock.png") {{
+            getImage().scale(50, 50); // Scale the image in one line
+        }}, 450, 265);
         
         setBackground(background);
         
