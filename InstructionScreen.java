@@ -33,14 +33,13 @@ public class InstructionScreen extends World
         setBackground(background);
         //button that proceeds to stage
         addObject(new Button(this:: goScreenSelect, "MenuButton.png", "MenuButton.png"), 80,30);
-        buttons();
+        
+        Button nextButton = new Button(this::nextInstruction, "nextButton.png", "nextButton.png");
+        addObject(nextButton, 550, 360);
     }
     
     public void buttons()
     {
-        Button nextButton = new Button(this::nextInstruction, "nextButton.png", "nextButton.png");
-        addObject(nextButton, 550, 360);
-        
         Button prevButton = new Button(this::prevInstruction, "backButton.png", "backButton.png");
         addObject(prevButton, 50, 360);
     }
