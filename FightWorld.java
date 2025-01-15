@@ -84,7 +84,10 @@ public class FightWorld extends World
             
             if (kisukeEnemy.getHealth() <= 0) 
             {
-                clearLevel(1); // Mark level 1 as cleared
+                if (!LevelClearManager.isLevelClear(1)) {
+                    LevelClearManager.setLevelClear(1, true); // Set the level as cleared
+                    clearLevel(1); // Mark the level as cleared in game
+                }
             }
             
         }
@@ -170,7 +173,6 @@ public class FightWorld extends World
         objectsSpawned = true; // Set the flag to prevent re-spawning
     }
     
-    
     public void startFadeOut() 
     {
         if (!isFading) 
@@ -181,7 +183,6 @@ public class FightWorld extends World
             fadeOverlay.startFadeOut();
         }
     }
-
 
     private void clearLevel(int level)
     {

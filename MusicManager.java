@@ -13,6 +13,22 @@ public class MusicManager
     public static GreenfootSound fourMusicTwo = new GreenfootSound("stage4PhaseTwo.mp3");
     public static GreenfootSound endingTheme = new GreenfootSound("endingSong.mp3");
     
+    public static void playEndingTheme()
+    {
+        endingTheme.setVolume(40);
+        if(!endingTheme.isPlaying())
+        {
+            endingTheme.playLoop();
+        }
+    }
+    
+    public static void stopEndingTheme()
+    {
+        if(endingTheme.isPlaying())
+        {
+            endingTheme.pause();
+        }
+    }
     
     public static void playFourMusicTwo()
     {
