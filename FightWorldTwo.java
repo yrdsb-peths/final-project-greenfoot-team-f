@@ -70,7 +70,13 @@ public class FightWorldTwo extends World
         if (enemyHealthBar != null && ichigoEnemy != null) 
         {
             enemyHealthBar.setHealth(ichigoEnemy.getHealth());
+            
+            if (ichigoEnemy.getHealth() <= 0) 
+            {
+                clearLevel(2); // Mark level 2 as cleared
+            }
         }
+        
     }
     
     private void playCountdownAnimation()
@@ -164,6 +170,11 @@ public class FightWorldTwo extends World
             addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
             fadeOverlay.startFadeOut();
         }
+    }
+    
+    private void clearLevel(int level)
+    {
+        HighScoreManager.updateHighScore("LEVEL", level); // Update high score for player
     }
     
 }

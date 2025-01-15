@@ -71,6 +71,11 @@ public class FightWorldThree extends World
         if (enemyHealthBar != null && kennyEnemy != null) 
         {
             enemyHealthBar.setHealth(kennyEnemy.getHealth());
+            
+            if (kennyEnemy.getHealth() <= 0) 
+            {
+                clearLevel(3); // Mark level 3 as cleared
+            }
         }
     }
 
@@ -163,5 +168,10 @@ public class FightWorldThree extends World
             addObject(fadeOverlay, getWidth() / 2, getHeight() / 2);
             fadeOverlay.startFadeOut();
         }
+    }
+    
+    private void clearLevel(int level)
+    {
+        HighScoreManager.updateHighScore("LEVEL", level); // Update high score for player
     }
 }

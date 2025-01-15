@@ -81,6 +81,12 @@ public class FightWorld extends World
         if (enemyHealthBar != null && kisukeEnemy != null) 
         {
             enemyHealthBar.setHealth(kisukeEnemy.getHealth());
+            
+            if (kisukeEnemy.getHealth() <= 0) 
+            {
+                clearLevel(1); // Mark level 1 as cleared
+            }
+            
         }
     }
     
@@ -177,7 +183,10 @@ public class FightWorld extends World
     }
 
 
-
+    private void clearLevel(int level)
+    {
+        HighScoreManager.updateHighScore("LEVEL", level); // Update high score for player
+    }
 
     
 }
