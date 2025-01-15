@@ -23,6 +23,8 @@ public class ScreenSelect extends World
         
         addObject(new LevelNum("lockLevelFour.png"), 450,200);
         
+        addObject(new LevelNum("selectALevel.png"), 300,90);
+        
         // Dynamically add buttons for cleared levels
         if (LevelClearManager.isLevelCleared(1))
         {
