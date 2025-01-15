@@ -23,25 +23,34 @@ public class ScreenSelect extends World
         
         background = new GreenfootImage("instructionScreenBgBleach.png");
         
-        addObject(new Button(this:: goLvlOne, "lvlOne.png", "lvlOne.png"), 150,265);
-       
-        addObject(new Button(this:: goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 265);
+        addObject(new Button(this:: goLvlOne, "lvlOne.png", "lvlOne.png"), 150,200);
         
-        addObject(new Button(this:: goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 265);
-
-        addObject(new Button(this:: goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 265);
-            
+        if (LevelClearManager.isLevelClear(1)) 
+        {
+            addObject(new Button(this:: goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 200);
+        }
+        
+        if (LevelClearManager.isLevelClear(2)) 
+        {
+            addObject(new Button(this:: goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 200);
+        }
+    
+        if (LevelClearManager.isLevelClear(3)) 
+        {
+            addObject(new Button(this:: goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 200);
+        }
+                
         setBackground(background);
         
         scrollX = 0;
         counter = 0;
         // Instruction button
-        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
-        addObject(new Button(this::goHighScore, "highScoreButton.png", "highScoreButton.png"), 499,350);
+        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 101,371);
+        addObject(new Button(this::goHighScore, "highScoreButton.png", "highScoreButton.png"), 499,371);
 
         addObject(new Button(this:: goMenu, "backButton.png", "backButton.png"), 35,51);
         //Fight/start game button
-        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,180);
+        //addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,180);
     }
     
     public void goMenu()

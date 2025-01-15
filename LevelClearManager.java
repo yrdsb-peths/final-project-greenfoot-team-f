@@ -6,15 +6,21 @@
  */
 public class LevelClearManager  
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class LevelClearManager
-     */
-    public LevelClearManager()
+    private static boolean[] isLevelClear = new boolean[4];
+    
+    public static boolean isLevelClear(int level) 
     {
-        
+        if (level >= 0 && level < isLevelClear.length) {
+            return isLevelClear[level];
+        }
+        return false;
     }
 
+    public static void setLevelClear(int level, boolean isClear) 
+    {
+        if(level >= 0 && level < isLevelClear.length)
+        {
+            isLevelClear[level] = isClear;
+        }
+    }
 }
