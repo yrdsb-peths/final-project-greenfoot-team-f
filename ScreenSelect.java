@@ -23,6 +23,22 @@ public class ScreenSelect extends World
         
         background = new GreenfootImage("instructionScreenBgBleach.png");
         
+        addObject(new LevelNum("lvlOne.png"), 150,265);
+       
+        addObject(new LevelNum("lock.png") {{
+            getImage().scale(50, 50); // Scale the image in one line
+        }}, 250, 265);
+    
+        addObject(new LevelNum("lock.png") {{
+            getImage().scale(50, 50); // Scale the image in one line
+        }}, 350, 265);
+        
+        addObject(new LevelNum("lock.png") {{
+            getImage().scale(50, 50); // Scale the image in one line
+        }}, 450, 265);
+        
+        setBackground(background);
+        
         scrollX = 0;
         counter = 0;
         // Instruction button
@@ -31,7 +47,7 @@ public class ScreenSelect extends World
 
         addObject(new Button(this:: goMenu, "backButton.png", "backButton.png"), 35,51);
         //Fight/start game button
-        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,190);
+        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,180);
     }
     
     public void goMenu()

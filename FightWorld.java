@@ -11,6 +11,7 @@ public class FightWorld extends World
     private GreenfootSound backgroundMusic;
     private int countdownFrame = 0;
     private boolean animationFinished = false;
+    private boolean isLevelComplete = false;
     
     private GreenfootSound countdownSfx;
     
@@ -85,6 +86,7 @@ public class FightWorld extends World
             if (kisukeEnemy.getHealth() <= 0) 
             {
                 clearLevel(1); // Mark level 1 as cleared
+                isLevelComplete = true;
             }
             
         }
