@@ -74,7 +74,10 @@ public class FightWorldThree extends World
             
             if (kennyEnemy.getHealth() <= 0) 
             {
-                clearLevel(3); // Mark level 3 as cleared
+                if (!LevelClearManager.isLevelClear(3)) {
+                    LevelClearManager.setLevelClear(3, true); // Set the level as cleared
+                    clearLevel(3); // Mark the level as cleared in game
+                }
             }
         }
     }

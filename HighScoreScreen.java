@@ -16,6 +16,9 @@ public class HighScoreScreen extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        setBackground(new GreenfootImage("HighScore_1.png"));
+        
         showText("Highest Level Reached: " + level, getWidth() / 2, getHeight() / 2);
         
         addObject(new Button(this:: goScreenSelect, "backButton.png", "backButton.png"),41,30);
