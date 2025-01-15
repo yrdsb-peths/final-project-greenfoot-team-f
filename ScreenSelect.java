@@ -27,6 +27,8 @@ public class ScreenSelect extends World
         counter = 0;
         // Instruction button
         addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,371);
+        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499,350);
+
         addObject(new Button(this:: goMenu, "backButton.png", "backButton.png"), 35,51);
         //Fight/start game button
         addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,190);
