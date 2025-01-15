@@ -318,7 +318,9 @@ public class HitsuPhaseTwo extends Actor implements Enemy
                 FightWorldFive currentWorld = (FightWorldFive) getWorld();
                 currentWorld.startFadeOut(); // Use FightWorldFive's fade-out logic
             }
-    
+            
+            LevelClearManager.clearLevel(4);
+            
             // Remove HitsuPhaseTwo from the world
             getWorld().removeObject(this);
         }

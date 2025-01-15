@@ -338,7 +338,9 @@ public class Ichigo extends Actor implements Enemy
                 FightWorldTwo currentWorld = (FightWorldTwo) getWorld();
                 currentWorld.startFadeOut(); // Use FightWorldTwo's fade logic
             }
-    
+            
+            LevelClearManager.clearLevel(2);
+            
             // Remove Ichigo from the world
             getWorld().removeObject(this);
         }
