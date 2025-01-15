@@ -12,7 +12,7 @@ public class BarFrame extends Actor
     {
         //this is an actor class that contains the differnt health bar frames of both player and enemy
         GreenfootImage healthFrame = new GreenfootImage(imageName);
-        healthFrame.scale(250,70);
+        //healthFrame.scale(250,70);
         setImage(healthFrame); 
     }
     

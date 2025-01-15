@@ -28,7 +28,7 @@ public class HealthBar extends Actor
 
     private void updateImage()
     {
-        GreenfootImage image = new GreenfootImage(width - 30, height - 10);
+        GreenfootImage image = new GreenfootImage(width, height);
 
         // Draw background (black bar)
         image.setColor(backgroundColor);
