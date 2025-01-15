@@ -180,5 +180,17 @@ public class MusicManager
         }
     }
 
+    public static void stopAllMusic()
+    {
+        stopMenuMusic();
+        stopSelectMusic();
+        stopStageOneMusic();
+        stopLoseMusic();
+        stopTwoMusic();
+        stopThreeMusic();
+        stopFourMusic();
+        stopFourMusicTwo();
+    }
+    
 
 }

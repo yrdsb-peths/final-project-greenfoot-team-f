@@ -64,6 +64,14 @@ public class Projectile extends Actor
             return; 
         }
         
+        HitsuPhaseTwo hitsuTwo = (HitsuPhaseTwo) getOneIntersectingObject(HitsuPhaseTwo.class);
+        if(hitsuTwo != null)
+        {
+            hitsuTwo.takeDamage(10);
+            
+            getWorld().removeObject(this);
+            return;
+        }
         
         if (isAtEdge()) // Remove projectile if it goes off-screen
         {

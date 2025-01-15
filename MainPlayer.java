@@ -228,6 +228,7 @@ public class MainPlayer extends Actor
         health -= damage;
         if (health <= 0)
         {
+            MusicManager.stopAllMusic();
             health = 0;
             Greenfoot.setWorld(new GameOverScreen());
         }
