@@ -23,21 +23,21 @@ public class ScreenSelect extends World
         
         background = new GreenfootImage("instructionScreenBgBleach.png");
         
-        addObject(new Button(this:: goLvlOne, "lvlOne.png", "lvlOne.png"), 150,200);
+        addObject(new Button(this:: goLvlOne, "clearLevelOne.png", "clearLevelOne.png"), 150,200);
         
         if (LevelClearManager.isLevelClear(1)) 
         {
-            addObject(new Button(this:: goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 200);
+            addObject(new Button(this:: goLvlTwo, "clearLevelTwo.png", "clearLevelOne.png"), 250, 200);
         }
         
         if (LevelClearManager.isLevelClear(2)) 
         {
-            addObject(new Button(this:: goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 200);
+            addObject(new Button(this:: goLvlThree, "clearLevelThree.png", "clearLevelThree.png"), 350, 200);
         }
     
         if (LevelClearManager.isLevelClear(3)) 
         {
-            addObject(new Button(this:: goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 200);
+            addObject(new Button(this:: goLvlFour, "clearLevelThree.png", "clearLevelThree.png"), 450, 200);
         }
                 
         setBackground(background);
