@@ -37,17 +37,13 @@ public class InstructionScreen extends World
         Button nextButton = new Button(this::nextInstruction, "nextButton.png", "nextButton.png");
         addObject(nextButton, 550, 360);
     }
-    
-    public void buttons()
-    {
-        Button prevButton = new Button(this::prevInstruction, "backButton.png", "backButton.png");
-        addObject(prevButton, 50, 360);
-    }
-    
+
     public void nextInstruction()
     {
-        GreenfootImage background = new GreenfootImage("better.png");
+        removeObjects(getObjects(Button.class));
         
+        GreenfootImage background = new GreenfootImage("better.png");
+                
         GreenfootImage ichigoImage = new GreenfootImage("ichigoImage.png");
         ichigoImage.scale(700, 480);
         background.drawImage(ichigoImage, (getWidth() - ichigoImage.getWidth()) / 2 - 100, (getHeight() - ichigoImage.getHeight()) / 2 - 30);
@@ -57,11 +53,18 @@ public class InstructionScreen extends World
         instructionText2.setTransparency(230);
         background.drawImage(instructionText2, (getWidth() - instructionText2.getWidth()) / 2 + 170, (getHeight() - instructionText2.getHeight()) / 2);
         
+        addObject(new Button(this:: goScreenSelect, "MenuButton.png", "MenuButton.png"), 80,30);
+        
+        Button prevButton = new Button(this::prevInstruction, "backButton.png", "backButton.png");
+        addObject(prevButton, 50, 360);
+        
         setBackground(background);
     }
     
     public void prevInstruction()
     {
+        removeObjects(getObjects(Button.class));
+        
         GreenfootImage background = new GreenfootImage("better.png");
         
         GreenfootImage uryuImage = new GreenfootImage("uryuImage.png");
@@ -72,6 +75,11 @@ public class InstructionScreen extends World
         instructionText1.scale(300, 300);
         instructionText1.setTransparency(230);
         background.drawImage(instructionText1, (getWidth() - instructionText1.getWidth()) / 2 - 120, (getHeight() - instructionText1.getHeight()) / 2);
+        
+        addObject(new Button(this:: goScreenSelect, "MenuButton.png", "MenuButton.png"), 80,30);
+        
+        Button nextButton = new Button(this::nextInstruction, "nextButton.png", "nextButton.png");
+        addObject(nextButton, 550, 360);
         
         setBackground(background);
     }

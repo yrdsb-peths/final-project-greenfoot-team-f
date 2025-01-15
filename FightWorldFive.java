@@ -34,9 +34,12 @@ public class FightWorldFive extends World
 
         setBackground(background);
         
+        LevelNum levelNum = new LevelNum("levelFour.png");
+        addObject(levelNum, 300, 53);
+        
         prepare();
         
-        setPaintOrder(FadeOverlay.class, BarFrame.class, HealthBar.class);
+        setPaintOrder(FadeOverlay.class, LevelNum.class, BarFrame.class, LevelNum.class, HealthBar.class);
     }
 
     public void act()
