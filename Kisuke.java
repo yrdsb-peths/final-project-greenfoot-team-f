@@ -368,6 +368,7 @@ public class Kisuke extends Actor implements Enemy
                 currentWorld.startFadeOut(); // Use FightWorld's fade logic
             }
     
+            
             // Remove Kisuke from the world
             getWorld().removeObject(this);
         }
