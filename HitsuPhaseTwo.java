@@ -308,8 +308,20 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         if (health <= 0) 
         {
             health = 0;
-            MusicManager.stopFourMusicTwo(); 
+    
+            // Stop current stage music
+            MusicManager.stopFourMusicTwo();
+    
+            // Trigger the fade-out transition via the world
+            if (getWorld() instanceof FightWorldFive) 
+            {
+                FightWorldFive currentWorld = (FightWorldFive) getWorld();
+                currentWorld.startFadeOut(); // Use FightWorldFive's fade-out logic
+            }
+    
+            // Remove HitsuPhaseTwo from the world
             getWorld().removeObject(this);
         }
     }
+
 }
