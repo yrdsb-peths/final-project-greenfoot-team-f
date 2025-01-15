@@ -16,27 +16,31 @@ public class ScreenSelect extends World
         scrollX = 0;
         counter = 0;
     
-        addObject(new Button(this::goLvlOne, "lvlOne.png", "lvlOne.png"), 150, 265);
+        addObject(new Button(this::goLvlOne, "lvlOne.png", "lvlOne.png"), 150, 200);
     
         // Dynamically add buttons for cleared levels
         if (LevelClearManager.isLevelCleared(1))
         {
-            addObject(new Button(this::goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 265);
+            addObject(new Button(this::goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 200);
         }
+        
         if (LevelClearManager.isLevelCleared(2))
         {
-            addObject(new Button(this::goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 265);
+            addObject(new Button(this::goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 200);
         }
+        
         if (LevelClearManager.isLevelCleared(3))
         {
-            addObject(new Button(this::goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 265);
+            addObject(new Button(this::goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 200);
         }
     
-        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499, 371);
-        addObject(new Button(this::goHighScore, "highScoreButton.png", "highScoreButton.png"), 499, 350);
+        addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 101, 371);
+        
+        addObject(new Button(this::goHighScore, "highScoreButton.png", "highScoreButton.png"), 499, 371);
+        
         addObject(new Button(this::goMenu, "backButton.png", "backButton.png"), 35, 51);
+        
     }
-
 
     public void goMenu()
     {
