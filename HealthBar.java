@@ -34,7 +34,7 @@ public class HealthBar extends Actor
         image.setColor(backgroundColor);
         image.fillRect(0, 0, width, height);
 
-        // Draw foreground (red bar for health)
+        // Draw foreground (green bar for health)
         int healthWidth = (int) ((double) currentHealth / maxHealth * width);
         image.setColor(foregroundColor);
         if (leftToRight)

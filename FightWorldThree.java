@@ -29,6 +29,9 @@ public class FightWorldThree extends World
 
         GreenfootImage background = new GreenfootImage("stage3.png"); // Background for stage 3
         
+        GreenfootImage levelNum = new GreenfootImage("levelThree.png");
+        background.drawImage(levelNum, (getWidth() - levelNum.getWidth()) / 2, (getHeight() - levelNum.getHeight()) / 2 - 149);
+        
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
         countdownSfx.setVolume(100);
         countdownSfx.play();
@@ -99,6 +102,10 @@ public class FightWorldThree extends World
             GreenfootImage background = new GreenfootImage("stage3.png"); // Stage 3 background
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600, 400);
+            
+            LevelNum levelNum = new LevelNum("levelThree.png");
+            addObject(levelNum, 300, 53);
+            
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
                                  (getHeight() - countdownOverlay.getHeight()) / 2 + 20);

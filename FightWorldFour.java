@@ -99,6 +99,10 @@ public class FightWorldFour extends World
             GreenfootImage background = new GreenfootImage("stage_4.png"); // Stage 4 background
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600, 400);
+            
+            LevelNum levelNum = new LevelNum("levelFour.png");
+            addObject(levelNum, 300, 53);
+            
             background.drawImage(countdownOverlay, 
                                  (getWidth() - countdownOverlay.getWidth()) / 2, 
                                  (getHeight() - countdownOverlay.getHeight()) / 2 + 20);
