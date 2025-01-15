@@ -108,7 +108,7 @@ public class FightWorldTwo extends World
             GreenfootImage countdownOverlay = new GreenfootImage(fileName);
             countdownOverlay.scale(600, 400);
             
-            LevelNum levelNum = new LevelNum("levelTwo.png");
+            LevelNum levelNum = new LevelNum("lvlTwo.png");
             addObject(levelNum, 300, 53);
             
             background.drawImage(countdownOverlay, 

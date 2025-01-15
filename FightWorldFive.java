@@ -34,7 +34,7 @@ public class FightWorldFive extends World
 
         setBackground(background);
         
-        LevelNum levelNum = new LevelNum("levelFour.png");
+        LevelNum levelNum = new LevelNum("lvlFour.png");
         addObject(levelNum, 300, 53);
         
         prepare();
