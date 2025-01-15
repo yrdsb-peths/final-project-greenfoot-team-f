@@ -68,6 +68,7 @@ public class FightWorldFour extends World
         if (enemyHealthBar != null && hitsuEnemy != null) 
         {
             enemyHealthBar.setHealth(hitsuEnemy.getHealth());
+            
         }
     }
 
@@ -161,4 +162,5 @@ public class FightWorldFour extends World
             fadeOverlay.startFadeOut();
         }
     }
+    
 }

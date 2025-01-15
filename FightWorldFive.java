@@ -64,6 +64,11 @@ public class FightWorldFive extends World
         if (enemyHealthBar != null && hitsuPhaseTwoEnemy != null) 
         {
             enemyHealthBar.setHealth(hitsuPhaseTwoEnemy.getHealth());
+            
+            if (hitsuPhaseTwoEnemy.getHealth() <= 0) 
+            {
+                clearLevel(4); // Mark level 3 as cleared
+            }
         }
     }
 
@@ -153,4 +158,10 @@ public class FightWorldFive extends World
             fadeOverlay.startFadeOut();
         }
     }
+    
+    private void clearLevel(int level)
+    {
+        HighScoreManager.updateHighScore("LEVEL:", level); // Update high score for player
+    }
+    
 }
