@@ -38,7 +38,7 @@ public class FightWorldFour extends World
         
         prepare();
         
-        setPaintOrder(FadeOverlay.class, BarFrame.class, HealthBar.class);
+        setPaintOrder(FadeOverlay.class, LevelNum.class, BarFrame.class, HealthBar.class);
     }
 
     public void act()
