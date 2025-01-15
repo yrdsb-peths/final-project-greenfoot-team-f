@@ -11,6 +11,7 @@ public class MusicManager
     public static GreenfootSound threeMusic = new GreenfootSound("stage3MusicNew.mp3");
     public static GreenfootSound fourMusic = new GreenfootSound("stage4PhaseOneNew.mp3");
     public static GreenfootSound fourMusicTwo = new GreenfootSound("stage4PhaseTwo.mp3");
+    public static GreenfootSound endingTheme = new GreenfootSound("endingSong.mp3");
     
     
     public static void playFourMusicTwo()
