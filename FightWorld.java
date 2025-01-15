@@ -85,9 +85,10 @@ public class FightWorld extends World
             
             if (kisukeEnemy.getHealth() <= 0) 
             {
-                if (!LevelClearManager.isLevelClear(1)) {
-                    LevelClearManager.setLevelClear(1, true); // Set the level as cleared
-                    clearLevel(1); // Mark the level as cleared in game
+                if (!LevelClearManager.isLevelCleared(1)) // Fix method name
+                {
+                    LevelClearManager.clearLevel(1); // Correct method to set level as cleared
+                    clearLevel(1); // Mark the level as cleared in-game
                 }
             }
             

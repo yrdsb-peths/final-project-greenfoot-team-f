@@ -9,19 +9,16 @@ public class ScreenSelect extends World
     public ScreenSelect()
     {
         super(600, 400, 1);
-
+    
         background = new GreenfootImage("instructionScreenBgBleach.png");
         setBackground(background);
-        
-        // Reset cleared levels on game reset
-        LevelClearManager.resetLevels();
-        
+    
         scrollX = 0;
         counter = 0;
-
+    
         addObject(new Button(this::goLvlOne, "lvlOne.png", "lvlOne.png"), 150, 265);
-
-        // Add buttons dynamically for cleared levels
+    
+        // Dynamically add buttons for cleared levels
         if (LevelClearManager.isLevelCleared(1))
         {
             addObject(new Button(this::goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 265);
@@ -34,13 +31,12 @@ public class ScreenSelect extends World
         {
             addObject(new Button(this::goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 265);
         }
-
-        // Instruction button
+    
         addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 499, 371);
         addObject(new Button(this::goHighScore, "highScoreButton.png", "highScoreButton.png"), 499, 350);
-
         addObject(new Button(this::goMenu, "backButton.png", "backButton.png"), 35, 51);
     }
+
 
     public void goMenu()
     {
