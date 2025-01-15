@@ -23,20 +23,14 @@ public class ScreenSelect extends World
         
         background = new GreenfootImage("instructionScreenBgBleach.png");
         
-        addObject(new LevelNum("lvlOne.png"), 150,265);
+        addObject(new Button(this:: goLvlOne, "lvlOne.png", "lvlOne.png"), 150,265);
        
-        addObject(new LevelNum("lock.png") {{
-            getImage().scale(50, 50); // Scale the image in one line
-        }}, 250, 265);
-    
-        addObject(new LevelNum("lock.png") {{
-            getImage().scale(50, 50); // Scale the image in one line
-        }}, 350, 265);
+        addObject(new Button(this:: goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 265);
         
-        addObject(new LevelNum("lock.png") {{
-            getImage().scale(50, 50); // Scale the image in one line
-        }}, 450, 265);
-        
+        addObject(new Button(this:: goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 265);
+
+        addObject(new Button(this:: goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 265);
+            
         setBackground(background);
         
         scrollX = 0;
@@ -105,5 +99,25 @@ public class ScreenSelect extends World
     {
         MusicManager.stopMenuMusic(); 
         Greenfoot.setWorld(new FightWorld()); 
+    }
+    
+    private void goLvlOne()
+    {
+        Greenfoot.setWorld(new FightWorld());
+    }
+    
+    private void goLvlTwo()
+    {
+        Greenfoot.setWorld(new FightWorldTwo());
+    }
+    
+    private void goLvlThree()
+    {
+        Greenfoot.setWorld(new FightWorldThree());
+    }
+    
+    private void goLvlFour()
+    {
+        Greenfoot.setWorld(new FightWorldFour());
     }
 }
