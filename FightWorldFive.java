@@ -34,7 +34,7 @@ public class FightWorldFive extends World
 
         setBackground(background);
         
-        LevelNum levelNum = new LevelNum("lvlFour.png");
+        LevelNum levelNum = new LevelNum("finalLvl.png");
         addObject(levelNum, 300, 53);
         
         prepare();
@@ -44,6 +44,11 @@ public class FightWorldFive extends World
 
     public void act()
     {
+        if (isFading && fadeOverlay != null && fadeOverlay.isFadeComplete()) 
+        {
+            Greenfoot.setWorld(new EndingScreen()); // Transition to EndingScreen when fading is complete
+        }
+        
         
         if (!animationFinished) 
         {
