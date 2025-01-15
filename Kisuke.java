@@ -41,6 +41,7 @@ public class Kisuke extends Actor implements Enemy
     private int health = 100; // enemy health
     
     private GreenfootSound attackSound = new GreenfootSound("kisukeAttack2.mp3");
+    private GreenfootSound introSound = new GreenfootSound("kisukeIntro.mp3"); 
     
     private boolean isFading = false;
     private int fadeOpacity = 0;
@@ -57,6 +58,7 @@ public class Kisuke extends Actor implements Enemy
         attackFrames = loadFrames("kisukeAttack_", 10);
         jumpFrames = loadFrames("kisukeJump_", 7);
         
+        introSound.play(); 
         attackSound.setVolume(50);
         
         setImage(idleFrames[0]);  // Set initial image to the first idle frame
@@ -367,7 +369,8 @@ public class Kisuke extends Actor implements Enemy
                 FightWorld currentWorld = (FightWorld) getWorld();
                 currentWorld.startFadeOut(); // Use FightWorld's fade logic
             }
-    
+            
+            LevelClearManager.clearLevel(1);
             
             // Remove Kisuke from the world
             getWorld().removeObject(this);

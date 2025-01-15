@@ -1,26 +1,21 @@
-/**
- * Write a description of class LevelClearManager here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class LevelClearManager  
+import java.util.HashSet;
+
+public class LevelClearManager
 {
-    private static boolean[] isLevelClear = new boolean[4];
-    
-    public static boolean isLevelClear(int level) 
+    private static HashSet<Integer> clearedLevels = new HashSet<>();
+
+    public static void clearLevel(int level)
     {
-        if (level >= 0 && level < isLevelClear.length) {
-            return isLevelClear[level];
-        }
-        return false;
+        clearedLevels.add(level);
     }
 
-    public static void setLevelClear(int level, boolean isClear) 
+    public static boolean isLevelCleared(int level)
     {
-        if(level >= 0 && level < isLevelClear.length)
-        {
-            isLevelClear[level] = isClear;
-        }
+        return clearedLevels.contains(level);
+    }
+
+    public static void resetLevels()
+    {
+        clearedLevels.clear(); // Clear all cleared levels
     }
 }
