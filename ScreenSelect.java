@@ -15,6 +15,8 @@ public class ScreenSelect extends World
         
         addObject(new Button(this:: goLvlOne, "clearLevelOne.png", "clearLevelOne.png"), 150,200);
         
+        addObject(new Button(this:: goEndingScreen, "viewEnding.png", "viewEnding.png"), 300, 350);
+        
         addObject(new LevelNum("lockLevelTwo.png"), 250,200);
         
         addObject(new LevelNum("lockLevelThree.png"), 350,200);
@@ -117,6 +119,12 @@ public class ScreenSelect extends World
     {
         MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new FightWorldFour());
+    }
+    
+    private void goEndingScreen()
+    {
+        MusicManager.pauseMenuMusic();
+        Greenfoot.setWorld(new EndingScreen());
     }
 }
 
