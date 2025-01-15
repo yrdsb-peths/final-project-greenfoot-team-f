@@ -9,15 +9,32 @@ public class MusicManager
     public static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");
     public static GreenfootSound twoMusic  = new GreenfootSound("stage2music.mp3");
     public static GreenfootSound threeMusic = new GreenfootSound("stage3MusicNew.mp3");
-    public static GreenfootSound fourMusic = new GreenfootSound("stage4PhaseOne.mp3");
+    public static GreenfootSound fourMusic = new GreenfootSound("stage4PhaseOneNew.mp3");
     public static GreenfootSound fourMusicTwo = new GreenfootSound("stage4PhaseTwo.mp3");
-
+    
+    
+    public static void playFourMusicTwo()
+    {
+        fourMusicTwo.setVolume(60);
+        if(!fourMusicTwo.isPlaying())
+        {
+            fourMusicTwo.playLoop();
+        }
+    }
+    
+    public static void stopFourMusicTwo()
+    {
+        if(fourMusicTwo.isPlaying())
+        {
+            fourMusicTwo.pause();
+        }
+    }
     
     public static void playFourMusic()
     {
         if(!fourMusic.isPlaying()) 
         {
-            fourMusic.setVolume(80); 
+            fourMusic.setVolume(60); 
             fourMusic.playLoop();
         }
     }

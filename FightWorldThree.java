@@ -46,7 +46,7 @@ public class FightWorldThree extends World
     {
         if (isFading && fadeOverlay != null && fadeOverlay.isFadeComplete()) 
         {
-            // Add logic for transition to the next stage/world if needed
+            Greenfoot.setWorld(new FightWorldFour());
         }
         
         if (!animationFinished) 

@@ -45,7 +45,8 @@ public class FightWorldFour extends World
     {
         if (isFading && fadeOverlay != null && fadeOverlay.isFadeComplete()) 
         {
-            // Add logic for transition to the next stage/world if needed
+            // Transition to PhaseTwoTransition when the fade-out is complete
+            Greenfoot.setWorld(new PhaseTwoTransition());
         }
         
         if (!animationFinished) 

@@ -1,13 +1,13 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class Hitsu extends Actor implements Enemy 
+public class HitsuPhaseTwo extends Actor implements Enemy 
 {
     private final int gravity = 1; // Gravity value for downward acceleration
     private int velocity = 0; // Current vertical velocity
-    private boolean isJumping = false; // Indicates if Hitsu is currently jumping
+    private boolean isJumping = false; // Indicates if HitsuPhaseTwo is currently jumping
     private int jumpFrameIndex = 0; // Tracks the current frame of jump animation
 
-    private int speed = 1; // Movement speed
+    private int speed = 2; // Movement speed
     private int attackCooldown = 0; // Cooldown for attacks
     private int jumpCooldown = 0; // Cooldown for jumps
 
@@ -33,20 +33,19 @@ public class Hitsu extends Actor implements Enemy
     private boolean isIdle = false;
 
     private MainPlayer player;
-    private int health = 100;
+    private int health = 120; // Increased health for Phase Two
 
-    private GreenfootSound attackSound = new GreenfootSound("hitsuAttack.mp3");
-    private static GreenfootSound awakenSound = new GreenfootSound("newAwakenSound.mp3");
+    private GreenfootSound attackSound = new GreenfootSound("hitsuAttackTwo.mp3");
 
-    public Hitsu(MainPlayer player) 
+    public HitsuPhaseTwo(MainPlayer player) 
     {
         this.player = player;
 
-        // Load sprites
-        idleFrames = loadFrames("hitsuIdle_", 6); // 6 frames (00 to 05)
-        walkFrames = loadFrames("hitsuRun_", 6); // 6 frames (00 to 05)
-        attackFrames = loadFrames("hitsuAttackNew_", 10); // 10 frames (00 to 09)
-        jumpFrames = loadFrames("hitsuJump_", 7); // 7 frames (00 to 06)
+        // Load sprites for Phase Two
+        idleFrames = loadFrames("hitsuIdleTwo_", 11); // 11 frames (00 to 10)
+        walkFrames = loadFrames("hitsuRunTwo_", 6);  // 6 frames (00 to 05)
+        attackFrames = loadFrames("hitsuAttackTwo_", 9); // 9 frames (00 to 08)
+        jumpFrames = loadFrames("hitsuJumpTwo_", 7);  // 7 frames (00 to 06)
 
         attackSound.setVolume(80);
 
@@ -203,7 +202,7 @@ public class Hitsu extends Actor implements Enemy
             x -= 40;
         }
 
-        EnemyProjectile projectile = new EnemyProjectile("hitsuProjectileOne.png", facingRight, 25);
+        EnemyProjectile projectile = new EnemyProjectile("hitsuProjectileTwo.png", facingRight, 30);
         attackSound.play();
         getWorld().addObject(projectile, x, y);
     }
@@ -309,20 +308,7 @@ public class Hitsu extends Actor implements Enemy
         if (health <= 0) 
         {
             health = 0;
-    
-            // Stop the current stage music
-            MusicManager.stopFourMusic(); // Replace with the correct method for stage four music
-            awakenSound.play();
-            // Trigger the fade-out transition via the world
-            if (getWorld() instanceof FightWorldFour) 
-            {
-                FightWorldFour currentWorld = (FightWorldFour) getWorld();
-                currentWorld.startFadeOut(); // Use FightWorldFour's fade logic
-            }
-    
-            // Remove Hitsu from the world
             getWorld().removeObject(this);
         }
     }
-
 }
