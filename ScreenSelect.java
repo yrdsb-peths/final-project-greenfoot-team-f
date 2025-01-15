@@ -23,6 +23,24 @@ public class ScreenSelect extends World
         
         background = new GreenfootImage("instructionScreenBgBleach.png");
         
+        GreenfootImage lvlOne = new GreenfootImage("lock.png");
+        lvlOne.scale(50,50);
+        background.drawImage(lvlOne, (getWidth() - lvlOne.getWidth()) / 2 - 150, (getHeight() - lvlOne.getHeight()) / 2 + 65);
+        
+        GreenfootImage lvlTwo = new GreenfootImage("lock.png");
+        lvlTwo.scale(50,50);
+        background.drawImage(lvlTwo, (getWidth() - lvlTwo.getWidth()) / 2 - 50, (getHeight() - lvlTwo.getHeight()) / 2 + 65);
+        
+        GreenfootImage lvlThree = new GreenfootImage("lock.png");
+        lvlThree.scale(50,50);
+        background.drawImage(lvlThree, (getWidth() - lvlThree.getWidth()) / 2 + 50, (getHeight() - lvlThree.getHeight()) / 2 + 65);
+        
+        GreenfootImage lvlFour = new GreenfootImage("lock.png");
+        lvlFour.scale(50,50);
+        background.drawImage(lvlFour, (getWidth() - lvlFour.getWidth()) / 2 + 150, (getHeight() - lvlFour.getHeight()) / 2 + 65);
+        
+        setBackground(background);
+        
         scrollX = 0;
         counter = 0;
         // Instruction button
@@ -31,7 +49,7 @@ public class ScreenSelect extends World
 
         addObject(new Button(this:: goMenu, "backButton.png", "backButton.png"), 35,51);
         //Fight/start game button
-        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,190);
+        addObject(new Button(this:: goFightStage, "fight.png", "fight.png"), 310,180);
     }
     
     public void goMenu()
