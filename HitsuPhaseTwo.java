@@ -7,7 +7,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
     private boolean isJumping = false; // Indicates if HitsuPhaseTwo is currently jumping
     private int jumpFrameIndex = 0; // Tracks the current frame of jump animation
 
-    private int speed = 2; // Movement speed
+    private int speed = 1; // Movement speed
     private int attackCooldown = 0; // Cooldown for attacks
     private int jumpCooldown = 0; // Cooldown for jumps
 
@@ -35,7 +35,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
     private MainPlayer player;
     private int health = 120; // Increased health for Phase Two
 
-    private GreenfootSound attackSound = new GreenfootSound("hitsuAttackTwo.mp3");
+    private GreenfootSound attackSound = new GreenfootSound("hitsuAttack.mp3");
 
     public HitsuPhaseTwo(MainPlayer player) 
     {
@@ -308,6 +308,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         if (health <= 0) 
         {
             health = 0;
+            MusicManager.stopFourMusicTwo(); 
             getWorld().removeObject(this);
         }
     }
