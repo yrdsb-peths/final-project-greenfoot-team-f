@@ -45,6 +45,7 @@ public class FightWorld extends World
 
         setBackground(background);
         
+        MusicManager.stopAllMusic(); 
         MusicManager.playStageOneMusic();
         
         fadeOverlay = new FadeOverlay();

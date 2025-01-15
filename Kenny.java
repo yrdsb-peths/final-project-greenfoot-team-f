@@ -337,6 +337,8 @@ public class Kenny extends Actor implements Enemy
                 FightWorldThree currentWorld = (FightWorldThree) getWorld();
                 currentWorld.startFadeOut(); // Use FightWorldThree's fade logic
             }
+            
+            LevelClearManager.clearLevel(3);
     
             // Remove Kenny from the world
             getWorld().removeObject(this);

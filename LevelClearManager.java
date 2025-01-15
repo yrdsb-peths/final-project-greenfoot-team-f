@@ -1,20 +1,21 @@
-/**
- * Write a description of class LevelClearManager here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class LevelClearManager  
-{
-    // instance variables - replace the example below with your own
-    private int x;
+import java.util.HashSet;
 
-    /**
-     * Constructor for objects of class LevelClearManager
-     */
-    public LevelClearManager()
+public class LevelClearManager
+{
+    private static HashSet<Integer> clearedLevels = new HashSet<>();
+
+    public static void clearLevel(int level)
     {
-        
+        clearedLevels.add(level);
     }
 
+    public static boolean isLevelCleared(int level)
+    {
+        return clearedLevels.contains(level);
+    }
+
+    public static void resetLevels()
+    {
+        clearedLevels.clear(); // Clear all cleared levels
+    }
 }
