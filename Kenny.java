@@ -40,6 +40,7 @@ public class Kenny extends Actor implements Enemy
     private int health = 100; // enemy health
     
     private GreenfootSound attackSound = new GreenfootSound("kennyAttack.mp3");  // Change sound if necessary
+    private GreenfootSound introSound = new GreenfootSound("kennyIntro.mp3"); 
     
     private boolean isFading = false;
     
@@ -53,6 +54,7 @@ public class Kenny extends Actor implements Enemy
         attackFrames = loadFrames("kennyAttack_", 10);  // 10 frames (00 to 09)
         jumpFrames = loadFrames("kennyJump_", 7);  // 7 frames (00 to 06)
         
+        introSound.play(); 
         attackSound.setVolume(80);
         
         setImage(idleFrames[0]);  // Set initial image to the first idle frame
