@@ -41,6 +41,8 @@ public class Kenny extends Actor implements Enemy
     
     private GreenfootSound attackSound = new GreenfootSound("kennyAttack.mp3");  // Change sound if necessary
     
+    private boolean isFading = false;
+    
     public Kenny(MainPlayer player) 
     {
         this.player = player;
@@ -213,7 +215,7 @@ public class Kenny extends Actor implements Enemy
         }
 
         // Create and add the projectile to the world
-        EnemyProjectile projectile = new EnemyProjectile("kennyProjectile_01.png", facingRight, 25);
+        EnemyProjectile projectile = new EnemyProjectile("kennyProjectile_01.png", facingRight, 20);
         attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
@@ -321,11 +323,24 @@ public class Kenny extends Actor implements Enemy
     public void takeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health <= 0 && !isFading)
         {
-            health = 0;
-            MusicManager.stopThreeMusic();
+            health = 0; // Ensure health doesn't go below zero
+            isFading = true;
+    
+            // Stop the current stage music
+            MusicManager.stopThreeMusic(); // Replace with the correct method for stage three
+    
+            // Trigger the fade-out transition via the world
+            if (getWorld() instanceof FightWorldThree)
+            {
+                FightWorldThree currentWorld = (FightWorldThree) getWorld();
+                currentWorld.startFadeOut(); // Use FightWorldThree's fade logic
+            }
+    
+            // Remove Kenny from the world
             getWorld().removeObject(this);
         }
     }
+
 }

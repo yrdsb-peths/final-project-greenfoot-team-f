@@ -55,6 +55,16 @@ public class Projectile extends Actor
             
         }
         
+        Hitsu hitsu = (Hitsu) getOneIntersectingObject(Hitsu.class);
+        if(hitsu != null)
+        {
+            hitsu.takeDamage(10); 
+            
+            getWorld().removeObject(this);
+            return; 
+        }
+        
+        
         if (isAtEdge()) // Remove projectile if it goes off-screen
         {
             getWorld().removeObject(this);
