@@ -174,7 +174,7 @@ public class FightWorldTwo extends World
     
     private void clearLevel(int level)
     {
-        HighScoreManager.updateHighScore("LEVEL:", level); // Update high score for player
+        HighScoreManager.updateHighScore("LEVEL", level); // Update high score for player
     }
     
 }
