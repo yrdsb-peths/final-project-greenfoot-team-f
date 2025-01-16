@@ -25,26 +25,32 @@
 
 # Additional information (features)
 Ending screen
-  1. Click the `view ending` button if the bosses are too hard to beat.
+   
+   1. Click the view ending button if the bosses are too hard to beat.
 
 Gameplay
-  2. A wide variety of music and sound effects
    
+   2. A wide variety of music and sound effects
+
 
 UI (User Interface)
-  1. Health bars are included
-  2. 
+   
+   3. Health bars are included
+   4. Level indicator
 
 Music Manager
-  1. The MusicMManager is a separate class that manages all in-game music.
-  2. It uses methods like .playLoop or .setVolume
+
+   5.The MusicManager  is a separate class that manages all in-game music.
+   6.it uses methods like .playLoop or .setVolume
 
 Buttons
-  1. This object is used mostly before and after the game's content (before the game        starts or when the game is complete).
-  2. The button plays a sound effect when clicked.
-  3. Button increases in size when hovered over
-  4. public Button (Runnable action, String imageName, String hoverImgName)
+   
+   7. This object is used mostly before and after the game's content (before the game        starts or when the game is complete).
+   8. The button plays a sound effect when clicked.
+   9. The button increases in size when hovered over.
+   10. public Button (Runnable action, String imageName, String hoverImgName)
 
 Scrolling background
-  1. For the background image of ScreenSelect, a scrolling background is used.
+   
+   11. For the background image of ScreenSelect, a scrolling background is used.
 
