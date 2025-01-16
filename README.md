@@ -3,7 +3,7 @@
 2. Scarlett Ho
 3. Nicholas Chau
 4. Karthik Raveeswaran
-5. 
+   
 # How the concept of "Levels" was used
 * The concept of levels was used from the main character's progression, defeating each enemy to reach his goal.
 * Enemies also get progressively harder, and each enemy has a unique trait.
