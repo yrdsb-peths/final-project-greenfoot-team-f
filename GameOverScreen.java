@@ -36,7 +36,7 @@ public class GameOverScreen extends World
     {
         MusicManager.stopLoseMusic(); 
         MusicManager.playMenuMusic(); 
-        Greenfoot.setWorld(new MenuScreen());
+        Greenfoot.setWorld(new ScreenSelect());
     }
 
     private void goFightStage()
