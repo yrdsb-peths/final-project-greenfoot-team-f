@@ -2,18 +2,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class MainPlayer extends Actor
 {
+    // Gravity value applied to simulate falling
     private final int gravity = 1;
     private int velocity;
 
+    // Animation frame arrays
     private GreenfootImage[] idleFrames;
     private GreenfootImage[] runFrames;
     private GreenfootImage[] jumpFrames;
     private GreenfootImage[] attackFrames;
 
-    private int currentFrame;
-    private int animationCounter;
+    private int currentFrame; // Tracks the current frame for animation
+    private int animationCounter; // Controls the speed of animation
 
-    private boolean facingRight;
+    private boolean facingRight; // Tracks the direction the player is facing
 
     // Attack animation variables
     private boolean isAttacking = false;
@@ -25,12 +27,14 @@ public class MainPlayer extends Actor
     
     private int health = 100; //PLAYER HEALTH *****
     
+    // Constructor to initialize player state and load animations
     public MainPlayer()
     {
         velocity = 0;
         currentFrame = 0;
         animationCounter = 0;
 
+        //Load animation frames for various states
         idleFrames = loadFrames("playerIdle_", 4);
         runFrames = loadFrames("run_", 4);
         jumpFrames = loadFrames("jump_", 6);
@@ -40,12 +44,13 @@ public class MainPlayer extends Actor
         setImage(idleFrames[0]);
     }
 
+    // Act method is called every frame
     public void act()
     {
         fall();
         if (Greenfoot.isKeyDown("space") && isOnSolidGround())
         {
-            jump();
+            jump(); // Initiate a jump if space is pressed and on solid ground
             Greenfoot.playSound("jumpSfx.mp3");
         }
 
@@ -53,6 +58,7 @@ public class MainPlayer extends Actor
         animate();
     }
 
+    // Loads animation frames into an array
     private GreenfootImage[] loadFrames(String baseName, int count)
     {
         GreenfootImage[] frames = new GreenfootImage[count];
@@ -63,6 +69,7 @@ public class MainPlayer extends Actor
         return frames;
     }
 
+    // Handles the player's jump logic
     private void jump()
     {
         velocity = -18;
@@ -70,9 +77,10 @@ public class MainPlayer extends Actor
         jumpFrameIndex = 0;
     }
     
+    // Handles falling logic with gravity
     public void fall()
     {
-        setLocation(getX(), getY() + velocity);
+        setLocation(getX(), getY() + velocity); // Update the player's vertical position
 
         if (isOnSolidGround())
         {
@@ -84,10 +92,11 @@ public class MainPlayer extends Actor
         }
     }
     
+    // Handles horizontal movement and direction changes
     public void move()
     {
-        int y = getY();
-        int x = getX();
+        int y = getY();// Keep the same vertical position
+        int x = getX(); // Get the current horizontal position
 
         if (Greenfoot.isKeyDown("a")) // Move left
         {
@@ -107,9 +116,10 @@ public class MainPlayer extends Actor
             }
         }
 
-        setLocation(x, y);
+        setLocation(x, y); // Update the player's position
     }
 
+    // Checks if the player is standing on solid ground
     public boolean isOnSolidGround()
     {
         int imageWidth = getImage().getWidth();
@@ -134,11 +144,12 @@ public class MainPlayer extends Actor
         return false;
     }
 
-    
+    // Handles all animations for the player
     private void animate()
     {
         animationCounter++;
 
+        // Handle attack animation
         if (Greenfoot.isKeyDown("p") && !isAttacking)
         {
             isAttacking = true;
@@ -162,6 +173,7 @@ public class MainPlayer extends Actor
                 animationCounter = 0;
             }
         }
+        // Handle jump animation
         else if (isJumping)
         {
             if (animationCounter >= 6)
@@ -185,7 +197,7 @@ public class MainPlayer extends Actor
                 animationCounter = 0;
             }
         }
-        else
+        else // Handle idle animation
         {
             if (animationCounter >= 6)
             {
@@ -196,6 +208,7 @@ public class MainPlayer extends Actor
         }
     }
 
+    // Flips a frame horizontally if the player is facing left
     private GreenfootImage getFlippedFrame(GreenfootImage frame)
     {
         GreenfootImage image = new GreenfootImage(frame);
@@ -206,6 +219,7 @@ public class MainPlayer extends Actor
         return image;
     }
 
+    // Fires a projectile from the player's position
     private void fireProjectile()
     {
         int x;
@@ -223,6 +237,7 @@ public class MainPlayer extends Actor
 
     }
     
+    // Reduces player's health and handles game over
     public void takeDamage(int damage)
     {
         health -= damage;

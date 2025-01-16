@@ -1,5 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * This is the ScreenSelect Class. Once the user clicks SPACE on MenuScreen,
+ * the user will be then introduced to different levels they can complete. 
+ * When level one is completed, level two will be unlocked, and so on.
+ * The user can also access HighScoreScreen and InstructionScreen.
+ */
 public class ScreenSelect extends World
 {
     private GreenfootImage background;
@@ -10,6 +16,7 @@ public class ScreenSelect extends World
     {
         super(600, 400, 1);
     
+        //Adding images and buttons to world.
         background = new GreenfootImage("instructionScreenBgBleach.png");
         setBackground(background);
         
@@ -74,6 +81,7 @@ public class ScreenSelect extends World
         scrollBackground();
     }
 
+    //To scroll the background visuals
     public void scrollBackground()
     {
         counter++;

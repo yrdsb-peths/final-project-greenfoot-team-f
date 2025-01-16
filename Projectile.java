@@ -37,6 +37,7 @@ public class Projectile extends Actor
             return; // Exit to prevent further execution
         }
         
+        // Collision detection with Ichigo
         Ichigo ichigo = (Ichigo) getOneIntersectingObject(Ichigo.class); 
         if(ichigo != null)
         {
@@ -45,6 +46,7 @@ public class Projectile extends Actor
             return;
         }
         
+        // Collision detection with Kenny
         Kenny kenny = (Kenny) getOneIntersectingObject(Kenny.class);
         if(kenny != null)
         {
@@ -55,6 +57,7 @@ public class Projectile extends Actor
             
         }
         
+        // Collision detection with Hitsu
         Hitsu hitsu = (Hitsu) getOneIntersectingObject(Hitsu.class);
         if(hitsu != null)
         {
@@ -64,6 +67,7 @@ public class Projectile extends Actor
             return; 
         }
         
+        // Collision detection with HitsuPhaseTwo
         HitsuPhaseTwo hitsuTwo = (HitsuPhaseTwo) getOneIntersectingObject(HitsuPhaseTwo.class);
         if(hitsuTwo != null)
         {
@@ -77,9 +81,7 @@ public class Projectile extends Actor
         {
             getWorld().removeObject(this);
         }
-        
-        
-        
+
     }
 
 }

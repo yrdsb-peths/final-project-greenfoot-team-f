@@ -11,14 +11,18 @@ public class Hitsu extends Actor implements Enemy
     private int attackCooldown = 0; // Cooldown for attacks
     private int jumpCooldown = 0; // Cooldown for jumps
 
+    //ArrayLists for frames
     private GreenfootImage[] idleFrames;
     private GreenfootImage[] walkFrames;
     private GreenfootImage[] attackFrames;
     private GreenfootImage[] jumpFrames;
+    
+    //Animation state tracking
     private int idleFrameIndex = 0;
     private int walkFrameIndex = 0;
     private int attackFrameIndex = 0;
 
+    //Animation speed and delay
     private int animationDelay = 0;
     private final int animationSpeed = 6;
 
@@ -27,7 +31,8 @@ public class Hitsu extends Actor implements Enemy
 
     private int idleCounter = 0;
     private final int idleDuration = 120;
-
+    
+    //Direction
     private boolean facingRight = false;
     private boolean isAttacking = false;
     private boolean isIdle = false;
@@ -53,6 +58,7 @@ public class Hitsu extends Actor implements Enemy
         setImage(idleFrames[0]); // Set initial image to the first idle frame
     }
 
+    //Controls for Character animation
     public void act() 
     {
         if (isJumping) 
@@ -82,28 +88,33 @@ public class Hitsu extends Actor implements Enemy
         }
     }
 
+    //Enter idle state and set a counter for its duration
     private void enterIdleState() 
     {
         isIdle = true;
         idleCounter = idleDuration;
     }
 
+    //Handles idle animation and state exit
     private void handleIdle() 
     {
         idleCounter--;
 
+        //Change frame at the animation speed
         if (idleCounter % animationSpeed == 0) 
         {
             idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
             setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
         }
 
+        //Exit idle state when counter reaches to 0
         if (idleCounter <= 0) 
         {
             isIdle = false;
         }
     }
 
+    //Load frames for animations based on a base name and count
     private GreenfootImage[] loadFrames(String baseName, int count) 
     {
         GreenfootImage[] frames = new GreenfootImage[count];
@@ -115,6 +126,7 @@ public class Hitsu extends Actor implements Enemy
         return frames;
     }
 
+    //Move Hitsu towards the player's position
     public void followPlayer() 
     {
         if (!isAttacking && !isJumping && !isIdle) 
@@ -135,6 +147,7 @@ public class Hitsu extends Actor implements Enemy
         }
     }
 
+    //Check if Hitsu should jump
     private void handleJump() 
     {
         if (!isJumping && jumpCooldown <= 0 && isOnSolidGround()) 
@@ -149,7 +162,8 @@ public class Hitsu extends Actor implements Enemy
             jumpCooldown--;
         }
     }
-
+    
+    //Trigger jump logic
     private void jump() 
     {
         velocity = -18;
@@ -158,6 +172,7 @@ public class Hitsu extends Actor implements Enemy
         jumpCooldown = 30;
     }
 
+    //Apply gravity
     private void fall() 
     {
         setLocation(getX(), getY() + velocity);
@@ -173,6 +188,7 @@ public class Hitsu extends Actor implements Enemy
         }
     }
 
+    //Handling attacks
     private void handleAttack() 
     {
         if (!isAttacking && attackCooldown <= 0) 
@@ -196,11 +212,11 @@ public class Hitsu extends Actor implements Enemy
 
         if (facingRight) 
         {
-            x += 40;
+            x += 40; //Offset for right-facing direction
         } 
         else 
         {
-            x -= 40;
+            x -= 40; //Offset for left-facing direction
         }
 
         EnemyProjectile projectile = new EnemyProjectile("hitsuProjectileOne.png", facingRight, 25);
@@ -208,6 +224,7 @@ public class Hitsu extends Actor implements Enemy
         getWorld().addObject(projectile, x, y);
     }
 
+    //Animate based on the current state
     private void animate() 
     {
         animationDelay++;
@@ -216,13 +233,14 @@ public class Hitsu extends Actor implements Enemy
         {
             if (isAttacking) 
             {
+                //Play attack animation
                 if (attackFrameIndex < attackFrames.length) 
                 {
                     setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
 
                     if (attackFrameIndex == 5) 
                     {
-                        performAttack();
+                        performAttack(); // Fire projectile mid-attack
                     }
 
                     attackFrameIndex++;
@@ -236,6 +254,7 @@ public class Hitsu extends Actor implements Enemy
             } 
             else if (isJumping) 
             {
+                //Play jump animation
                 if (jumpFrameIndex < jumpFrames.length) 
                 {
                     setImage(flipIfNeeded(jumpFrames[jumpFrameIndex]));
@@ -244,6 +263,7 @@ public class Hitsu extends Actor implements Enemy
             } 
             else if (Math.abs(player.getX() - getX()) > 5) 
             {
+                //Play walk animation if far from player
                 walkAnimationDelay++;
                 if (walkAnimationDelay >= walkAnimationSpeed) 
                 {
@@ -254,6 +274,7 @@ public class Hitsu extends Actor implements Enemy
             } 
             else 
             {
+                // Play idle animation if close to the player
                 idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
                 setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
             }
@@ -267,17 +288,19 @@ public class Hitsu extends Actor implements Enemy
         GreenfootImage image = new GreenfootImage(frame);
         if (!facingRight) 
         {
-            image.mirrorHorizontally();
+            image.mirrorHorizontally(); //Flip image
         }
         return image;
     }
-
+    
+    //Set direction and update image orientation
     public void setFacingRight(boolean facingRight) 
     {
         this.facingRight = facingRight;
         setImage(flipIfNeeded(getImage()));
     }
 
+    //Check if Hitsu is on the ground
     public boolean isOnSolidGround() 
     {
         int imageHeight = getImage().getHeight();
@@ -297,7 +320,8 @@ public class Hitsu extends Actor implements Enemy
 
         return false;
     }
-
+    
+    //Update health
     public int getHealth() 
     {
         return health;

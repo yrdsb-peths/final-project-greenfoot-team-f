@@ -12,13 +12,16 @@ public class FightWorldFour extends World
     private int delayCounter = 0; // Counter to implement the delay 
 
     private boolean objectsSpawned = false;
-
+    
+    // Keeps track of health bars
     private HealthBar playerHealthBar;
     private HealthBar enemyHealthBar;
 
+    //Characters
     private MainPlayer mainPlayer;
     private Hitsu hitsuEnemy;
 
+    //Transition
     private FadeOverlay fadeOverlay;
     private boolean isFading = false;
 
@@ -134,6 +137,7 @@ public class FightWorldFour extends World
         Platform platform2 = new Platform();
         addObject(platform2, 160, 240);
         
+        //Add bar frames
         BarFrame barBar = new BarFrame("healthFrame.png"); 
         addObject(barBar, 130, 48); 
         

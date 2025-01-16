@@ -14,12 +14,15 @@ public class FightWorldTwo extends World
     
     private boolean objectsSpawned = false;
     
+    // Keeps track of health bars
     private HealthBar playerHealthBar;
     private HealthBar enemyHealthBar;
     
+    //Characters
     private MainPlayer mainPlayer;
     private Ichigo ichigoEnemy;
     
+    //Transition
     private FadeOverlay fadeOverlay;
     private boolean isFading = false;
         

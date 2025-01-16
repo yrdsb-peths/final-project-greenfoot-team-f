@@ -1,11 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class GameCompleteScreen here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class GameCompleteScreen extends World
 {
     public GameCompleteScreen()
@@ -13,6 +7,7 @@ public class GameCompleteScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         
+        //Adding images to background
         GreenfootImage background = new GreenfootImage("stage_1alt.png");
         
         GreenfootImage gameOverImage = new GreenfootImage("levelComplete.png");
@@ -22,6 +17,7 @@ public class GameCompleteScreen extends World
 
         setBackground(background);
         
+        //Add buttons
         addObject(new Button(this::goScreenSelect, "MenuButton.png", "MenuButton.png"), 301,300);
         
         addObject(new Button(this:: goFightStage, "PlayAgain.png", "PlayAgain.png"), 301,250);
