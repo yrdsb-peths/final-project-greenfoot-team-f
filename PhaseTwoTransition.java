@@ -10,7 +10,6 @@ public class PhaseTwoTransition extends World
     private GreenfootImage currentImage; // Current image with applied alpha
     private int[] frameDurations = {120, 120, 180}; // Durations for each image in frames
     
-    
     public PhaseTwoTransition()
     {    
         super(600, 400, 1); // Create a new world with dimensions 600x400
@@ -57,9 +56,7 @@ public class PhaseTwoTransition extends World
         }
     }
 
-    /**
-     * Updates the background with the current image and alpha level.
-     */
+    //Updates the background with the current image and alpha level.
     private void updateBackground()
     {
         GreenfootImage fadedImage = new GreenfootImage(currentImage);

@@ -1,5 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * This is the MenuScreen. This screen is what the user will see first when
+ * they first press run. Pressing the SPACE bar will take you to the ScreenSelect world.
+ */
 public class MenuScreen extends World
 {
     private GreenfootImage pressSpaceImage; 

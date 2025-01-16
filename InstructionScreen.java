@@ -1,23 +1,22 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Stack;
 /**
- * Write a description of class InstructionScreen here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * This is the InstructionScreen. When the user clicks the instruction button,
+ * the screen switches to this screen and the user has access to how to play
+ * the game, tips on how to defeat enemies, and other useful information.
  */
 public class InstructionScreen extends World
 {
     private GreenfootImage background;
     private Stack<World> screenHistory; //Stack to keep track of screen history
-    /**
-     * Constructor for objects of class InstructionScreen.
-     * 
-     */
+    
+    //This is the starting screen the user will see once the instruction button is clicked.
     public InstructionScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
+        
+        //Adding images to background
         GreenfootImage background = new GreenfootImage("better.png");
         
         GreenfootImage uryuImage = new GreenfootImage("uryuImage.png");
@@ -37,10 +36,12 @@ public class InstructionScreen extends World
         addObject(nextButton, 550, 360);
     }
 
+    //This is the screen breakdown, it shows what represents what in the game.
     public void screenBreakdown()
     {
         removeObjects(getObjects(Button.class));
         
+        //Adding images to background.
         GreenfootImage background = new GreenfootImage("better.png");
                 
         GreenfootImage screenBreakdown = new GreenfootImage("screenBreakdown.png");
@@ -75,6 +76,7 @@ public class InstructionScreen extends World
         setBackground(background);
     }
     
+    //This is the second slide when the user clicks the next button.
     public void nextInstruction()
     {
         removeObjects(getObjects(Button.class));
@@ -101,6 +103,7 @@ public class InstructionScreen extends World
         setBackground(background);
     }
     
+    //This is the first slide. When the user clicks the back button on "nextInstruction" the slide switches to this method.
     public void prevInstruction()
     {
         removeObjects(getObjects(Button.class));

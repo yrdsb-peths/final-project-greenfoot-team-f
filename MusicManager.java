@@ -1,8 +1,10 @@
 import greenfoot.GreenfootSound;
 import greenfoot.*;
 
+//This class manages the music put in the game.
 public class MusicManager
 {
+    //All the music in the game.
     public static GreenfootSound menuMusic = new GreenfootSound("menuMusicNew.mp3");
     public static GreenfootSound selectMusic = new GreenfootSound("Home Screen.mp3"); 
     public static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");

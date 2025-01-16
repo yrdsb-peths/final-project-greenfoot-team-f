@@ -278,8 +278,6 @@ public class Kenny extends Actor implements Enemy
         }
     }
 
-
-
     private GreenfootImage flipIfNeeded(GreenfootImage frame) 
     {
         GreenfootImage image = new GreenfootImage(frame);
@@ -290,12 +288,14 @@ public class Kenny extends Actor implements Enemy
         return image;
     }
     
+    //Set direction and update image orientation
     public void setFacingRight(boolean facingRight)
     {
         this.facingRight = facingRight;
         setImage(flipIfNeeded(getImage())); 
     }
     
+    //Check if Ichigo is on the ground
     public boolean isOnSolidGround()
     {
         int imageWidth = getImage().getWidth();

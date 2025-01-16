@@ -222,7 +222,8 @@ public class Ichigo extends Actor implements Enemy
         attackSound.play(); 
         getWorld().addObject(projectile, x, y);
     }
-
+    
+    //Updates the animation based on the current state of HitsuPhaseTwo
     private void animate() 
     {
         animationDelay++; // Increment the animation delay counter
@@ -231,6 +232,7 @@ public class Ichigo extends Actor implements Enemy
         {
             if (isAttacking) 
             {
+                //Play attack animation
                 if (attackFrameIndex < attackFrames.length) 
                 {
                     setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
@@ -238,7 +240,7 @@ public class Ichigo extends Actor implements Enemy
 
                     if (attackFrameIndex == 2) 
                     {
-                        performAttack();
+                        performAttack(); // Fire projectile mid-attack
                     }
 
                     if (attackFrameIndex == attackFrames.length) 
@@ -250,6 +252,7 @@ public class Ichigo extends Actor implements Enemy
             } 
             else if (isJumping) 
             {
+                //Play jump animation
                 if (jumpFrameIndex < jumpFrames.length) 
                 {
                     setImage(flipIfNeeded(jumpFrames[jumpFrameIndex]));
@@ -258,8 +261,8 @@ public class Ichigo extends Actor implements Enemy
             } 
             else if (Math.abs(player.getX() - getX()) > 5) 
             {
+                //Play walk animation if far from player
                 walkAnimationDelay++;
-                
                 if (walkAnimationDelay >= walkAnimationSpeed) 
                 {
                     walkFrameIndex = (walkFrameIndex + 1) % walkFrames.length;
@@ -291,12 +294,14 @@ public class Ichigo extends Actor implements Enemy
         return image;
     }
     
+    //Set direction and update image orientation
     public void setFacingRight(boolean facingRight)
     {
         this.facingRight = facingRight;
         setImage(flipIfNeeded(getImage())); 
     }
     
+    //Check if Ichigo is on the ground
     public boolean isOnSolidGround()
     {
         int imageWidth = getImage().getWidth();

@@ -11,10 +11,13 @@ public class HitsuPhaseTwo extends Actor implements Enemy
     private int attackCooldown = 0; // Cooldown for attacks
     private int jumpCooldown = 0; // Cooldown for jumps
 
+    // Animation frame arrays for different states
     private GreenfootImage[] idleFrames;
     private GreenfootImage[] walkFrames;
     private GreenfootImage[] attackFrames;
     private GreenfootImage[] jumpFrames;
+    
+    // Frame indices for tracking animation progress
     private int idleFrameIndex = 0;
     private int walkFrameIndex = 0;
     private int attackFrameIndex = 0;
@@ -66,12 +69,13 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         else 
         {
             handleJump();
+            
             if (!isJumping) 
             {
-                fall();
-                followPlayer();
-                handleAttack();
-                animate();
+                fall(); //Apply gravity if not on solid ground
+                followPlayer(); // Move toward the player
+                handleAttack(); // Check and process attack behavior
+                animate(); // Update animations based on state
 
                 if (!isAttacking && Greenfoot.getRandomNumber(150) < 1) 
                 {
@@ -81,12 +85,14 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         }
     }
 
+    // Method to set HitsuPhaseTwo into an idle state
     private void enterIdleState() 
     {
         isIdle = true;
         idleCounter = idleDuration;
     }
 
+    // Handles idle state animations and logic
     private void handleIdle() 
     {
         idleCounter--;
@@ -103,6 +109,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         }
     }
 
+    // Loads animation frames into an array
     private GreenfootImage[] loadFrames(String baseName, int count) 
     {
         GreenfootImage[] frames = new GreenfootImage[count];
@@ -114,13 +121,14 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         return frames;
     }
 
+    // Moves HitsuPhaseTwo toward the player
     public void followPlayer() 
     {
         if (!isAttacking && !isJumping && !isIdle) 
         {
             int playerX = player.getX();
             int deltaX = playerX - getX();
-
+            // Move left or right based on player's position
             if (deltaX < 0) 
             {
                 facingRight = false;
@@ -134,6 +142,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         }
     }
 
+    // Handles jump logic, including cooldowns and random triggering
     private void handleJump() 
     {
         if (!isJumping && jumpCooldown <= 0 && isOnSolidGround()) 
@@ -148,35 +157,38 @@ public class HitsuPhaseTwo extends Actor implements Enemy
             jumpCooldown--;
         }
     }
-
+    
+    // Initiates a jump by setting velocity and state
     private void jump() 
     {
         velocity = -18;
-        isJumping = true;
+        isJumping = true; //Set jumping state to true
         jumpFrameIndex = 0;
         jumpCooldown = 30;
     }
 
+    // Handles falling mechanics and checks for landing
     private void fall() 
     {
         setLocation(getX(), getY() + velocity);
-
-        if (isOnSolidGround()) 
+        
+        if (isOnSolidGround()) //Check if Hitsu is on solid ground
         {
             velocity = 0;
             isJumping = false;
         } 
         else 
         {
-            velocity += gravity;
+            velocity += gravity; //Apply gravity to increase downward velocity
         }
     }
 
+    // Handles attack logic, including cooldowns and random triggering
     private void handleAttack() 
     {
         if (!isAttacking && attackCooldown <= 0) 
         {
-            if (Greenfoot.getRandomNumber(100) < 5) 
+            if (Greenfoot.getRandomNumber(100) < 5) //Random chance to attack
             {
                 isAttacking = true;
                 attackFrameIndex = 0;
@@ -188,11 +200,13 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         }
     }
 
+    //Performs the attack by spawning a projectile
     public void performAttack() 
     {
         int x = getX();
         int y = getY() - 20;
 
+        //Adjust spawn location based on facing direction
         if (facingRight) 
         {
             x += 40;
@@ -202,11 +216,13 @@ public class HitsuPhaseTwo extends Actor implements Enemy
             x -= 40;
         }
 
+        //Create and add the projectile to the world
         EnemyProjectile projectile = new EnemyProjectile("hitsuProjectileTwo.png", facingRight, 30);
         attackSound.play();
         getWorld().addObject(projectile, x, y);
     }
 
+    //Updates the animation based on the current state of HitsuPhaseTwo
     private void animate() 
     {
         animationDelay++;
@@ -215,13 +231,14 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         {
             if (isAttacking) 
             {
+                //Play attack animation
                 if (attackFrameIndex < attackFrames.length) 
                 {
                     setImage(flipIfNeeded(attackFrames[attackFrameIndex]));
 
                     if (attackFrameIndex == 5) 
                     {
-                        performAttack();
+                        performAttack(); // Fire projectile mid-attack
                     }
 
                     attackFrameIndex++;
@@ -235,6 +252,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
             } 
             else if (isJumping) 
             {
+                //Play jump animation
                 if (jumpFrameIndex < jumpFrames.length) 
                 {
                     setImage(flipIfNeeded(jumpFrames[jumpFrameIndex]));
@@ -243,6 +261,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
             } 
             else if (Math.abs(player.getX() - getX()) > 5) 
             {
+                //Play walk animation if far from player
                 walkAnimationDelay++;
                 if (walkAnimationDelay >= walkAnimationSpeed) 
                 {
@@ -253,6 +272,7 @@ public class HitsuPhaseTwo extends Actor implements Enemy
             } 
             else 
             {
+                // Play idle animation if close to the player
                 idleFrameIndex = (idleFrameIndex + 1) % idleFrames.length;
                 setImage(flipIfNeeded(idleFrames[idleFrameIndex]));
             }
@@ -271,12 +291,14 @@ public class HitsuPhaseTwo extends Actor implements Enemy
         return image;
     }
 
+    //Set direction and update image orientation
     public void setFacingRight(boolean facingRight) 
     {
         this.facingRight = facingRight;
         setImage(flipIfNeeded(getImage()));
     }
 
+    //Check if Hitsu is on the ground
     public boolean isOnSolidGround() 
     {
         int imageHeight = getImage().getHeight();
