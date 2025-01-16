@@ -19,7 +19,11 @@ public class HighScoreScreen extends World
         
         setBackground(new GreenfootImage("HighScore_1.png"));
         
-        showText("Highest Level Reached: " + level, getWidth() / 2, getHeight() / 2);
+        GreenfootImage textImage = new GreenfootImage("Highest Level Reached: " + level, 28, Color.WHITE, new Color(0, 0, 0, 0));
+        getBackground().drawImage(textImage, (getWidth() - textImage.getWidth()) / 2, (getHeight() - textImage.getHeight()) / 2);
+        
+        GreenfootImage newRecordIcon = new GreenfootImage("newRecordIcon.png");
+        getBackground().drawImage(newRecordIcon, (getWidth() - newRecordIcon.getWidth()) / 2 - 160, (getHeight() / 2) + 40);
         
         addObject(new Button(this:: goScreenSelect, "backButton.png", "backButton.png"),41,30);
         
