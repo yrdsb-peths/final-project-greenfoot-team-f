@@ -62,18 +62,15 @@ public class EndingScreen extends World
         }
     }
 
-    
-    
+    //For button that switches current screen to menu screen.
     public void goMenuScreen()
     {
         MusicManager.stopEndingTheme();
         MusicManager.playMenuMusic(); 
         Greenfoot.setWorld(new MenuScreen()); 
     }
-    
-    /**
-     * Updates the background with the current image and alpha level.
-     */
+
+    //Updates the background with the current image and alpha level.
     private void updateBackground()
     {
         GreenfootImage fadedImage = new GreenfootImage(currentImage);

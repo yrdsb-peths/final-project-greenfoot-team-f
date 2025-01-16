@@ -17,15 +17,17 @@ public class FightWorld extends World
     private int frameDelay = 3; // Adjust to control the speed of animation
     private int delayCounter = 0; // Counter to implement the delay 
     
-    private boolean objectsSpawned = false;
+    private boolean objectsSpawned = false; // Keeps track of objects without re-spawning
     
+    // Keeps track of health bars
     private HealthBar playerHealthBar;
     private HealthBar enemyHealthBar;
     
-    
+    //Characters
     private MainPlayer mainPlayer;
     private Kisuke kisukeEnemy;
     
+    //Transition
     private FadeOverlay fadeOverlay;
     private boolean isFading = false;
     
@@ -33,12 +35,12 @@ public class FightWorld extends World
     {    
         super(600, 400, 1);
 
+        //Set background
         GreenfootImage background = new GreenfootImage("newStageOne.png");
-        
         setBackground(background);
         
+        //Managing music and sound
         countdownSfx = new GreenfootSound("countdownsfx.mp3");  
-        
         countdownSfx.setVolume(100);
         countdownSfx.play();
 
@@ -62,7 +64,6 @@ public class FightWorld extends World
             Greenfoot.setWorld(new FightWorldTwo()); // Transition to the next world
         }
         
-        
         if (!animationFinished) 
         {
             playCountdownAnimation(); // Handle the countdown animation
@@ -78,11 +79,12 @@ public class FightWorld extends World
         {
             playerHealthBar.setHealth(mainPlayer.getHealth());
         }
-    
+        
         if (enemyHealthBar != null && kisukeEnemy != null) 
         {
             enemyHealthBar.setHealth(kisukeEnemy.getHealth());
             
+            //When enemy health bar is 0, the current level will be marked as completed
             if (kisukeEnemy.getHealth() <= 0) 
             {
                 if (!LevelClearManager.isLevelCleared(1)) // Fix method name
@@ -91,7 +93,6 @@ public class FightWorld extends World
                     clearLevel(1); // Mark the level as cleared in-game
                 }
             }
-            
         }
     }
     
@@ -157,6 +158,7 @@ public class FightWorld extends World
         Platform platform2 = new Platform();
         addObject(platform2, 160, 240);
         
+        //Add health bar frames
         BarFrame barBar = new BarFrame("healthFrame.png"); 
         addObject(barBar,130, 48); 
         
@@ -175,6 +177,7 @@ public class FightWorld extends World
         objectsSpawned = true; // Set the flag to prevent re-spawning
     }
     
+    //Fading screen once fight is complete
     public void startFadeOut() 
     {
         if (!isFading) 
@@ -186,10 +189,9 @@ public class FightWorld extends World
         }
     }
 
+    // Update high score for player
     private void clearLevel(int level)
     {
-        HighScoreManager.updateHighScore("LEVEL", level); // Update high score for player
+        HighScoreManager.updateHighScore("LEVEL", level);
     }
-
-    
 }

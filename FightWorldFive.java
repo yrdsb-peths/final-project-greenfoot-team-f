@@ -48,8 +48,7 @@ public class FightWorldFive extends World
         {
             Greenfoot.setWorld(new EndingScreen()); // Transition to EndingScreen when fading is complete
         }
-        
-        
+                
         if (!animationFinished) 
         {
             playCountdownAnimation(); // Handle the countdown animation
@@ -70,6 +69,7 @@ public class FightWorldFive extends World
         {
             enemyHealthBar.setHealth(hitsuPhaseTwoEnemy.getHealth());
             
+            //When enemy health bar is 0, the current level will be marked as completed
             if (hitsuPhaseTwoEnemy.getHealth() <= 0) 
             {
                 clearLevel(4); // Mark level 3 as cleared
@@ -135,6 +135,7 @@ public class FightWorldFive extends World
         Platform platform2 = new Platform();
         addObject(platform2, 160, 240);
         
+        //Add bar frames
         BarFrame barBar = new BarFrame("healthFrame.png"); 
         addObject(barBar, 130, 48); 
         
