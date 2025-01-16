@@ -31,12 +31,14 @@ Ending screen
 Gameplay
    
    2. A wide variety of music and sound effects
+   2.5 2nd phase for final enemy for a fun extra NEW challenge
 
 
 UI (User Interface)
    
    3. Health bars are included
    4. Level indicator
+   5. Checkpoints for a more convenient experience
 
 Music Manager
 
