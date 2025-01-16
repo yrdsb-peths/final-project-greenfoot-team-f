@@ -1,5 +1,19 @@
-# Set up Greenfoot for VSCode
+# Group Members
+1. Ryan Ho
+2. Scarlett Ho
+3. Nicholas Chau
+4. Karthik
 
+
+
+
+
+
+
+
+
+
+# Set up Greenfoot for VSCode
 [Mac]
 1. Open `Finder` and navigate to the Applications folder.
 2. Right-click on the Greenfoot app and select `Show Package Contents`.

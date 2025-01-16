@@ -12,59 +12,38 @@ public class ScreenSelect extends World
 
     
         background = new GreenfootImage("instructionScreenBgBleach.png");
+        setBackground(background);
         
         addObject(new Button(this:: goLvlOne, "clearLevelOne.png", "clearLevelOne.png"), 150,200);
         
-        if (LevelClearManager.isLevelClear(1)) 
-        {
-            addObject(new Button(this:: goLvlTwo, "clearLevelTwo.png", "clearLevelOne.png"), 250, 200);
-
-        }
+        addObject(new Button(this:: goEndingScreen, "viewEnding.png", "viewEnding.png"), 300, 350);
         
-        if (LevelClearManager.isLevelClear(2)) 
-        {
-            addObject(new Button(this:: goLvlThree, "clearLevelThree.png", "clearLevelThree.png"), 350, 200);
-        }
-    
-        if (LevelClearManager.isLevelClear(3)) 
-        {
-            addObject(new Button(this:: goLvlFour, "clearLevelThree.png", "clearLevelThree.png"), 450, 200);
-        }
-                
-
-    
-        background = new GreenfootImage("instructionScreenBgBleach.png");
-
-        setBackground(background);
-    
-        scrollX = 0;
-        counter = 0;
-    
-        addObject(new Button(this::goLvlOne, "lvlOne.png", "lvlOne.png"), 150, 200);
-    
+        addObject(new LevelNum("lockLevelTwo.png"), 250,200);
+        
+        addObject(new LevelNum("lockLevelThree.png"), 350,200);
+        
+        addObject(new LevelNum("lockLevelFour.png"), 450,200);
+        
+        addObject(new LevelNum("selectALevel.png"), 300,90);
+        
         // Dynamically add buttons for cleared levels
         if (LevelClearManager.isLevelCleared(1))
         {
-            addObject(new Button(this::goLvlTwo, "lvlTwo.png", "lvlTwo.png"), 250, 200);
-
+            addObject(new Button(this::goLvlTwo, "clearLevelTwo.png", "clearLevelTwo.png"), 250, 200);
+            
+            addObject(new LevelNum("lockLevelThree.png"), 350,200);
         }
         
         if (LevelClearManager.isLevelCleared(2))
         {
-
             addObject(new Button(this:: goLvlThree, "clearLevelThree.png", "clearLevelThree.png"), 350, 200);
-
-            addObject(new Button(this::goLvlThree, "lvlThree.png", "lvlThree.png"), 350, 200);
-
+            
+            addObject(new LevelNum("lockLevelFour.png"), 450,200);
         }
         
         if (LevelClearManager.isLevelCleared(3))
         {
-
-            addObject(new Button(this:: goLvlFour, "clearLevelThree.png", "clearLevelThree.png"), 450, 200);
-
-            addObject(new Button(this::goLvlFour, "lvlFour.png", "lvlFour.png"), 450, 200);
-
+            addObject(new Button(this:: goLvlFour, "clearLevelFour.png", "clearLevelFour.png"), 450, 200);
         }
     
         addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 101, 371);
@@ -123,22 +102,32 @@ public class ScreenSelect extends World
 
     private void goLvlOne()
     {
+        MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new FightWorld());
     }
 
     private void goLvlTwo()
     {
+        MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new FightWorldTwo());
     }
 
     private void goLvlThree()
     {
+        MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new FightWorldThree());
     }
 
     private void goLvlFour()
     {
+        MusicManager.pauseMenuMusic();
         Greenfoot.setWorld(new FightWorldFour());
+    }
+    
+    private void goEndingScreen()
+    {
+        MusicManager.pauseMenuMusic();
+        Greenfoot.setWorld(new EndingScreen());
     }
 }
 
