@@ -2,7 +2,10 @@
 1. Ryan Ho
 2. Scarlett Ho
 3. Nicholas Chau
-4. Karthik
+4. Karthik Raveeswaran
+
+# Data structures used and its purpose 
+1. We used a 'stack' and 'queue' actor class to...
 
 
 
