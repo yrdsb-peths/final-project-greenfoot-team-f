@@ -3,7 +3,7 @@ import greenfoot.*;
 
 public class MusicManager
 {
-    public static GreenfootSound menuMusic = new GreenfootSound("menuMusic.mp3");
+    public static GreenfootSound menuMusic = new GreenfootSound("menuMusicNew.mp3");
     public static GreenfootSound selectMusic = new GreenfootSound("Home Screen.mp3"); 
     public static GreenfootSound oneMusic = new GreenfootSound("stageOneMusic.mp3");
     public static GreenfootSound loseMusic = new GreenfootSound("loseMusic.mp3");

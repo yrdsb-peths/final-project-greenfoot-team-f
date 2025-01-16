@@ -14,7 +14,7 @@ public class GameOverScreen extends World
     
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
-        GreenfootImage background = new GreenfootImage("gameOverBackground.png");
+        GreenfootImage background = new GreenfootImage("gameOverScreenNew.png");
         background.scale(700,400);
         GreenfootImage gameOverImage = new GreenfootImage("GameOver.png");
         gameOverImage.scale(350, 80);
@@ -23,10 +23,8 @@ public class GameOverScreen extends World
 
         setBackground(background);
         
-        addObject(new Button(this::goScreenSelect, "MenuButton.png", "MenuButton.png"), 90,280);
-        
-        addObject(new Button(this:: goFightStage, "PlayAgain.png", "PlayAgain.png"), 90,250);
-        
+        addObject(new Button(this::goScreenSelect, "levelSelectButton.png", "levelSelectButton.png"), 170,280);
+                
         MusicManager.stopStageOneMusic();
         MusicManager.stopTwoMusic();
         MusicManager.stopThreeMusic(); 

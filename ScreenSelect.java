@@ -42,7 +42,7 @@ public class ScreenSelect extends World
         
         if (LevelClearManager.isLevelCleared(3))
         {
-            addObject(new Button(this:: goLvlFour, "clearLevelThree.png", "clearLevelThree.png"), 450, 200);
+            addObject(new Button(this:: goLvlFour, "clearLevelFour.png", "clearLevelFour.png"), 450, 200);
         }
     
         addObject(new Button(this::goInstructions, "InstructionButton.png", "InstructionButton.png"), 101, 371);
