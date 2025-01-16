@@ -36,13 +36,13 @@ UI (User Interface)
   2. 
 
 Music Manager
-     - The MusicMManager is a separate class that manages all in-game music.
-     - It uses methods like .playLoop or .setVolume
+  1. The MusicMManager is a separate class that manages all in-game music.
+  2. It uses methods like .playLoop or .setVolume
 Buttons
-     - This object is used mostly before and after the game's content (before the game        starts or when the game is complete).
-     The button plays a sound effect when clicked.
-     - Button increases in size when hovered over
-     - public Button (Runnable action, String imageName, String hoverImgName)
+  1. This object is used mostly before and after the game's content (before the game        starts or when the game is complete).
+  2. The button plays a sound effect when clicked.
+  3. Button increases in size when hovered over
+  4. public Button (Runnable action, String imageName, String hoverImgName)
 Scrolling background
-     - For the background image of ScreenSelect, a scrolling background is used.
+  1. For the background image of ScreenSelect, a scrolling background is used.
 
