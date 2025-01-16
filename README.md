@@ -4,6 +4,11 @@
 3. Nicholas Chau
 4. Karthik Raveeswaran
 
+# How the concept of "Levels" was used
+* The concept of levels was used from the main character's progression, defeating each enemy in the hopes of reaching his goal.
+* Enemies also get progressively harder, and each enemy has a unique trait.
+* The game has an indefinite ending. 
+
 # Data structures used and its purpose 
 
 [Stack] [Queue]
