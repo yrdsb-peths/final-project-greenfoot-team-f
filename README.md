@@ -13,10 +13,26 @@
 
 [Stack] [Queue]
 1. We used a `Stack` and `Queue` actor class to...
+[Lists]
+
+[Maps] 
+
+[Interface]
 
 # Additional information (features)
 
-1. Usage of UI designs
+Ending screen
+  1. Click the `view ending` button if the bosses are too hard to beat.
+
+Gameplay
+  1. A wide variety of music and sound effects
+   
+
+UI (User Interface)
+  1. Health bars are included
+  2. 
+
+
 
 
 
