@@ -30,29 +30,29 @@ Ending screen
 
 Gameplay
    
-   2. A wide variety of music and sound effects
-   2.5. 2nd phase for final enemy for a fun extra NEW challenge
+   2. A wide variety of music and sound effects.
+   3.  2nd phase for the final enemy for a fun extra NEW challenge
 
 
 UI (User Interface)
    
-   3. Health bars are included
-   4. Level indicator
-   5. Checkpoints for a more convenient experience
+   4. Health bars are included
+   5. Level indicator
+   6. Checkpoints for a more convenient experience
 
 Music Manager
 
-   5. The MusicManager  is a separate class that manages all in-game music.
-   6. It uses methods like .playLoop or .setVolume
+   7. The MusicManager  is a separate class that manages all in-game music.
+   8. It uses methods like .playLoop or .setVolume
 
 Buttons
    
-   7. This object is used mostly before and after the game's content (before the game starts or when the game is complete).
-   8. The button plays a sound effect when clicked.
-   9. The button increases in size when hovered over.
-   10. public Button (Runnable action, String imageName, String hoverImgName)
+   9. This object is used mostly before and after the game's content (before the game starts or when the game is complete).
+   10. The button plays a sound effect when clicked.
+   11. The button increases in size when hovered over.
+   12. public Button (Runnable action, String imageName, String hoverImgName)
 
 Scrolling background
    
-   11. For the background image of ScreenSelect, a scrolling background is used.
+   13. For the background image of ScreenSelect, a scrolling background is used.
 
