@@ -34,45 +34,14 @@ UI (User Interface)
   1. Health bars are included
   2. 
 
-2. Music Manager
+Music Manager
      - The MusicMManager is a separate class that manages all in-game music.
      - It uses methods like .playLoop or .setVolume
-3. Buttons
+Buttons
      - This object is used mostly before and after the game's content (before the game        starts or when the game is complete).
      The button plays a sound effect when clicked.
      - Button increases in size when hovered over
      - public Button (Runnable action, String imageName, String hoverImgName)
-4. Scrolling background
+Scrolling background
      - For the background image of ScreenSelect, a scrolling background is used.
 
-
-
-
-
-
-
-
-
-
-
-# Set up Greenfoot for VSCode
-[Mac]
-1. Open `Finder` and navigate to the Applications folder.
-2. Right-click on the Greenfoot app and select `Show Package Contents`.
-3. In the opened folder, go to `Contents -> Resources -> Java` and find the `greenfoot.jar` file.
-4. Copy this `greenfoot.jar` to the `/lib` Folder in this project.
-
-[Windows]
-1. Open `File Explorer` and navigate to `C:\Program Files\Greenfoot` and locate the `greenfoot.jar` file.
-2. Copy this `greenfoot.jar` to the `\lib` Folder in this project.
-
-<br>
-<br>
-
-# project.greenfoot
-Copy the `project.greenfoot.md` file and rename it to `project.greenfoot`
-
-# Learn Markdown Basics
-[Markdown basics](https://www.markdownguide.org/getting-started/)
-
-Remember to push origin!!!!
