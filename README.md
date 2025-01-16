@@ -14,13 +14,14 @@ Our game is an action-inspired platformer where the player navigates levels, int
 
 # Data structures used and their purpose 
 
-[Stack] [Queue]
-1. We used a `Stack` and `Queue` actor class to...
-[Lists]
+[HashMap]
+Used in HighScoreManager to store and manage the highest score the player has achieved. 
 
-[Maps] 
+[Queues]
+Used in InstructionScreen, to switch between screens when the player hits next or back. 
 
-[Interface]
+[Arrays and ArrayLists]
+Arrays are used to store the animation frames for different player states (idle, running, jumping, attacking). These frames are loaded into GreenfootImage[] arrays and accessed by the animate() method to display the correct animation based on the player's current state.
 
 # Additional information (features)
 
