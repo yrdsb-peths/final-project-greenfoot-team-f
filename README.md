@@ -5,7 +5,9 @@
 4. Karthik Raveeswaran
 
 # Data structures used and its purpose 
-1. We used a 'stack' and 'queue' actor class to...
+1. We used a `Stack` and `Queue` actor class to...
+
+# Additional Features
 
 
 
