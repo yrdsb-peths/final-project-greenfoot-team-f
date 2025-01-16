@@ -17,7 +17,7 @@
 
 [Queues]
 
-  2. Used in  `InstructionScreen`, to switch between screens when the player hits next or back. 
+  2. Used in  `InstructionScreen`, to switch between screens when the player hits next or back, enabling seamless naigation through multiple instruction pages or sections. This allows the player to view different sets of instructions.
 
 [Arrays and ArrayLists]
   3. Arrays store the animation frames for different player states (idle, running, jumping, attacking). These frames are loaded into GreenfootImage[] arrays and accessed by the animate() method to display the correct animation based on the player's current state.
