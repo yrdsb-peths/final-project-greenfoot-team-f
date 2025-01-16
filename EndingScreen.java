@@ -8,7 +8,7 @@ public class EndingScreen extends World
     private int frameCounter = 0; // To count frames for timing
     private int fadeAlpha = 0; // Current alpha value for fading in
     private GreenfootImage currentImage; // Current image with applied alpha
-    private int[] frameDurations = {240, 240, 240}; // Durations for each image in frames (4 seconds per image)
+    private int[] frameDurations = {240, 300, 240}; // Durations for each image in frames (4 seconds per image)
     
     private static GreenfootSound endingSpeech  = new GreenfootSound("endingSpeechNew.mp3");
     
