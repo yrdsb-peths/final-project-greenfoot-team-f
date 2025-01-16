@@ -3,10 +3,7 @@
 2. Scarlett Ho
 3. Nicholas Chau
 4. Karthik Raveeswaran
-
-# Game Overview
-Our game is an action-inspired platformer where the player navigates levels, interacts with the environment, defeats enemies, and progresses through challenges. It includes various game mechanics like jumping, attacking, health management, and high score tracking.
-
+5. 
 # How the concept of "Levels" was used
 * The concept of levels was used from the main character's progression, defeating each enemy to reach his goal.
 * Enemies also get progressively harder, and each enemy has a unique trait.
@@ -15,21 +12,22 @@ Our game is an action-inspired platformer where the player navigates levels, int
 # Data structures used and their purpose 
 
 [HashMap]
-Used in HighScoreManager to store and manage the highest score the player has achieved. 
+
+  1. The `HashMap` data structure was used to store and track the highest level cleared by the player, this code can be found in `HighScoreManager`, and it builds up every time a player clears a level, even re-runs.
 
 [Queues]
-Used in InstructionScreen, to switch between screens when the player hits next or back. 
+
+  2. Used in  `InstructionScreen`, to switch between screens when the player hits next or back. 
 
 [Arrays and ArrayLists]
-Arrays are used to store the animation frames for different player states (idle, running, jumping, attacking). These frames are loaded into GreenfootImage[] arrays and accessed by the animate() method to display the correct animation based on the player's current state.
+  3. Arrays store the animation frames for different player states (idle, running, jumping, attacking). These frames are loaded into GreenfootImage[] arrays and accessed by the animate() method to display the correct animation based on the player's current state.
 
 # Additional information (features)
-
 Ending screen
   1. Click the `view ending` button if the bosses are too hard to beat.
 
 Gameplay
-  1. A wide variety of music and sound effects
+  2. A wide variety of music and sound effects
    
 
 UI (User Interface)
@@ -41,7 +39,7 @@ UI (User Interface)
      - It uses methods like .playLoop or .setVolume
 3. Buttons
      - This object is used mostly before and after the game's content (before the game        starts or when the game is complete).
-     - Button plays a sound effect when clicked.
+     The button plays a sound effect when clicked.
      - Button increases in size when hovered over
      - public Button (Runnable action, String imageName, String hoverImgName)
 4. Scrolling background
