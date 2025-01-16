@@ -4,6 +4,9 @@
 3. Nicholas Chau
 4. Karthik Raveeswaran
 
+# Game Overview
+Our game is an action-inspired platformer where the player navigates levels, interacts with the environment, defeats enemies, and progresses through challenges. It includes various game mechanics like jumping, attacking, health management, and high score tracking.
+
 # How the concept of "Levels" was used
 * The concept of levels was used from the main character's progression, defeating each enemy to reach his goal.
 * Enemies also get progressively harder, and each enemy has a unique trait.
