@@ -31,7 +31,7 @@ Ending screen
 Gameplay
    
    2. A wide variety of music and sound effects
-   2.5 2nd phase for final enemy for a fun extra NEW challenge
+   2.5. 2nd phase for final enemy for a fun extra NEW challenge
 
 
 UI (User Interface)
